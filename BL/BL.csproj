@@ -2,7 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DAL\DAL.csproj" />
-    <ProjectReference Include="..\Persistence\Persistence.csproj" />
+    <ProjectReference Include="..\Pesistence\Pesistence.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

@@ -1,7 +1,20 @@
 <Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <EmbeddedResource Include=".\ConnectionString.txt">
+      <Link>./ConnectionString.txt</Link>
+    </EmbeddedResource>
+    <None Include=".\ConnectionString.txt" CopyToOutputDirectory="Always">
+      <Pack>True</Pack>
+      <PackagePath>.</PackagePath>
+    </None>
+  </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Persistence\Persistence.csproj" />
+    <ProjectReference Include="..\Pesistence\Pesistence.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MySql.Data" Version="8.0.16" />
   </ItemGroup>
 
   <PropertyGroup>

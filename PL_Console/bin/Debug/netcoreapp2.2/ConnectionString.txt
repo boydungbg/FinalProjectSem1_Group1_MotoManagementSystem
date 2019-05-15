@@ -1,0 +1,1 @@
+server=localhost;user id=CTSUser;password=123456;port=3306;database=Group1_MotoParkingManagementSystem;SslMode=None

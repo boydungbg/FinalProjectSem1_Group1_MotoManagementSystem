@@ -1,0 +1,9 @@
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\Pesistence\bin\Debug\netstandard2.0\Pesistence.deps.json
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\Pesistence\bin\Debug\netstandard2.0\Pesistence.dll
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\Pesistence\bin\Debug\netstandard2.0\Pesistence.pdb
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\Pesistence\obj\Debug\netstandard2.0\Pesistence.csprojAssemblyReference.cache
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\Pesistence\obj\Debug\netstandard2.0\Pesistence.csproj.CoreCompileInputs.cache
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\Pesistence\obj\Debug\netstandard2.0\Pesistence.AssemblyInfoInputs.cache
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\Pesistence\obj\Debug\netstandard2.0\Pesistence.AssemblyInfo.cs
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\Pesistence\obj\Debug\netstandard2.0\Pesistence.dll
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\Pesistence\obj\Debug\netstandard2.0\Pesistence.pdb
