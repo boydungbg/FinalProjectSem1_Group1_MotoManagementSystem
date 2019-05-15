@@ -3,7 +3,7 @@ using Xunit;
 using DAL;
 using Persistence;
 
-namespace DAL.test
+namespace DAL.Xunit
 {
     public class UserUnitTest
     {
@@ -17,7 +17,7 @@ namespace DAL.test
             User user = userDAL.Login(username, password);
 
             Assert.NotNull(user);
-            Assert.Equal(username,  user.GetUser_name());
+            Assert.Equal(username,  user.User_name);
         }
         [Theory]
         [InlineData("customer_01", "123456789")]

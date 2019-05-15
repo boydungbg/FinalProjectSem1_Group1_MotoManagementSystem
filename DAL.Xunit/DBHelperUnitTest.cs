@@ -3,7 +3,7 @@ using Xunit;
 using DAL;
 
 
-namespace CTS_DAL_XUnit
+namespace DAL.Xunit
 {
     public class DBHelperUnitTest
     {

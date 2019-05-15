@@ -1,11 +1,10 @@
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\BL\bin\Debug\netstandard2.0\ConnectionString.txt
 E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\BL\bin\Debug\netstandard2.0\BL.deps.json
 E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\BL\bin\Debug\netstandard2.0\BL.dll
 E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\BL\bin\Debug\netstandard2.0\BL.pdb
 E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\BL\bin\Debug\netstandard2.0\DAL.dll
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\BL\bin\Debug\netstandard2.0\Pesistence.dll
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\BL\bin\Debug\netstandard2.0\Persistence.dll
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\BL\bin\Debug\netstandard2.0\Persistence.pdb
 E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\BL\bin\Debug\netstandard2.0\DAL.pdb
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\BL\bin\Debug\netstandard2.0\Pesistence.pdb
 E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\BL\obj\Debug\netstandard2.0\BL.csprojAssemblyReference.cache
 E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\BL\obj\Debug\netstandard2.0\BL.csproj.CoreCompileInputs.cache
 E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\BL\obj\Debug\netstandard2.0\BL.AssemblyInfoInputs.cache
@@ -13,3 +12,4 @@ E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\BL\o
 E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\BL\obj\Debug\netstandard2.0\BL.csproj.CopyComplete
 E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\BL\obj\Debug\netstandard2.0\BL.dll
 E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\BL\obj\Debug\netstandard2.0\BL.pdb
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\BL\bin\Debug\netstandard2.0\ConnectionString.txt

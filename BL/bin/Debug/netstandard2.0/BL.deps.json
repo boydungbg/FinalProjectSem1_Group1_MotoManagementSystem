@@ -11,7 +11,7 @@
         "dependencies": {
           "DAL": "1.0.0",
           "NETStandard.Library": "2.0.3",
-          "Pesistence": "1.0.0"
+          "Persistence": "1.0.0"
         },
         "runtime": {
           "BL.dll": {}
@@ -180,15 +180,15 @@
       "DAL/1.0.0": {
         "dependencies": {
           "MySql.Data": "8.0.16",
-          "Pesistence": "1.0.0"
+          "Persistence": "1.0.0"
         },
         "runtime": {
           "DAL.dll": {}
         }
       },
-      "Pesistence/1.0.0": {
+      "Persistence/1.0.0": {
         "runtime": {
-          "Pesistence.dll": {}
+          "Persistence.dll": {}
         }
       }
     }
@@ -337,7 +337,7 @@
       "serviceable": false,
       "sha512": ""
     },
-    "Pesistence/1.0.0": {
+    "Persistence/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

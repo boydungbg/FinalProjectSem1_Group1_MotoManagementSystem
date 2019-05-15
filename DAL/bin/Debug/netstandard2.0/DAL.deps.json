@@ -11,7 +11,7 @@
         "dependencies": {
           "MySql.Data": "8.0.16",
           "NETStandard.Library": "2.0.3",
-          "Pesistence": "1.0.0"
+          "Persistence": "1.0.0"
         },
         "runtime": {
           "DAL.dll": {}
@@ -177,9 +177,9 @@
           "System.Runtime": "4.3.0"
         }
       },
-      "Pesistence/1.0.0": {
+      "Persistence/1.0.0": {
         "runtime": {
-          "Pesistence.dll": {}
+          "Persistence.dll": {}
         }
       }
     }
@@ -323,7 +323,7 @@
       "path": "system.threading.tasks/4.3.0",
       "hashPath": "system.threading.tasks.4.3.0.nupkg.sha512"
     },
-    "Pesistence/1.0.0": {
+    "Persistence/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

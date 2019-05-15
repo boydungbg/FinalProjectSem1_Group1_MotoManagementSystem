@@ -1,4 +1,3 @@
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\PL_Console\bin\Debug\netcoreapp2.2\ConnectionString.txt
 E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\PL_Console\bin\Debug\netcoreapp2.2\PL_Console.deps.json
 E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\PL_Console\bin\Debug\netcoreapp2.2\PL_Console.runtimeconfig.json
 E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\PL_Console\bin\Debug\netcoreapp2.2\PL_Console.runtimeconfig.dev.json
@@ -6,9 +5,9 @@ E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\PL_C
 E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\PL_Console\bin\Debug\netcoreapp2.2\PL_Console.pdb
 E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\PL_Console\bin\Debug\netcoreapp2.2\BL.dll
 E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\PL_Console\bin\Debug\netcoreapp2.2\DAL.dll
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\PL_Console\bin\Debug\netcoreapp2.2\Pesistence.dll
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\PL_Console\bin\Debug\netcoreapp2.2\Pesistence.pdb
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\PL_Console\bin\Debug\netcoreapp2.2\Persistence.dll
 E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\PL_Console\bin\Debug\netcoreapp2.2\BL.pdb
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\PL_Console\bin\Debug\netcoreapp2.2\Persistence.pdb
 E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\PL_Console\bin\Debug\netcoreapp2.2\DAL.pdb
 E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\PL_Console\obj\Debug\netcoreapp2.2\PL_Console.csprojAssemblyReference.cache
 E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\PL_Console\obj\Debug\netcoreapp2.2\PL_Console.csproj.CoreCompileInputs.cache
@@ -17,3 +16,4 @@ E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\PL_C
 E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\PL_Console\obj\Debug\netcoreapp2.2\PL_Console.csproj.CopyComplete
 E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\PL_Console\obj\Debug\netcoreapp2.2\PL_Console.dll
 E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\PL_Console\obj\Debug\netcoreapp2.2\PL_Console.pdb
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\PL_Console\bin\Debug\netcoreapp2.2\ConnectionString.txt

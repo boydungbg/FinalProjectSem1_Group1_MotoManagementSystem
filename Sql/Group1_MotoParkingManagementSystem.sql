@@ -59,22 +59,22 @@ values('CM01','Thẻ tháng'),
 ('CM05','Thẻ tháng'),
 ('CM06','Thẻ tháng');
 select * from Card;
-create table if not exists Card_details(
+create table if not exists Card_detail(
 card_id varchar(10)  not null,
-constraint fk_CardDetails_Card foreign key (card_id) references Card(card_id),
+constraint fk_CardDetail_Card foreign key (card_id) references Card(card_id),
 cus_id varchar(10)  not null, 
-constraint fk_CardDetails_Customer foreign key (cus_id) references Customer(cus_id),
+constraint fk_CardDetail_Customer foreign key (cus_id) references Customer(cus_id),
 card_time varchar(50) not null,
 date_created datetime not null
 );
-insert into Card_details(card_id,cus_id,card_time,date_created)
+insert into Card_detail(card_id,cus_id,card_time,date_created)
 values('CM01','KH01','15/5/2019 - 15/8/2019',current_timestamp()),
 ('CM02','KH02','15/5/2019 - 15/8/2019',current_timestamp()),
 ('CM03','KH03','15/5/2019 - 15/8/2019',current_timestamp()),
 ('CM04','KH04','15/5/2019 - 15/8/2019',current_timestamp()),
 ('CM05','KH05','15/5/2019 - 15/8/2019',current_timestamp()),
 ('CM06','KH06','15/5/2019 - 15/8/2019',current_timestamp());
-select * from Card_details;
+select * from Card_detail;
 create table if not exists Accounts(
 acc_id varchar(10) primary key,
 acc_name varchar(50) not null,
@@ -100,14 +100,13 @@ cl_dateTimeEnd datetime,
 cl_sendTime varchar(20),
 cl_intoMoney double
 );
-drop user if exists 'CTSUser'@'localhost';
-create user if not exists 'CTSUser'@'localhost' identified by '123456';
-    grant all on Card to 'CTSUser'@'localhost';
-    grant all on Customer to 'CTSUser'@'localhost';
-    grant all on Card_details to 'CTSUser'@'localhost';
-    grant all on Card_Logs to 'CTSUser'@'localhost';
-    grant all  on Group1_MotoParkingManagementSystem.Accounts to 'CTSUser'@'localhost';
-    grant lock tables on Group1_MotoParkingManagementSystem.* to 'CTSUser'@'localhost';
-    -- grant all ON *.* TO 'CTSUser'@'%';
+drop user if exists 'MPSUser'@'localhost';
+create user if not exists 'MPSUser'@'localhost' identified by '123456';
+    grant all on Card to 'MPSUser'@'localhost';
+    grant all on Customer to 'MPSUser'@'localhost';
+    grant all on Card_detail to 'MPSUser'@'localhost';
+    grant all on Card_Logs to 'MPSUser'@'localhost';
+	grant all on Accounts to 'MPSUser'@'localhost';
+    grant lock tables on Group1_MotoParkingManagementSystem.* to 'MPSUser'@'localhost';
 
 

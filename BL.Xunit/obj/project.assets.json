@@ -1823,7 +1823,7 @@
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
           "DAL": "1.0.0",
-          "Pesistence": "1.0.0"
+          "Persistence": "1.0.0"
         },
         "compile": {
           "bin/placeholder/BL.dll": {}
@@ -1836,8 +1836,8 @@
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
-          "MySql.Data": "8.0.16",
-          "Pesistence": "1.0.0"
+          "Mysql.Data": "8.0.16",
+          "Persistence": "1.0.0"
         },
         "compile": {
           "bin/placeholder/DAL.dll": {}
@@ -1846,14 +1846,14 @@
           "bin/placeholder/DAL.dll": {}
         }
       },
-      "Pesistence/1.0.0": {
+      "Persistence/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "compile": {
-          "bin/placeholder/Pesistence.dll": {}
+          "bin/placeholder/Persistence.dll": {}
         },
         "runtime": {
-          "bin/placeholder/Pesistence.dll": {}
+          "bin/placeholder/Persistence.dll": {}
         }
       }
     }
@@ -6305,10 +6305,10 @@
       "path": "../DAL/DAL.csproj",
       "msbuildProject": "../DAL/DAL.csproj"
     },
-    "Pesistence/1.0.0": {
+    "Persistence/1.0.0": {
       "type": "project",
-      "path": "../Pesistence/Pesistence.csproj",
-      "msbuildProject": "../Pesistence/Pesistence.csproj"
+      "path": "../Persistence/Persistence.csproj",
+      "msbuildProject": "../Persistence/Persistence.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -6316,7 +6316,7 @@
       "BL >= 1.0.0",
       "Microsoft.NET.Test.Sdk >= 15.9.0",
       "Microsoft.NETCore.App >= 2.2.0",
-      "Pesistence >= 1.0.0",
+      "Persistence >= 1.0.0",
       "xunit >= 2.4.0",
       "xunit.runner.visualstudio >= 2.4.0"
     ]
@@ -6352,8 +6352,8 @@
             "E:\\PROGRAMER\\SEM1\\Project sem1\\FinalProjectSem1_Group1_MotoManagementSystem\\BL\\BL.csproj": {
               "projectPath": "E:\\PROGRAMER\\SEM1\\Project sem1\\FinalProjectSem1_Group1_MotoManagementSystem\\BL\\BL.csproj"
             },
-            "E:\\PROGRAMER\\SEM1\\Project sem1\\FinalProjectSem1_Group1_MotoManagementSystem\\Pesistence\\Pesistence.csproj": {
-              "projectPath": "E:\\PROGRAMER\\SEM1\\Project sem1\\FinalProjectSem1_Group1_MotoManagementSystem\\Pesistence\\Pesistence.csproj"
+            "E:\\PROGRAMER\\SEM1\\Project sem1\\FinalProjectSem1_Group1_MotoManagementSystem\\Persistence\\Persistence.csproj": {
+              "projectPath": "E:\\PROGRAMER\\SEM1\\Project sem1\\FinalProjectSem1_Group1_MotoManagementSystem\\Persistence\\Persistence.csproj"
             }
           }
         }

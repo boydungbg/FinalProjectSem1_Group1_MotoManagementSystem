@@ -10,7 +10,7 @@
         "dependencies": {
           "DAL": "1.0.0",
           "Microsoft.NET.Test.Sdk": "15.9.0",
-          "Pesistence": "1.0.0",
+          "Persistence": "1.0.0",
           "xunit": "2.4.0",
           "xunit.runner.visualstudio": "2.4.0"
         },
@@ -1174,15 +1174,15 @@
       "DAL/1.0.0": {
         "dependencies": {
           "MySql.Data": "8.0.16",
-          "Pesistence": "1.0.0"
+          "Persistence": "1.0.0"
         },
         "runtime": {
           "DAL.dll": {}
         }
       },
-      "Pesistence/1.0.0": {
+      "Persistence/1.0.0": {
         "runtime": {
-          "Pesistence.dll": {}
+          "Persistence.dll": {}
         }
       }
     }
@@ -1793,7 +1793,7 @@
       "serviceable": false,
       "sha512": ""
     },
-    "Pesistence/1.0.0": {
+    "Persistence/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

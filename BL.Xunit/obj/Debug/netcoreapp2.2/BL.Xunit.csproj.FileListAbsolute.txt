@@ -1,7 +1,6 @@
 E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\BL.Xunit\bin\Debug\netcoreapp2.2\xunit.runner.visualstudio.dotnetcore.testadapter.dll
 E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\BL.Xunit\bin\Debug\netcoreapp2.2\xunit.runner.reporters.netcoreapp10.dll
 E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\BL.Xunit\bin\Debug\netcoreapp2.2\xunit.runner.utility.netcoreapp10.dll
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\BL.Xunit\bin\Debug\netcoreapp2.2\ConnectionString.txt
 E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\BL.Xunit\bin\Debug\netcoreapp2.2\BL.Xunit.deps.json
 E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\BL.Xunit\bin\Debug\netcoreapp2.2\BL.Xunit.runtimeconfig.json
 E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\BL.Xunit\bin\Debug\netcoreapp2.2\BL.Xunit.runtimeconfig.dev.json
@@ -9,9 +8,9 @@ E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\BL.X
 E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\BL.Xunit\bin\Debug\netcoreapp2.2\BL.Xunit.pdb
 E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\BL.Xunit\bin\Debug\netcoreapp2.2\BL.dll
 E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\BL.Xunit\bin\Debug\netcoreapp2.2\DAL.dll
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\BL.Xunit\bin\Debug\netcoreapp2.2\Pesistence.dll
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\BL.Xunit\bin\Debug\netcoreapp2.2\Persistence.dll
 E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\BL.Xunit\bin\Debug\netcoreapp2.2\BL.pdb
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\BL.Xunit\bin\Debug\netcoreapp2.2\Pesistence.pdb
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\BL.Xunit\bin\Debug\netcoreapp2.2\Persistence.pdb
 E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\BL.Xunit\bin\Debug\netcoreapp2.2\DAL.pdb
 E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\BL.Xunit\obj\Debug\netcoreapp2.2\BL.Xunit.csprojAssemblyReference.cache
 E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\BL.Xunit\obj\Debug\netcoreapp2.2\BL.Xunit.csproj.CoreCompileInputs.cache
@@ -20,3 +19,4 @@ E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\BL.X
 E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\BL.Xunit\obj\Debug\netcoreapp2.2\BL.Xunit.csproj.CopyComplete
 E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\BL.Xunit\obj\Debug\netcoreapp2.2\BL.Xunit.dll
 E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\BL.Xunit\obj\Debug\netcoreapp2.2\BL.Xunit.pdb
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\BL.Xunit\bin\Debug\netcoreapp2.2\ConnectionString.txt
