@@ -16,13 +16,17 @@ namespace Persistence
         public User(string user_id, string user_name, string user_pass, string user_fullname, string user_email, int user_level, DateTime user_dateCteated)
         {
             this.User_id = user_id;
-            this.User_name = User_name;
-            this.User_pass = User_pass;
+            this.User_name = user_name;
+            this.User_pass = user_pass;
             this.User_fullname = user_fullname;
             this.User_email = user_email;
             this.User_level = user_level;
             this.User_dateCteated = user_dateCteated;
 
+        }
+        public string GetUser_name()
+        {
+            return this.User_name;
         }
     }
 }
