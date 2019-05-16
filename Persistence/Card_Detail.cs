@@ -1,7 +1,7 @@
 using System;
 namespace Persistence
 {
-    class Card_Detail
+   public class Card_Detail
     {
         public string Card_id { get; set; }
         public string Cus_id { get; set; }

@@ -17,10 +17,10 @@ namespace DAL.Xunit
             User user = userDAL.Login(username, password);
 
             Assert.NotNull(user);
-            Assert.Equal(username,  user.User_name);
+            Assert.Equal(username,user.User_name);
         }
         [Theory]
-        [InlineData("customer_01", "123456789")]
+        [InlineData("manager_02", "123456789")]
         [InlineData("'?^%'", "'.:=='")]
         [InlineData("'?^%'", null)]
         [InlineData(null, "'.:=='")]

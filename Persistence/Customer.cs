@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Persistence
 {
-    class Customer
+    public  class Customer
     {
         public string Cus_id { get; set; }
         public string Cus_name { get; set; }

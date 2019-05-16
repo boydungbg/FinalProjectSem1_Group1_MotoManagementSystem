@@ -2,11 +2,12 @@
 
 namespace PL_Console
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Menus menu = new Menus();
+            menu.MenuChoice();
         }
     }
 }

@@ -6,24 +6,6 @@ namespace DAL
 {
     public class DBHelper
     {
-        private static string CONNECTION_STRING = @"server=localhost;user id=CTSUser;password=123456;port=3306;database=Group1_MotoParkingManagementSystem;SslMode=None;";
-        public static MySqlConnection OpenDefaultConnection()
-        {
-            try
-            {
-                MySqlConnection connection = new MySqlConnection
-                {
-                    ConnectionString = CONNECTION_STRING
-                };
-                connection.Open();
-
-                return connection;
-            }
-            catch
-            {
-                return null;
-            }
-        }
         public static MySqlConnection OpenConnection()
         {
             try

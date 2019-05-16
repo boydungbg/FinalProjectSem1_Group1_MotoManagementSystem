@@ -2,7 +2,7 @@ using System;
 
 namespace Persistence
 {
-    class Card_Logs
+    public class Card_Logs
     {
         public string Card_id { get; set; }
         public string User_id { get; set; }

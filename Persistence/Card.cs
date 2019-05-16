@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Persistence
 {
-    class Card
+    public class Card
     {
         public string Card_id { get; set; }
         public string LicensePlate { get; set; }
