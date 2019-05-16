@@ -54,20 +54,20 @@ namespace PL_Console
         }
         public void MenuLogin()
         {
+            UserBL userbl = new UserBL();
+            User user = null;
+            string accname;
+            string accpass;
             while (true)
             {
                 Console.Clear();
-                UserBL userbl = new UserBL();
-                User user = null;
-                string accname;
-                string accpass;
                 char choice;
                 Console.WriteLine(b);
                 Console.WriteLine(" ĐĂNG NHẬP");
                 Console.WriteLine(b);
-                Console.Write("nhập tài khoản: ");
+                Console.Write(" Nhập tài khoản : ");
                 accname = Console.ReadLine();
-                Console.Write("Nhập mật khẩu : ");
+                Console.Write(" Nhập mật khẩu  : ");
                 accpass = password();
                 try
                 {
@@ -118,8 +118,16 @@ namespace PL_Console
                         MenuChoice();
                     }
                 }
+                break;
             }
-
+            if (user.User_level == 0)
+            {
+                MenuManager();
+            }
+            if (user.User_level == 1)
+            {
+                MenuSecurity();
+            }
         }
         public string password()
         {
@@ -156,6 +164,75 @@ namespace PL_Console
                 return false;
             }
             return true;
+        }
+        public void MenuManager()
+        {
+            Console.Clear();
+            string[] menuItem = { "Tạo thẻ tháng", "Thống kê", "Đăng xuất" };
+            char choose = Menu(menuItem, 3, "Chào mừng bạn đã đến với hệ thống quản lý bãi gửi xe", "#Chọn: ");
+            switch (choose)
+            {
+                case '1':
+                    Console.WriteLine("Tạo thẻ tháng");
+                    break;
+                case '2':
+                    MenuStatictis();
+                    break;
+                case '3':
+                    MenuLogin();
+                    break;
+            }
+        }
+        public void MenuStatictis()
+        {
+            Console.Clear();
+            string[] menuItem = { "Thống kê theo ngày", "Thống kê theo tháng", "Quay lại" };
+            char choose = Menu(menuItem, 3, "Thống kê", "#Chọn: ");
+            switch (choose)
+            {
+                case '1':
+                    Console.WriteLine("Tạo thẻ tháng");
+                    break;
+                case '2':
+                    Console.WriteLine("Thống kê");
+                    break;
+                case '3':
+                    MenuManager();
+                    break;
+            }
+        }
+        public void MenuSecurity()
+        {
+            Console.Clear();
+            string[] menuItem = { "Kiểm tra xe ra vào", "Đăng xuất" };
+            char choose = Menu(menuItem, 2, "Chào mừng bạn đã đến với hệ thống quản lý bãi gửi xe", "#Chọn: ");
+            switch (choose)
+            {
+                case '1':
+                    CheckInCheckOut();
+                    break;
+                case '2':
+                    MenuLogin();
+                    break;
+            }
+        }
+        public void CheckInCheckOut()
+        {
+            Console.Clear();
+            string[] menuItem = { "Kiểm tra xe vào", "Kiểm tra xe ra", "Quay lại" };
+            char choose = Menu(menuItem, 3, "Kiểm tra xe vào xe ra", "#Chọn: ");
+            switch (choose)
+            {
+                case '1':
+                    Console.WriteLine("Xe ra - xe vào");
+                    break;
+                case '2':
+                    Console.WriteLine("Xe ra - xe vào");
+                    break;
+                case '3':
+                    MenuSecurity();
+                    break;
+            }
         }
         public char yesNo()
         {

@@ -1,9 +1,6 @@
 drop database if exists Group1_MotoParkingManagementSystem;
 create database if not exists Group1_MotoParkingManagementSystem char set 'utf8'; 
-
 use Group1_MotoParkingManagementSystem;
-
-
 create table if not exists Customer(
 cus_id varchar(10) primary key,
 cus_fullname nvarchar(50) not null,
@@ -11,12 +8,12 @@ cus_address nvarchar(50) not null,
 license_plate varchar(20) not null
 );
 insert into Customer(cus_id,cus_fullname,cus_address,license_plate)
-values ('KH01','Đào Văn Đức','Thái Bình','75-G1-2222'),
-('KH02','Lê Chí Dũng','Bắc Giang','33-G1-3333'),
-('KH03','Nguyễn Văn A','Hà Nội','22-E1-2222'),
-('KH04','Dũng đẹp zai','Hà Nội','44-b1-4444'),
-('KH05','Bùi Việt Hoàng','Phú Thọ','88-G1-8888'),
-('KH06','Boydung','Bắc Giang','88-A1-8888');
+values ('123456789','Đào Văn Đức','Thái Bình','75-G1-2222'),
+('123456709','Lê Chí Dũng','Bắc Giang','33-G1-3333'),
+('122332387','Nguyễn Văn A','Hà Nội','22-E1-2222'),
+('123445785','Dũng đẹp zai','Hà Nội','44-b1-4444'),
+('122446775','Bùi Việt Hoàng','Phú Thọ','88-G1-8888'),
+('123567436','Boydung','Bắc Giang','88-A1-8888');
 select * from Customer;
 create table if not exists Card(
 card_id varchar(10) primary key,
@@ -65,15 +62,15 @@ constraint fk_CardDetail_Card foreign key (card_id) references Card(card_id),
 cus_id varchar(10)  not null, 
 constraint fk_CardDetail_Customer foreign key (cus_id) references Customer(cus_id),
 card_time varchar(50) not null,
-date_created datetime not null
+date_created datetime not null default current_timestamp
 );
-insert into Card_detail(card_id,cus_id,card_time,date_created)
-values('CM01','KH01','15/5/2019 - 15/8/2019',current_timestamp()),
-('CM02','KH02','15/5/2019 - 15/8/2019',current_timestamp()),
-('CM03','KH03','15/5/2019 - 15/8/2019',current_timestamp()),
-('CM04','KH04','15/5/2019 - 15/8/2019',current_timestamp()),
-('CM05','KH05','15/5/2019 - 15/8/2019',current_timestamp()),
-('CM06','KH06','15/5/2019 - 15/8/2019',current_timestamp());
+insert into Card_detail(card_id,cus_id,card_time)
+values('CM01','123456789','15/5/2019 - 15/8/2019'),
+('CM02','123456709','15/5/2019 - 15/8/2019'),
+('CM03','122332387','15/5/2019 - 15/8/2019'),
+('CM04','123445785','15/5/2019 - 15/8/2019'),
+('CM05','122446775','15/5/2019 - 15/8/2019'),
+('CM06','123567436','15/5/2019 - 15/8/2019');
 select * from Card_detail;
 create table if not exists Accounts(
 acc_id varchar(10) primary key,

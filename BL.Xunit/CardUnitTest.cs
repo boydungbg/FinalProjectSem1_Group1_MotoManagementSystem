@@ -1,14 +1,13 @@
-using System;
-using System.Collections.Generic;
 using Persistence;
 using Xunit;
-namespace DAL.Xunit
+
+namespace BL.Xunit
 {
     public class CardUnitTest
     {
-        private CardDAL cardDAL = new CardDAL();
+        CardBL cardBL = new CardBL();
         [Fact]
-        public void CreateCardTest1()
+         public void CreateCardTest1()
         {
             string card_id = "CM20";
             string cus_id = "122332386";
@@ -20,7 +19,7 @@ namespace DAL.Xunit
             Card_Detail card_Detail = new Card_Detail(card_id, cus_id, cardTime,null);
             Card card = new Card(card_id, cus_licensePlate, cardType, null, null, null);
             Customer cus = new Customer(cus_id, cus_name, cus_address, cus_licensePlate);
-            Assert.True(cardDAL.CreateCard(card, cus, card_Detail));
+            Assert.True(cardBL.CreateCard(card, cus, card_Detail));
         }
         [Fact]
         public void CreateCardTest2()
@@ -35,8 +34,7 @@ namespace DAL.Xunit
             Card_Detail card_Detail = new Card_Detail(card_id, cus_id, cardTime,null);
             Card card = new Card(card_id, cus_licensePlate, cardType, null, null, null);
             Customer cus = new Customer(cus_id, cus_name, cus_address, cus_licensePlate);
-            Assert.False(cardDAL.CreateCard(card, cus, card_Detail));
+            Assert.False(cardBL.CreateCard(card, cus, card_Detail));
         }
-
     }
 }
