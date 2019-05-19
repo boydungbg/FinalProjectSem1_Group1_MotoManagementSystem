@@ -18,35 +18,35 @@ select * from Customer;
 create table if not exists Card(
 card_id varchar(10) primary key,
 card_type nvarchar(50) not null,
-license_plate varchar(20),
+license_plate varchar(20) not null,
 card_status bit not null default 0
 ); 
-insert into Card(card_id,card_type)
-values('CD01','Thẻ ngày'),
-('CD02','Thẻ ngày'),
-('CD03','Thẻ ngày'),
-('CD04','Thẻ ngày'),
-('CD05','Thẻ ngày'),
-('CD06','Thẻ ngày'),
-('CD07','Thẻ ngày'),
-('CD08','Thẻ ngày'),
-('CD09','Thẻ ngày'),
-('CD10','Thẻ ngày'),
-('CD11','Thẻ ngày'),
-('CD12','Thẻ ngày'),
-('CD13','Thẻ ngày'),
-('CD14','Thẻ ngày'),
-('CD15','Thẻ ngày'),
-('CD16','Thẻ ngày'),
-('CD17','Thẻ ngày'),
-('CD18','Thẻ ngày'),
-('CD19','Thẻ ngày'),
-('CD20','Thẻ ngày'),
-('CD21','Thẻ ngày'),
-('CD22','Thẻ ngày'),
-('CD23','Thẻ ngày'),
-('CD24','Thẻ ngày'),
-('CD25','Thẻ ngày');
+insert into Card(card_id,card_type,license_plate)
+values('CD01','Thẻ ngày','No License Plate'),
+('CD02','Thẻ ngày','No License Plate'),
+('CD03','Thẻ ngày','No License Plate'),
+('CD04','Thẻ ngày','No License Plate'),
+('CD05','Thẻ ngày','No License Plate'),
+('CD06','Thẻ ngày','No License Plate'),
+('CD07','Thẻ ngày','No License Plate'),
+('CD08','Thẻ ngày','No License Plate'),
+('CD09','Thẻ ngày','No License Plate'),
+('CD10','Thẻ ngày','No License Plate'),
+('CD11','Thẻ ngày','No License Plate'),
+('CD12','Thẻ ngày','No License Plate'),
+('CD13','Thẻ ngày','No License Plate'),
+('CD14','Thẻ ngày','No License Plate'),
+('CD15','Thẻ ngày','No License Plate'),
+('CD16','Thẻ ngày','No License Plate'),
+('CD17','Thẻ ngày','No License Plate'),
+('CD18','Thẻ ngày','No License Plate'),
+('CD19','Thẻ ngày','No License Plate'),
+('CD20','Thẻ ngày','No License Plate'),
+('CD21','Thẻ ngày','No License Plate'),
+('CD22','Thẻ ngày','No License Plate'),
+('CD23','Thẻ ngày','No License Plate'),
+('CD24','Thẻ ngày','No License Plate'),
+('CD25','Thẻ ngày','No License Plate');
 
 insert into Card(card_id,card_type,license_plate)
 values('CM01','Thẻ tháng','75-G1-2222'),
@@ -58,16 +58,17 @@ values('CM01','Thẻ tháng','75-G1-2222'),
 select * from Card;
 create table if not exists Card_detail(
 card_id varchar(10)  not null,
+cus_id varchar(10)  not null,
+constraint pk_carddetail primary key (card_id,cus_id),
 constraint fk_CardDetail_Card foreign key (card_id) references Card(card_id),
-cus_id varchar(10)  not null, 
 constraint fk_CardDetail_Customer foreign key (cus_id) references Customer(cus_id),
 start_day datetime not null,
 end_day datetime not null,
 date_created datetime not null default current_timestamp
 );
-insert into Card_detail(card_id,cus_id,start_day,end_day)
+insert into Card_detail (card_id,cus_id,start_day,end_day)
 values('CM01','123456789','2019-05-17','2019-06-17'),
-('CM02','123456709','2019-05-17','2019-06-17'), 
+('CM02','123456709','2019-05-17','2019-06-17'),
 ('CM03','122332387','2019-05-17','2019-06-17'),
 ('CM04','123445785','2019-05-17','2019-06-17'),
 ('CM05','122446775','2019-05-17','2019-06-17'),
@@ -89,7 +90,7 @@ create table if not exists Card_Logs(
 cl_id int primary key auto_increment,
 card_id varchar(10)  not null,
 constraint fk_CardLogs_Card foreign key (card_id) references Card(card_id),
-acc_name varchar(10)  not null,
+acc_name varchar(50)  not null,
 constraint fk_CardLogs_Account foreign key (acc_name) references Accounts(acc_name),
 cl_licensePlate varchar(20) not null,
 cl_dateTimeStart datetime not null,
@@ -97,6 +98,11 @@ cl_dateTimeEnd datetime,
 cl_sendTime varchar(20),
 cl_intoMoney double
 );
+/*insert into Card_Logs(card_id,acc_name,cl_licensePlate,cl_dateTimeStart)
+values('CD01','security_01','88-X8-9999',current_timestamp()),
+('CM01','security_01','88-X8-1234',current_timestamp()),
+('CM03','security_01','88-X8-5678',current_timestamp()),
+('CD22','security_01','88-X8-9988',current_timestamp());*/
 drop user if exists 'MPSUser'@'localhost';
 create user if not exists 'MPSUser'@'localhost' identified by '123456';
     grant all on Card to 'MPSUser'@'localhost';

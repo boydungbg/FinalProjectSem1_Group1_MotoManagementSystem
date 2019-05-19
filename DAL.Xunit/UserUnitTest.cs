@@ -14,7 +14,6 @@ namespace DAL.Xunit
         {
             UserDAL userDAL = new UserDAL();
             User user = userDAL.Login(username, password);
-
             Assert.NotNull(user);
             Assert.Equal(username,user.User_name);
         }

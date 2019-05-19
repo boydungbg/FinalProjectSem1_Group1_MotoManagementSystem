@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using DAL;
 using Persistence;
 
@@ -20,7 +21,31 @@ namespace BL
         }
         public bool DeleteCardByID(string cardid, string cusid)
         {
-            return cardDAL.DeleteCardByID(cardid,cusid);
+            if (cardid == null || cusid == null)
+            {
+                return false;
+            }
+            return cardDAL.DeleteCardByID(cardid, cusid);
+        }
+        public Card GetCardByLicensePlate(string licensePlate)
+        {
+            if (licensePlate == null)
+            {
+                return null;
+            }
+            return cardDAL.GetCardByLicensePlate(licensePlate);
+        }
+        public bool UpdateCardByID(Card card, string id)
+        {
+            if (card == null || id == null)
+            {
+                return false;
+            }
+            return cardDAL.UpdateCardByID(card,id);
+        }
+        public List<Card> GetlistCard()
+        {
+            return cardDAL.GetlistCard();
         }
     }
 }

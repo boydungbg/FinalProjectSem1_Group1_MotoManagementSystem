@@ -13,21 +13,21 @@ namespace PL_console
         public void CreateCard()
         {
             Menus menu = new Menus();
-            CardBL cardBL = new CardBL();
-            CustomerBL cusBL = new CustomerBL();
-            Card newCard = new Card();
-            Customer newCus = new Customer();
-            string card_id;
-            string customer_id;
-            string customer_name;
-            string customer_address;
-            string customer_licenseplate;
-            DateTime start_day;
-            DateTime end_day;
             char yesNo;
             bool check = false;
             do
             {
+                CardBL cardBL = new CardBL();
+                CustomerBL cusBL = new CustomerBL();
+                Card newCard = new Card();
+                Customer newCus = new Customer();
+                string card_id;
+                string customer_id;
+                string customer_name;
+                string customer_address;
+                string customer_licenseplate;
+                DateTime start_day;
+                DateTime end_day;
                 Console.Clear();
                 Console.WriteLine(b);
                 Console.WriteLine(" Tạo thẻ tháng.");
@@ -35,8 +35,6 @@ namespace PL_console
                 Console.Write("- Nhập mã thẻ(VD:CM01): ");
                 do
                 {
-                    cardBL = new CardBL();
-                    newCard = new Card();
                     card_id = validate(1);
                     try
                     {
@@ -141,13 +139,13 @@ namespace PL_console
                     {
                         Console.WriteLine(b);
                         Console.WriteLine();
-                        Console.WriteLine(" Tạo thẻ không thành công.");
+                        Console.WriteLine("✘ Tạo thẻ không thành công.");
                     }
                     if (check == true)
                     {
                         Console.WriteLine(b);
                         Console.WriteLine();
-                        Console.WriteLine(" Tạo thẻ thành công.");
+                        Console.WriteLine("✔ Tạo thẻ thành công.");
                     }
                 }
                 catch (System.NullReferenceException)
@@ -193,7 +191,7 @@ namespace PL_console
                         Console.Write(e.Message);
                         continue;
                     }
-                    Regex regex = new Regex("[C][M][0-9]{2}");
+                    Regex regex = new Regex("[C][MD][0-9]{2}");
                     MatchCollection matchCollectionstr = regex.Matches(input);
                     if (matchCollectionstr.Count == 0)
                     {

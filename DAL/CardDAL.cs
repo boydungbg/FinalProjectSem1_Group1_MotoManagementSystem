@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using MySql.Data.MySqlClient;
 using Persistence;
 
@@ -61,6 +62,54 @@ namespace DAL
                 command.Parameters.AddWithValue("@cus_id_card_detail", card_Detail.Cus_id);
                 command.Parameters.AddWithValue("@start_day", card_Detail.Start_day);
                 command.Parameters.AddWithValue("@end_day", card_Detail.End_day);
+                command.CommandText = query;
+                command.ExecuteNonQuery();
+                transaction.Commit();
+                result = true;
+            }
+            catch (System.Exception e)
+            {
+                string m = e.Message;
+                transaction.Rollback();
+            }
+            finally
+            {
+                // Unlock Tables
+                command.CommandText = "unlock tables";
+                command.ExecuteNonQuery();
+                connection.Close();
+            }
+            return result;
+        }
+        public bool UpdateCardByID(Card card, string cardid)
+        {
+            bool result = false;
+            if (card == null || cardid == null)
+            {
+                return result;
+            }
+            if (connection == null)
+            {
+                connection = DBHelper.OpenConnection();
+            }
+            if (connection.State == System.Data.ConnectionState.Closed)
+            {
+                connection.Open();
+            }
+            MySqlCommand command = new MySqlCommand("", connection);
+            //Lock table 
+            command.CommandText = @"lock tables Card write;";
+            command.ExecuteNonQuery();
+            //Transaction
+            MySqlTransaction transaction = connection.BeginTransaction();
+            command.Transaction = transaction;
+            try
+            {
+                //Insert card
+                query = @"Update Card SET license_plate = @LicensePlate , card_status = @cardStatus where card_id = @cardid;";
+                command.Parameters.AddWithValue("@cardid", cardid);
+                command.Parameters.AddWithValue("@LicensePlate", card.LicensePlate);
+                command.Parameters.AddWithValue("@cardStatus", card.Card_Status);
                 command.CommandText = query;
                 command.ExecuteNonQuery();
                 transaction.Commit();
@@ -162,13 +211,65 @@ namespace DAL
             }
             return card;
         }
-        public Card GetCard(MySqlDataReader reader)
+        public Card GetCardByLicensePlate(string licensePlate)
+        {
+            if (licensePlate == null)
+            {
+                return null;
+            }
+            if (connection == null)
+            {
+                connection = DBHelper.OpenConnection();
+            }
+            if (connection.State == System.Data.ConnectionState.Closed)
+            {
+                connection.Open();
+            }
+            MySqlCommand command = new MySqlCommand("", connection);
+            query = @"select * from Card where license_plate = @licensePlate ;";
+            command.Parameters.AddWithValue("@licensePlate", licensePlate);
+            command.CommandText = query;
+            Card card = null;
+            using (reader = command.ExecuteReader())
+            {
+                if (reader.Read())
+                {
+                    card = GetCard(reader);
+                }
+            }
+            return card;
+        }
+        private Card GetCard(MySqlDataReader reader)
         {
             string cardid = reader.GetString("card_id");
             string licensePlate = reader.GetString("license_plate");
             string cardType = reader.GetString("card_type");
             int cardstatus = reader.GetInt32("card_status");
             Card card = new Card(cardid, licensePlate, cardType, cardstatus, null, null);
+            return card;
+        }
+        public List<Card> GetlistCard()
+        {
+            if (connection == null)
+            {
+                connection = DBHelper.OpenConnection();
+            }
+            if (connection.State == System.Data.ConnectionState.Closed)
+            {
+                connection.Open();
+            }
+            query = @"select * from Card;";
+            MySqlCommand command = new MySqlCommand(query, connection);
+            List<Card> card = null;
+            using (reader = command.ExecuteReader())
+            {
+                card = new List<Card>();
+                while (reader.Read())
+                {
+                    card.Add(GetCard(reader));
+                }
+            }
+            connection.Close();
             return card;
         }
     }

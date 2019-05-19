@@ -23,6 +23,9 @@ namespace DAL.Xunit
             Card_Detail card_Detail = new Card_Detail(card_id, cus_id, start_day, end_day, null);
             Assert.True(cardDAL.CreateCard(card, cus, card_Detail));
             cardDAL = new CardDAL();
+            card = new Card(null, "89-B5-9988", cardType, 1, null, null);
+            Assert.True(cardDAL.UpdateCardByID(card, "CM21"));
+            cardDAL = new CardDAL();
             Assert.True(cardDAL.DeleteCardByID("CM21", "101029011"));
         }
         [Fact]
@@ -41,6 +44,11 @@ namespace DAL.Xunit
             Card card = new Card(card_id, cus_licensePlate, cardType, null, null, null);
             Customer cus = new Customer(cus_id, cus_name, cus_address, cus_licensePlate);
             Assert.False(cardDAL.CreateCard(card, cus, card_Detail));
+            cardDAL = new CardDAL();
+            card = new Card(null, "89-B5-9988", cardType, 1, null, null);
+            Assert.False(cardDAL.UpdateCardByID(null, null));
+            cardDAL = new CardDAL();
+            Assert.False(cardDAL.DeleteCardByID(null, "100000000"));
         }
         [Theory]
         [InlineData("CM01")]
@@ -61,6 +69,32 @@ namespace DAL.Xunit
             Card card = cardDAL.GetCardByID(card_id);
             Assert.Null(card);
         }
-       
+        [Fact]
+        public void ShowlistCardTest1()
+        {
+            CardDAL cardDAL = new CardDAL();
+            List<Card> card = cardDAL.GetlistCard();
+            Assert.NotEmpty(card);
+        }
+        [Theory]
+        [InlineData("44-b1-4444")]
+        [InlineData("22-E1-2222")]
+        public void GetCardByLicensePlateTest1(string licensePlate)
+        {
+            CardDAL cardDAL = new CardDAL();
+            Card card = cardDAL.GetCardByLicensePlate(licensePlate);
+            Assert.NotNull(card);
+            Assert.Equal(licensePlate, card.LicensePlate);
+        }
+        [Theory]
+        [InlineData("89-B5-9988")]
+        [InlineData(null)]
+        public void GetCardByLicensePlateTest2(string licensePlate)
+        {
+            CardDAL cardDAL = new CardDAL();
+            Card card = cardDAL.GetCardByLicensePlate(licensePlate);
+            Assert.Null(card);
+        }
+
     }
 }

@@ -64,7 +64,7 @@ namespace DAL
             }
             return cus;
         }
-        public Customer GetCustomer(MySqlDataReader reader)
+        private Customer GetCustomer(MySqlDataReader reader)
         {
             string customerid = reader.GetString("cus_id");
             string customerName = reader.GetString("cus_fullname");

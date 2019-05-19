@@ -8,6 +8,7 @@ namespace PL_Console
 {
     public class Menus
     {
+        private User user = null;
         string b = "══════════════════════════════════════════════════════════════";
         public void MenuChoice()
         {
@@ -56,7 +57,6 @@ namespace PL_Console
         public void MenuLogin()
         {
             UserBL userbl = new UserBL();
-            User user = null;
             string accname;
             string accpass;
             while (true)
@@ -220,13 +220,14 @@ namespace PL_Console
         }
         public void CheckInCheckOut()
         {
+            ConsoleSecurity security = new ConsoleSecurity();
             Console.Clear();
             string[] menuItem = { "Kiểm tra xe vào", "Kiểm tra xe ra", "Quay lại" };
             char choose = Menu(menuItem, 3, "Kiểm tra xe vào xe ra", "#Chọn: ");
             switch (choose)
             {
                 case '1':
-                    Console.WriteLine("Xe ra - xe vào");
+                    security.CheckIn(user);
                     break;
                 case '2':
                     Console.WriteLine("Xe ra - xe vào");

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Persistence;
 using Xunit;
 
@@ -23,6 +24,9 @@ namespace BL.Xunit
             Customer cus = new Customer(cus_id, cus_name, cus_address, cus_licensePlate);
             Assert.True(cardBL.CreateCard(card, cus, card_Detail));
             cardBL = new CardBL();
+            card = new Card(card_id, "89-B5-9988", cardType, 1, null, null);
+            Assert.True(cardBL.UpdateCardByID(card, "CM21"));
+            cardBL = new CardBL();
             Assert.True(cardBL.DeleteCardByID("CM21", "101029011"));
         }
         [Fact]
@@ -41,6 +45,10 @@ namespace BL.Xunit
             Card card = new Card(card_id, cus_licensePlate, cardType, null, null, null);
             Customer cus = new Customer(cus_id, cus_name, cus_address, cus_licensePlate);
             Assert.False(cardBL.CreateCard(card, cus, card_Detail));
+            card = new Card(card_id, "89-B5-9988", cardType, 1, null, null);
+            Assert.False(cardBL.UpdateCardByID(null, "CM21"));
+            cardBL = new CardBL();
+            Assert.False(cardBL.DeleteCardByID("CM99", null));
         }
         [Theory]
         [InlineData("CM01")]
@@ -59,6 +67,32 @@ namespace BL.Xunit
         {
             CardBL cardBL = new CardBL();
             Card card = cardBL.GetCardByID(cardid);
+            Assert.Null(card);
+        }
+        [Fact]
+        public void ShowlistCardTest1()
+        {
+            CardBL cardBL = new CardBL();
+            List<Card> card = cardBL.GetlistCard();
+            Assert.NotEmpty(card);
+        }
+        [Theory]
+        [InlineData("88-A1-8888")]
+        [InlineData("44-b1-4444")]
+        public void GetCardByLicensePlateTest1(string licensePlate)
+        {
+            CardBL cardBL = new CardBL();
+            Card card = cardBL.GetCardByLicensePlate(licensePlate);
+            Assert.NotNull(card);
+            Assert.Equal(licensePlate, card.LicensePlate);
+        }
+        [Theory]
+        [InlineData("44-b1-5544")]
+        [InlineData(null)]
+        public void GetCardByLicensePlateTest2(string licensePlate)
+        {
+            CardBL cardBL = new CardBL();
+            Card card = cardBL.GetCardByLicensePlate(licensePlate);
             Assert.Null(card);
         }
     }
