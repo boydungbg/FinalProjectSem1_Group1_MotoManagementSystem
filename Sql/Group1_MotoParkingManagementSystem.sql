@@ -48,49 +48,49 @@ values('CD01','Thẻ ngày'),
 ('CD24','Thẻ ngày'),
 ('CD25','Thẻ ngày');
 
-insert into Card(card_id,card_type)
-values('CM01','Thẻ tháng'),
-('CM02','Thẻ tháng'),
-('CM03','Thẻ tháng'),
-('CM04','Thẻ tháng'),
-('CM05','Thẻ tháng'),
-('CM06','Thẻ tháng');
+insert into Card(card_id,card_type,license_plate)
+values('CM01','Thẻ tháng','75-G1-2222'),
+('CM02','Thẻ tháng','33-G1-3333'),
+('CM03','Thẻ tháng','22-E1-2222'),
+('CM04','Thẻ tháng','44-b1-4444'),
+('CM05','Thẻ tháng','88-G1-8888'),
+('CM06','Thẻ tháng','88-A1-8888');
 select * from Card;
 create table if not exists Card_detail(
 card_id varchar(10)  not null,
 constraint fk_CardDetail_Card foreign key (card_id) references Card(card_id),
 cus_id varchar(10)  not null, 
 constraint fk_CardDetail_Customer foreign key (cus_id) references Customer(cus_id),
-card_time varchar(50) not null,
+start_day datetime not null,
+end_day datetime not null,
 date_created datetime not null default current_timestamp
 );
-insert into Card_detail(card_id,cus_id,card_time)
-values('CM01','123456789','15/5/2019 - 15/8/2019'),
-('CM02','123456709','15/5/2019 - 15/8/2019'),
-('CM03','122332387','15/5/2019 - 15/8/2019'),
-('CM04','123445785','15/5/2019 - 15/8/2019'),
-('CM05','122446775','15/5/2019 - 15/8/2019'),
-('CM06','123567436','15/5/2019 - 15/8/2019');
+insert into Card_detail(card_id,cus_id,start_day,end_day)
+values('CM01','123456789','2019-05-17','2019-06-17'),
+('CM02','123456709','2019-05-17','2019-06-17'), 
+('CM03','122332387','2019-05-17','2019-06-17'),
+('CM04','123445785','2019-05-17','2019-06-17'),
+('CM05','122446775','2019-05-17','2019-06-17'),
+('CM06','123567436','2019-05-17','2019-06-17');
 select * from Card_detail;
 create table if not exists Accounts(
-acc_id varchar(10) primary key,
-acc_name varchar(50) not null,
+acc_name varchar(50) primary key,
 acc_pass varchar(30) not null,
 acc_fullname nvarchar(50) not null,
 acc_email varchar(50) not null,
 acc_level bit not null,
 acc_dateCreated datetime not null default current_timestamp
 );
-insert into Accounts(acc_id,acc_name,acc_pass, acc_fullname, acc_email,acc_level)
-values('M01','manager_01','24122000','Lê Chí Dũng','boydungbg@gmail.com',0),
-('S01','security_01','24122000','Bùi Việt Hoàng','hoangmage@gmail.com',1);
+insert into Accounts(acc_name,acc_pass, acc_fullname, acc_email,acc_level)
+values('manager_01','24122000','Lê Chí Dũng','boydungbg@gmail.com',0),
+('security_01','24122000','Bùi Việt Hoàng','hoangmage@gmail.com',1);
 select * from Accounts;
 create table if not exists Card_Logs(
 cl_id int primary key auto_increment,
 card_id varchar(10)  not null,
 constraint fk_CardLogs_Card foreign key (card_id) references Card(card_id),
-acc_id varchar(10)  not null,
-constraint fk_CardLogs_Account foreign key (acc_id) references Accounts(acc_id),
+acc_name varchar(10)  not null,
+constraint fk_CardLogs_Account foreign key (acc_name) references Accounts(acc_name),
 cl_licensePlate varchar(20) not null,
 cl_dateTimeStart datetime not null,
 cl_dateTimeEnd datetime,

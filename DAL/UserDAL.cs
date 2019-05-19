@@ -36,9 +36,12 @@ namespace DAL
             {
                 connection.Open();
             }
-            query = @"select * from Accounts where acc_name = '" + username + "' and acc_pass = '" + password + "';";
-
-            MySqlCommand command = new MySqlCommand(query, connection);
+            MySqlCommand command = new MySqlCommand("", connection);
+            query = @"select * from Accounts where acc_name = @name and acc_pass = @pass ;";
+            command.Parameters.AddWithValue("@name", username);
+            command.Parameters.AddWithValue("@pass", password);
+            command.CommandText = query;
+            // command.ExecuteNonQuery();
             User user = null;
             using (reader = command.ExecuteReader())
             {
@@ -51,19 +54,13 @@ namespace DAL
         }
         private User GetUser(MySqlDataReader reader)
         {
-            if (reader.GetString("acc_id")==null)
-            {
-                return null;
-            }
-            string userid = reader.GetString("acc_id");
             string username = reader.GetString("acc_name");
             string userpass = reader.GetString("acc_pass");
             string fullname = reader.GetString("acc_fullname");
             string email = reader.GetString("acc_email");
             int level = reader.GetInt16("acc_level");
             DateTime acc_dateCreated = reader.GetDateTime("acc_dateCreated");
-            User user = new User(userid, username, userpass, fullname, email, level, acc_dateCreated);
-
+            User user = new User(username, userpass, fullname, email, level, acc_dateCreated);
             return user;
         }
 

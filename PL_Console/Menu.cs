@@ -2,6 +2,7 @@ using System;
 using System.Text.RegularExpressions;
 using BL;
 using Persistence;
+using PL_console;
 
 namespace PL_Console
 {
@@ -168,12 +169,13 @@ namespace PL_Console
         public void MenuManager()
         {
             Console.Clear();
+            ConsoleManager manager = new ConsoleManager();
             string[] menuItem = { "Tạo thẻ tháng", "Thống kê", "Đăng xuất" };
             char choose = Menu(menuItem, 3, "Chào mừng bạn đã đến với hệ thống quản lý bãi gửi xe", "#Chọn: ");
             switch (choose)
             {
                 case '1':
-                    Console.WriteLine("Tạo thẻ tháng");
+                    manager.CreateCard();
                     break;
                 case '2':
                     MenuStatictis();
@@ -191,7 +193,7 @@ namespace PL_Console
             switch (choose)
             {
                 case '1':
-                    Console.WriteLine("Tạo thẻ tháng");
+
                     break;
                 case '2':
                     Console.WriteLine("Thống kê");

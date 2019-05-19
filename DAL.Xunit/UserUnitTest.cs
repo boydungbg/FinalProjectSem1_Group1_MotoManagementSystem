@@ -7,7 +7,6 @@ namespace DAL.Xunit
 {
     public class UserUnitTest
     {
-
         [Theory]
         [InlineData("manager_01", "24122000")]
         [InlineData("security_01", "24122000")]
