@@ -1201,11 +1201,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\PROGRAMER\\SEM1\\Project sem1\\FinalProjectSem1_Group1_MotoManagementSystem\\DAL\\DAL.csproj",
+      "projectUniqueName": "E:\\PROGRAMER\\SEM1\\Project sem1\\FinalProjectSem1_Group1_MotoParkingManagementSystem\\DAL\\DAL.csproj",
       "projectName": "DAL",
-      "projectPath": "E:\\PROGRAMER\\SEM1\\Project sem1\\FinalProjectSem1_Group1_MotoManagementSystem\\DAL\\DAL.csproj",
+      "projectPath": "E:\\PROGRAMER\\SEM1\\Project sem1\\FinalProjectSem1_Group1_MotoParkingManagementSystem\\DAL\\DAL.csproj",
       "packagesPath": "C:\\Users\\luvso\\.nuget\\packages\\",
-      "outputPath": "E:\\PROGRAMER\\SEM1\\Project sem1\\FinalProjectSem1_Group1_MotoManagementSystem\\DAL\\obj\\",
+      "outputPath": "E:\\PROGRAMER\\SEM1\\Project sem1\\FinalProjectSem1_Group1_MotoParkingManagementSystem\\DAL\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -1222,8 +1222,8 @@
       "frameworks": {
         "netstandard2.0": {
           "projectReferences": {
-            "E:\\PROGRAMER\\SEM1\\Project sem1\\FinalProjectSem1_Group1_MotoManagementSystem\\Persistence\\Persistence.csproj": {
-              "projectPath": "E:\\PROGRAMER\\SEM1\\Project sem1\\FinalProjectSem1_Group1_MotoManagementSystem\\Persistence\\Persistence.csproj"
+            "E:\\PROGRAMER\\SEM1\\Project sem1\\FinalProjectSem1_Group1_MotoParkingManagementSystem\\Persistence\\Persistence.csproj": {
+              "projectPath": "E:\\PROGRAMER\\SEM1\\Project sem1\\FinalProjectSem1_Group1_MotoParkingManagementSystem\\Persistence\\Persistence.csproj"
             }
           }
         }

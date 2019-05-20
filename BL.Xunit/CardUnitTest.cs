@@ -95,5 +95,19 @@ namespace BL.Xunit
             Card card = cardBL.GetCardByLicensePlate(licensePlate);
             Assert.Null(card);
         }
+        [Fact]
+        public void GetCardByWordTest1()
+        {
+            CardBL cardBL = new CardBL();
+            Card card = cardBL.GetCardByWord();
+            Assert.NotNull(card);
+        }
+        [Fact]
+        public void GetListCardByCardTypeTest1()
+        {
+            CardBL cardBL = new CardBL();
+            List<Card> card = cardBL.GetListCardByCardType();
+            Assert.NotEmpty(card);
+        }
     }
 }

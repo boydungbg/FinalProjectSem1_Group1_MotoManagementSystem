@@ -95,6 +95,20 @@ namespace DAL.Xunit
             Card card = cardDAL.GetCardByLicensePlate(licensePlate);
             Assert.Null(card);
         }
+        [Fact]
+        public void GetCardByWordTest1()
+        {
+            CardDAL cardDAL = new CardDAL();
+            Card card = cardDAL.GetCardByWord();
+            Assert.NotNull(card);
+        }
+        [Fact]
+        public void GetListCardByCardTypeTest1()
+        {
+            CardDAL cardDAL = new CardDAL();
+            List<Card> card = cardDAL.GetListCardByCardType();
+            Assert.NotEmpty(card);
+        }
 
     }
 }

@@ -170,17 +170,20 @@ namespace PL_Console
         {
             Console.Clear();
             ConsoleManager manager = new ConsoleManager();
-            string[] menuItem = { "Tạo thẻ tháng", "Thống kê", "Đăng xuất" };
-            char choose = Menu(menuItem, 3, "Chào mừng bạn đã đến với hệ thống quản lý bãi gửi xe", "#Chọn: ");
+            string[] menuItem = { "Tạo thẻ tháng", "Hiển thị danh sách thẻ tháng", "Thống kê", "Đăng xuất" };
+            char choose = Menu(menuItem, 4, "Chào mừng bạn đã đến với hệ thống quản lý bãi gửi xe", "#Chọn: ");
             switch (choose)
             {
                 case '1':
                     manager.CreateCard();
                     break;
                 case '2':
-                    MenuStatictis();
+                    manager.GetListCardByCardType();
                     break;
                 case '3':
+                    MenuStatictis();
+                    break;
+                case '4':
                     MenuLogin();
                     break;
             }

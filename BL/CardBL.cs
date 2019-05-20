@@ -41,11 +41,19 @@ namespace BL
             {
                 return false;
             }
-            return cardDAL.UpdateCardByID(card,id);
+            return cardDAL.UpdateCardByID(card, id);
         }
         public List<Card> GetlistCard()
         {
             return cardDAL.GetlistCard();
+        }
+        public Card GetCardByWord()
+        {
+            return cardDAL.GetCardByWord();
+        }
+        public List<Card> GetListCardByCardType()
+        {
+            return cardDAL.GetListCardByCardType();
         }
     }
 }

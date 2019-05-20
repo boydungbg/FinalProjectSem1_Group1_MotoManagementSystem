@@ -11,3 +11,16 @@ E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\DAL\
 E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\DAL\obj\Debug\netstandard2.0\DAL.dll
 E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\DAL\obj\Debug\netstandard2.0\DAL.pdb
 E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\DAL\bin\Debug\netstandard2.0\ConnectionString.txt
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL\bin\Debug\netstandard2.0\ConnectionString.txt
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL\bin\Debug\netstandard2.0\DAL.deps.json
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL\bin\Debug\netstandard2.0\DAL.dll
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL\bin\Debug\netstandard2.0\DAL.pdb
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL\bin\Debug\netstandard2.0\Persistence.dll
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL\bin\Debug\netstandard2.0\Persistence.pdb
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL\obj\Debug\netstandard2.0\DAL.csprojAssemblyReference.cache
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL\obj\Debug\netstandard2.0\DAL.csproj.CoreCompileInputs.cache
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL\obj\Debug\netstandard2.0\DAL.AssemblyInfoInputs.cache
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL\obj\Debug\netstandard2.0\DAL.AssemblyInfo.cs
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL\obj\Debug\netstandard2.0\DAL.csproj.CopyComplete
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL\obj\Debug\netstandard2.0\DAL.dll
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL\obj\Debug\netstandard2.0\DAL.pdb

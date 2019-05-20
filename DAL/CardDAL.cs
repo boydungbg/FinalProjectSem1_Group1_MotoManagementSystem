@@ -241,6 +241,10 @@ namespace DAL
         }
         private Card GetCard(MySqlDataReader reader)
         {
+            if (reader.IsDBNull(reader.GetOrdinal("card_id")))
+            {
+                return null;
+            }
             string cardid = reader.GetString("card_id");
             string licensePlate = reader.GetString("license_plate");
             string cardType = reader.GetString("card_type");
@@ -267,6 +271,70 @@ namespace DAL
                 while (reader.Read())
                 {
                     card.Add(GetCard(reader));
+                }
+            }
+            connection.Close();
+            return card;
+        }
+        public Card GetCardByWord()
+        {
+            if (connection == null)
+            {
+                connection = DBHelper.OpenConnection();
+            }
+            if (connection.State == System.Data.ConnectionState.Closed)
+            {
+                connection.Open();
+            }
+            MySqlCommand command = new MySqlCommand("", connection);
+            query = @"SELECT max(card_id) from Card where card_id like 'CM%' ;";
+            command.CommandText = query;
+            Card card = null;
+            using (reader = command.ExecuteReader())
+            {
+                if (reader.Read())
+                {
+                    if (reader.IsDBNull(reader.GetOrdinal("max(card_id)")))
+                    {
+                        return null;
+                    }
+                    string cardid = reader.GetString("max(card_id)");
+                    card = new Card(cardid, null, null, null, null, null);
+                }
+            }
+            return card;
+        }
+        public List<Card> GetListCardByCardType()
+        {
+            if (connection == null)
+            {
+                connection = DBHelper.OpenConnection();
+            }
+            if (connection.State == System.Data.ConnectionState.Closed)
+            {
+                connection.Open();
+            }
+            query = @"Select c.card_id,c.card_type,c.license_plate,cd.cus_id,cd.start_day,
+            cd.end_day,cd.date_created from Card c
+            inner join Card_detail cd on c.card_id = cd.card_id
+            where c.card_id like 'CM%';";
+            MySqlCommand command = new MySqlCommand(query, connection);
+            List<Card> card = null;
+            using (reader = command.ExecuteReader())
+            {
+                card = new List<Card>();
+                while (reader.Read())
+                {
+                    string card_id = reader.GetString("card_id");
+                    string card_Type = reader.GetString("card_type");
+                    string license_plate = reader.GetString("license_plate");
+                    string cus_id = reader.GetString("cus_id");
+                    DateTime start_day = reader.GetDateTime("start_day");
+                    DateTime end_day = reader.GetDateTime("end_day");
+                    DateTime date_create = reader.GetDateTime("date_created");
+                    List<Card_Detail> listCard = new List<Card_Detail>();
+                    listCard.Add(new Card_Detail(card_id, cus_id, start_day, end_day, date_create));
+                    card.Add(new Card(card_id, license_plate, card_Type, null, null, listCard));
                 }
             }
             connection.Close();

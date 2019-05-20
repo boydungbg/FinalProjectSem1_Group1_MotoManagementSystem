@@ -2,7 +2,7 @@ drop database if exists Group1_MotoParkingManagementSystem;
 create database if not exists Group1_MotoParkingManagementSystem char set 'utf8'; 
 use Group1_MotoParkingManagementSystem;
 create table if not exists Customer(
-cus_id varchar(10) primary key,
+cus_id varchar(20) primary key,
 cus_fullname nvarchar(50) not null,
 cus_address nvarchar(50) not null,
 license_plate varchar(20) not null
@@ -31,22 +31,7 @@ values('CD01','Thẻ ngày','No License Plate'),
 ('CD07','Thẻ ngày','No License Plate'),
 ('CD08','Thẻ ngày','No License Plate'),
 ('CD09','Thẻ ngày','No License Plate'),
-('CD10','Thẻ ngày','No License Plate'),
-('CD11','Thẻ ngày','No License Plate'),
-('CD12','Thẻ ngày','No License Plate'),
-('CD13','Thẻ ngày','No License Plate'),
-('CD14','Thẻ ngày','No License Plate'),
-('CD15','Thẻ ngày','No License Plate'),
-('CD16','Thẻ ngày','No License Plate'),
-('CD17','Thẻ ngày','No License Plate'),
-('CD18','Thẻ ngày','No License Plate'),
-('CD19','Thẻ ngày','No License Plate'),
-('CD20','Thẻ ngày','No License Plate'),
-('CD21','Thẻ ngày','No License Plate'),
-('CD22','Thẻ ngày','No License Plate'),
-('CD23','Thẻ ngày','No License Plate'),
-('CD24','Thẻ ngày','No License Plate'),
-('CD25','Thẻ ngày','No License Plate');
+('CD10','Thẻ ngày','No License Plate');
 
 insert into Card(card_id,card_type,license_plate)
 values('CM01','Thẻ tháng','75-G1-2222'),
@@ -58,7 +43,7 @@ values('CM01','Thẻ tháng','75-G1-2222'),
 select * from Card;
 create table if not exists Card_detail(
 card_id varchar(10)  not null,
-cus_id varchar(10)  not null,
+cus_id varchar(20)  not null,
 constraint pk_carddetail primary key (card_id,cus_id),
 constraint fk_CardDetail_Card foreign key (card_id) references Card(card_id),
 constraint fk_CardDetail_Customer foreign key (cus_id) references Customer(cus_id),
@@ -111,5 +96,16 @@ create user if not exists 'MPSUser'@'localhost' identified by '123456';
     grant all on Card_Logs to 'MPSUser'@'localhost';
 	grant all on Accounts to 'MPSUser'@'localhost';
     grant lock tables on Group1_MotoParkingManagementSystem.* to 'MPSUser'@'localhost';
+select c.card_id,c.card_type,c.license_plate,cus.cus_id,cus.cus_fullname,
+cus.cus_address,cd.start_day,cd.end_day,max(cd.date_created),c.card_status from Card c
+inner join Card_detail cd on c.card_id = cd.card_id
+inner join Customer cus on  cd.cus_id = cus.cus_id
+where c.card_id like 'CM%'
+group by c.card_id;
+select c.card_id,c.card_type,c.license_plate,cd.cus_id,cd.start_day,
+            cd.end_day,cd.date_created,c.card_status from Card c
+            inner join Card_detail cd on c.card_id = cd.card_id
+            where c.card_id like 'CM%';
+
 
 

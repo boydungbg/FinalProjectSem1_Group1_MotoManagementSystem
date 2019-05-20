@@ -1,7 +1,7 @@
 using DAL;
 using Persistence;
 
-namespace Bl
+namespace BL
 {
     public class Card_detailBL
     {

@@ -1,4 +1,3 @@
-using Bl;
 using Persistence;
 using Xunit;
 
