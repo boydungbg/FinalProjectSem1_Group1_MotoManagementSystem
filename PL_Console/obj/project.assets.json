@@ -1738,11 +1738,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\PROGRAMER\\SEM1\\Project sem1\\FinalProjectSem1_Group1_MotoParkingManagementSystem\\PL_Console\\PL_Console.csproj",
+      "projectUniqueName": "E:\\PROGRAMER\\SEM1\\Project sem1\\FinalProjectSem1_Group1_MotoParkingManagementSystem-1\\PL_Console\\PL_Console.csproj",
       "projectName": "PL_Console",
-      "projectPath": "E:\\PROGRAMER\\SEM1\\Project sem1\\FinalProjectSem1_Group1_MotoParkingManagementSystem\\PL_Console\\PL_Console.csproj",
+      "projectPath": "E:\\PROGRAMER\\SEM1\\Project sem1\\FinalProjectSem1_Group1_MotoParkingManagementSystem-1\\PL_Console\\PL_Console.csproj",
       "packagesPath": "C:\\Users\\luvso\\.nuget\\packages\\",
-      "outputPath": "E:\\PROGRAMER\\SEM1\\Project sem1\\FinalProjectSem1_Group1_MotoParkingManagementSystem\\PL_Console\\obj\\",
+      "outputPath": "E:\\PROGRAMER\\SEM1\\Project sem1\\FinalProjectSem1_Group1_MotoParkingManagementSystem-1\\PL_Console\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -1759,11 +1759,11 @@
       "frameworks": {
         "netcoreapp2.2": {
           "projectReferences": {
-            "E:\\PROGRAMER\\SEM1\\Project sem1\\FinalProjectSem1_Group1_MotoParkingManagementSystem\\BL\\BL.csproj": {
-              "projectPath": "E:\\PROGRAMER\\SEM1\\Project sem1\\FinalProjectSem1_Group1_MotoParkingManagementSystem\\BL\\BL.csproj"
+            "E:\\PROGRAMER\\SEM1\\Project sem1\\FinalProjectSem1_Group1_MotoParkingManagementSystem-1\\BL\\BL.csproj": {
+              "projectPath": "E:\\PROGRAMER\\SEM1\\Project sem1\\FinalProjectSem1_Group1_MotoParkingManagementSystem-1\\BL\\BL.csproj"
             },
-            "E:\\PROGRAMER\\SEM1\\Project sem1\\FinalProjectSem1_Group1_MotoParkingManagementSystem\\Persistence\\Persistence.csproj": {
-              "projectPath": "E:\\PROGRAMER\\SEM1\\Project sem1\\FinalProjectSem1_Group1_MotoParkingManagementSystem\\Persistence\\Persistence.csproj"
+            "E:\\PROGRAMER\\SEM1\\Project sem1\\FinalProjectSem1_Group1_MotoParkingManagementSystem-1\\Persistence\\Persistence.csproj": {
+              "projectPath": "E:\\PROGRAMER\\SEM1\\Project sem1\\FinalProjectSem1_Group1_MotoParkingManagementSystem-1\\Persistence\\Persistence.csproj"
             }
           }
         }

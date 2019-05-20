@@ -124,18 +124,23 @@ namespace PL_Console
                         }
                         if (card == null)
                         {
-                            Console.Write("↻ Mã thẻ không tồn tại. Nhập lại: ");
+                            Console.Write("↻ Mã thẻ không tồn tại.");
+                            break;
                         }
                         if (card.Card_Status == 1)
                         {
-                            Console.Write("↻ Thẻ đang được sử dụng. Nhập lại: ");
+                            Console.Write("↻ Thẻ đang được sử dụng.");
+                            break;
                         }
                     } while (card == null || card.Card_Status == 1);
-                    if (card != null)
+                    if (card != null && card.Card_Status == 0)
                     {
                         Console.WriteLine("- Loại thẻ: " + card.Card_type);
                         if (card.Card_type == "Thẻ ngày")
                         {
+                            Console.WriteLine("- Tên người gửi: Không có");
+                            Console.WriteLine("- Địa chỉ người gửi: Không có");
+                            Console.WriteLine("- Thời hạn thẻ: Không có");
                             Console.Write("- Nhập biển số xe (VD:88-X8-8888): ");
                             do
                             {

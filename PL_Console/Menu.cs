@@ -12,18 +12,24 @@ namespace PL_Console
         string b = "══════════════════════════════════════════════════════════════";
         public void MenuChoice()
         {
-            Console.Clear();
-            string[] menuItem = { "Đăng nhập", "Thoát chương trình" };
-            char choose = Menu(menuItem, 2, "HỆ THỐNG QUẢN LÝ BÃI GỬI XE MÁY", "#Chọn: ");
-            switch (choose)
+            char choose;
+            do
             {
-                case '1':
-                    MenuLogin();
-                    break;
-                case '2':
-                    Environment.Exit(0);
-                    break;
-            }
+                Console.Clear();
+                string[] menuItem = { "Đăng nhập", "Thoát chương trình" };
+                choose = Menu(menuItem, 2, "HỆ THỐNG QUẢN LÝ BÃI GỬI XE MÁY", "#Chọn: ");
+                switch (choose)
+                {
+                    case '1':
+                        MenuLogin();
+                        break;
+                    case '2':
+                        break;
+                    default:
+                        break;
+                }
+            } while (choose != '2');
+
         }
         public char Menu(string[] menuItem, int itemCount, string tittle, string choice)
         {
@@ -168,77 +174,99 @@ namespace PL_Console
         }
         public void MenuManager()
         {
-            Console.Clear();
-            ConsoleManager manager = new ConsoleManager();
-            string[] menuItem = { "Tạo thẻ tháng", "Hiển thị danh sách thẻ tháng", "Thống kê", "Đăng xuất" };
-            char choose = Menu(menuItem, 4, "Chào mừng bạn đã đến với hệ thống quản lý bãi gửi xe", "#Chọn: ");
-            switch (choose)
+            char choose;
+            do
             {
-                case '1':
-                    manager.CreateCard();
-                    break;
-                case '2':
-                    manager.GetListCardByCardType();
-                    break;
-                case '3':
-                    MenuStatictis();
-                    break;
-                case '4':
-                    MenuLogin();
-                    break;
-            }
+                Console.Clear();
+                ConsoleManager manager = new ConsoleManager();
+                string[] menuItem = { "Tạo thẻ tháng", "Hiển thị danh sách thẻ tháng", "Thống kê", "Đăng xuất" };
+                choose = Menu(menuItem, 4, "Chào mừng bạn đã đến với hệ thống quản lý bãi gửi xe", "#Chọn: ");
+                switch (choose)
+                {
+                    case '1':
+                        manager.CreateCard();
+                        break;
+                    case '2':
+                        manager.GetListCardByCardType();
+                        break;
+                    case '3':
+                        MenuStatictis();
+                        break;
+                    case '4':
+                        break;
+                    default:
+                        break;
+                }
+            } while (choose != '4');
         }
         public void MenuStatictis()
         {
-            Console.Clear();
-            string[] menuItem = { "Thống kê theo ngày", "Thống kê theo tháng", "Quay lại" };
-            char choose = Menu(menuItem, 3, "Thống kê", "#Chọn: ");
-            switch (choose)
+            char choose;
+            do
             {
-                case '1':
+                Console.Clear();
+                string[] menuItem = { "Thống kê theo ngày", "Thống kê theo tháng", "Quay lại" };
+                choose = Menu(menuItem, 3, "Thống kê", "#Chọn: ");
+                switch (choose)
+                {
+                    case '1':
 
-                    break;
-                case '2':
-                    Console.WriteLine("Thống kê");
-                    break;
-                case '3':
-                    MenuManager();
-                    break;
-            }
+                        break;
+                    case '2':
+                        Console.WriteLine("Thống kê");
+                        break;
+                    case '3':
+                        break;
+                    default:
+                        break;
+                }
+            } while (choose != '3');
         }
         public void MenuSecurity()
         {
-            Console.Clear();
-            string[] menuItem = { "Kiểm tra xe ra vào", "Đăng xuất" };
-            char choose = Menu(menuItem, 2, "Chào mừng bạn đã đến với hệ thống quản lý bãi gửi xe", "#Chọn: ");
-            switch (choose)
+            char choose;
+            do
             {
-                case '1':
-                    CheckInCheckOut();
-                    break;
-                case '2':
-                    MenuLogin();
-                    break;
-            }
+                Console.Clear();
+                string[] menuItem = { "Kiểm tra xe ra vào", "Đăng xuất" };
+                choose = Menu(menuItem, 2, "Chào mừng bạn đã đến với hệ thống quản lý bãi gửi xe", "#Chọn: ");
+                switch (choose)
+                {
+                    case '1':
+                        CheckInCheckOut();
+                        break;
+                    case '2':
+                        break;
+                    default:
+                        break;
+                }
+            } while (choose != '2');
+
         }
         public void CheckInCheckOut()
         {
             ConsoleSecurity security = new ConsoleSecurity();
-            Console.Clear();
-            string[] menuItem = { "Kiểm tra xe vào", "Kiểm tra xe ra", "Quay lại" };
-            char choose = Menu(menuItem, 3, "Kiểm tra xe vào xe ra", "#Chọn: ");
-            switch (choose)
+            char choose;
+            do
             {
-                case '1':
-                    security.CheckIn(user);
-                    break;
-                case '2':
-                    Console.WriteLine("Xe ra - xe vào");
-                    break;
-                case '3':
-                    MenuSecurity();
-                    break;
-            }
+                Console.Clear();
+                string[] menuItem = { "Kiểm tra xe vào", "Kiểm tra xe ra", "Quay lại" };
+                choose = Menu(menuItem, 3, "Kiểm tra xe vào xe ra", "#Chọn: ");
+                switch (choose)
+                {
+                    case '1':
+                        security.CheckIn(user);
+                        break;
+                    case '2':
+                        Console.WriteLine("Xe ra - xe vào");
+                        break;
+                    case '3':
+                        break;
+                    default:
+                        break;
+                }
+            } while (choose != '3');
+
         }
         public char yesNo()
         {
