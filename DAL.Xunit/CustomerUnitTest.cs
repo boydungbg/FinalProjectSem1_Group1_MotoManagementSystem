@@ -15,6 +15,7 @@ namespace DAL.Xunit
             Customer cus = CusDAL.GetCustomerByID(cusid);
             Assert.NotNull(cus);
             Assert.Equal(cusid, cus.Cus_id);
+            
         }
         [Theory]
         [InlineData("121252789")]

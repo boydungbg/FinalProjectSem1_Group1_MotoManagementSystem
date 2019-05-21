@@ -63,6 +63,56 @@ namespace DAL
                 connection.Close();
             }
         }
+        public bool UpdateCardLogsByLicensePlateAndCardID(Card_Logs cardLogs, string licensePlate, string cardid, string dateTimeStart)
+        {
+            bool result = false;
+            if (licensePlate == null || cardid == null || dateTimeStart == null || cardLogs == null)
+            {
+                return result;
+            }
+            if (connection == null)
+            {
+                connection = DBHelper.OpenConnection();
+            }
+            if (connection.State == System.Data.ConnectionState.Closed)
+            {
+                connection.Open();
+            }
+            MySqlCommand command = new MySqlCommand("", connection);
+            //Lock table 
+            command.CommandText = @"lock tables Card_Logs write;";
+            command.ExecuteNonQuery();
+            MySqlTransaction transaction = connection.BeginTransaction();
+            command.Transaction = transaction;
+            try
+            {
+                query = @"Update  Card_logs  SET cl_dateTimeEnd =@dateTimeEnd  , cl_sendTime =@sendTime ,cl_intoMoney = @intoMoney 
+                        where card_id = @cardid  and  cl_licensePlate = @licensePlate and cl_dateTimeStart =@dateTimeStart;";
+                command.Parameters.AddWithValue("@cardid", cardid);
+                command.Parameters.AddWithValue("@licensePlate", licensePlate);
+                command.Parameters.AddWithValue("@dateTimeStart", dateTimeStart);
+                command.Parameters.AddWithValue("@dateTimeEnd", cardLogs.DateTimeEnd);
+                command.Parameters.AddWithValue("@sendTime",cardLogs.SendTime);
+                command.Parameters.AddWithValue("@intoMoney",cardLogs.IntoMoney);
+                command.CommandText = query;
+                command.ExecuteNonQuery();
+                transaction.Commit();
+                result = true;
+                return result;
+            }
+            catch (System.Exception e)
+            {
+                string m = e.Message;
+                transaction.Rollback();
+                throw;
+            }
+            finally
+            {
+                command.CommandText = "unlock tables";
+                command.ExecuteNonQuery();
+                connection.Close();
+            }
+        }
         public bool DeleteCardLogsByID(string id)
         {
             if (id == null)
@@ -84,7 +134,7 @@ namespace DAL
             cmd.ExecuteNonQuery();
             return true;
         }
-        public Card_Logs GetCardLogsByLicensePlate(string licensePlate)
+        public Card_Logs GetCardLogsByLicensePlateAndCardID(string licensePlate, string cardid)
         {
             if (licensePlate == null)
             {
@@ -99,8 +149,9 @@ namespace DAL
                 connection.Open();
             }
             MySqlCommand command = new MySqlCommand("", connection);
-            query = @"select card_id,cl_licensePlate,max(cl_dateTimeStart) from Card_Logs where cl_licensePlate = @licensePlate;";
+            query = @"select card_id,cl_licensePlate,max(cl_dateTimeStart) from Card_Logs where cl_licensePlate = @licensePlate and card_id =@cardid;";
             command.Parameters.AddWithValue("@licensePlate", licensePlate);
+            command.Parameters.AddWithValue("@cardid", cardid);
             command.CommandText = query;
             Card_Logs cardLogs = null;
             using (reader = command.ExecuteReader())
@@ -112,6 +163,7 @@ namespace DAL
             }
             return cardLogs;
         }
+
         private Card_Logs GetCardLogs(MySqlDataReader reader)
         {
             if (reader.IsDBNull(reader.GetOrdinal("card_id")))

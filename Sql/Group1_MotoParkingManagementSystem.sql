@@ -37,7 +37,7 @@ insert into Card(card_id,card_type,license_plate)
 values('CM01','Thẻ tháng','75-G1-2222'),
 ('CM02','Thẻ tháng','33-G1-3333'),
 ('CM03','Thẻ tháng','22-E1-2222'),
-('CM04','Thẻ tháng','44-b1-4444'),
+('CM04','Thẻ tháng','44-B1-4444'),
 ('CM05','Thẻ tháng','88-G1-8888'),
 ('CM06','Thẻ tháng','88-A1-8888');
 select * from Card;
@@ -80,7 +80,7 @@ constraint fk_CardLogs_Account foreign key (acc_name) references Accounts(acc_na
 cl_licensePlate varchar(20) not null,
 cl_dateTimeStart datetime not null,
 cl_dateTimeEnd datetime,
-cl_sendTime varchar(20),
+cl_sendTime varchar(50),
 cl_intoMoney double
 );
 /*insert into Card_Logs(card_id,acc_name,cl_licensePlate,cl_dateTimeStart)
@@ -96,16 +96,19 @@ create user if not exists 'MPSUser'@'localhost' identified by '123456';
     grant all on Card_Logs to 'MPSUser'@'localhost';
 	grant all on Accounts to 'MPSUser'@'localhost';
     grant lock tables on Group1_MotoParkingManagementSystem.* to 'MPSUser'@'localhost';
-select c.card_id,c.card_type,c.license_plate,cus.cus_id,cus.cus_fullname,
+/*select c.card_id,c.card_type,c.license_plate,cus.cus_id,cus.cus_fullname,
 cus.cus_address,cd.start_day,cd.end_day,max(cd.date_created),c.card_status from Card c
 inner join Card_detail cd on c.card_id = cd.card_id
 inner join Customer cus on  cd.cus_id = cus.cus_id
 where c.card_id like 'CM%'
-group by c.card_id;
-select c.card_id,c.card_type,c.license_plate,cd.cus_id,cd.start_day,
+group by c.card_id;*/
+/*select c.card_id,c.card_type,c.license_plate,cd.cus_id,cd.start_day,
             cd.end_day,cd.date_created,c.card_status from Card c
             inner join Card_detail cd on c.card_id = cd.card_id
-            where c.card_id like 'CM%';
+            where c.card_id like 'CM%';*/
+select *from Card_logs;
+/*Update  Card_logs  SET cl_dateTimeEnd =current_timestamp()  , cl_sendTime ='asd',cl_intoMoney = 0
+                        where card_id = 'CM01'  and  cl_licensePlate = '75-G1-2222' and cl_dateTimeStart = '2019-05-20 00:00:00';*/
 
 
 

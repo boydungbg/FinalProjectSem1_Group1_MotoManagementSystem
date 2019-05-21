@@ -132,7 +132,7 @@ namespace PL_console
                     {
                         Console.WriteLine(b);
                         Console.WriteLine();
-                        Console.WriteLine("✘ Tạo thẻ không thành công.");
+                        Console.WriteLine(" Tạo thẻ không thành công.");
                     }
                     if (check == true)
                     {
@@ -371,6 +371,7 @@ namespace PL_console
             CustomerBL cusBL = new CustomerBL();
             Customer cus = null;
             string status = "";
+            Console.Clear();
             try
             {
                 listcard = cardBL.GetListCardByCardType();

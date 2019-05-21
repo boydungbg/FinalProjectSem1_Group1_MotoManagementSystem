@@ -78,7 +78,7 @@ namespace BL.Xunit
         }
         [Theory]
         [InlineData("88-A1-8888")]
-        [InlineData("44-b1-4444")]
+        [InlineData("44-B1-4444")]
         public void GetCardByLicensePlateTest1(string licensePlate)
         {
             CardBL cardBL = new CardBL();
@@ -87,7 +87,7 @@ namespace BL.Xunit
             Assert.Equal(licensePlate, card.LicensePlate);
         }
         [Theory]
-        [InlineData("44-b1-5544")]
+        [InlineData("44-B1-5544")]
         [InlineData(null)]
         public void GetCardByLicensePlateTest2(string licensePlate)
         {

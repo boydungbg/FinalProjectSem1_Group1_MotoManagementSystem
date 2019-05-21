@@ -1,3 +1,4 @@
+using System;
 using DAL;
 using Persistence;
 
@@ -22,13 +23,21 @@ namespace BL
             }
             return card_LogsDAL.DeleteCardLogsByID(id);
         }
-        public Card_Logs GetCardLogsByLisencePlate(string LicensePlate)
+        public Card_Logs GetCardLogsByLisencePlateAndCardID(string LicensePlate, string cardid)
         {
             if (LicensePlate == null)
             {
                 return null;
             }
-            return card_LogsDAL.GetCardLogsByLicensePlate(LicensePlate);
+            return card_LogsDAL.GetCardLogsByLicensePlateAndCardID(LicensePlate,cardid);
+        }
+        public bool UpdateCardLogsByLicensePlateAndCardID(Card_Logs cardLogs ,string licensePlate , string cardid , string dateTimeStart)
+        {
+             if (licensePlate == null || cardid == null || dateTimeStart == null || cardLogs == null)
+            {
+                return false;
+            }
+            return card_LogsDAL.UpdateCardLogsByLicensePlateAndCardID(cardLogs,licensePlate,cardid,dateTimeStart);
         }
     }
 }

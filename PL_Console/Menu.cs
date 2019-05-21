@@ -8,7 +8,6 @@ namespace PL_Console
 {
     public class Menus
     {
-        private User user = null;
         string b = "══════════════════════════════════════════════════════════════";
         public void MenuChoice()
         {
@@ -24,6 +23,7 @@ namespace PL_Console
                         MenuLogin();
                         break;
                     case '2':
+                        Environment.Exit(0);
                         break;
                     default:
                         break;
@@ -62,6 +62,7 @@ namespace PL_Console
         }
         public void MenuLogin()
         {
+            User user = null;
             UserBL userbl = new UserBL();
             string accname;
             string accpass;
@@ -133,7 +134,7 @@ namespace PL_Console
             }
             if (user.User_level == 1)
             {
-                MenuSecurity();
+                MenuSecurity(user);
             }
         }
         public string password()
@@ -193,8 +194,10 @@ namespace PL_Console
                         MenuStatictis();
                         break;
                     case '4':
+                        MenuChoice();
                         break;
                     default:
+                        Console.WriteLine("Bạn nhập sai!!!Vui lòng nhập lai....!");
                         break;
                 }
             } while (choose != '4');
@@ -216,26 +219,29 @@ namespace PL_Console
                         Console.WriteLine("Thống kê");
                         break;
                     case '3':
+                        MenuManager();
                         break;
                     default:
                         break;
                 }
             } while (choose != '3');
         }
-        public void MenuSecurity()
+        public void MenuSecurity(User user)
         {
             char choose;
             do
             {
                 Console.Clear();
+
                 string[] menuItem = { "Kiểm tra xe ra vào", "Đăng xuất" };
                 choose = Menu(menuItem, 2, "Chào mừng bạn đã đến với hệ thống quản lý bãi gửi xe", "#Chọn: ");
                 switch (choose)
                 {
                     case '1':
-                        CheckInCheckOut();
+                        CheckInCheckOut(user);
                         break;
                     case '2':
+                        MenuChoice();
                         break;
                     default:
                         break;
@@ -243,7 +249,7 @@ namespace PL_Console
             } while (choose != '2');
 
         }
-        public void CheckInCheckOut()
+        public void CheckInCheckOut(User user)
         {
             ConsoleSecurity security = new ConsoleSecurity();
             char choose;
@@ -258,9 +264,10 @@ namespace PL_Console
                         security.CheckIn(user);
                         break;
                     case '2':
-                        Console.WriteLine("Xe ra - xe vào");
+                        security.ChecOut(user);
                         break;
                     case '3':
+                        MenuSecurity(user);
                         break;
                     default:
                         break;
@@ -294,5 +301,4 @@ namespace PL_Console
             return ys;
         }
     }
-
 }
