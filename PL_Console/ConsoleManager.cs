@@ -292,7 +292,7 @@ namespace PL_console
                         Console.Write("↻ Địa chỉ không hợp lệ (VD:BAC GIANG). Nhập lại: ");
                         continue;
                     }
-                    if (input.Length <= 8 || input.Length >= 30)
+                    if (input.Length <= 6 || input.Length >= 70)
                     {
                         Console.Write("↻ Địa chỉ không hợp lệ (VD:BAC GIANG). Nhập lại: ");
                         continue;

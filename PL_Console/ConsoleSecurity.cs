@@ -478,22 +478,30 @@ namespace PL_Console
                                     Console.WriteLine();
                                     Console.WriteLine("✔ Biển số xe giống nhau.");
                                     sendtime = Convert.ToString(dateTimeEnd - cardLogs.DateTimeStart);
+                                    for (int i = sendtime.Length - 1; i >= 0; i--)
+                                    {
+                                        if (sendtime[i] == '.')
+                                        {
+                                            sendtime = sendtime.Substring(0, i);
+                                            break;
+                                        }
+                                    }
                                     Console.WriteLine();
                                     Console.WriteLine(b);
                                     Console.WriteLine("- Thời gian gửi: " + sendtime);
-                                    if (dateTimeEnd >= DateTime.Parse("6:00 AM"))
+                                    if (dateTimeEnd >= DateTime.Parse("6:00 AM") || cardLogs.DateTimeStart < DateTime.Parse("6:00 PM"))
                                     {
                                         intoMoney = intoMoney + 10000;
                                     }
-                                    else if (dateTimeEnd < DateTime.Parse("6:00 PM"))
+                                    else if (dateTimeEnd <= DateTime.Parse("6:00 PM") || cardLogs.DateTimeStart >= DateTime.Parse("6:00 AM"))
                                     {
                                         intoMoney = intoMoney + 10000;
                                     }
-                                    else if (dateTimeEnd >= DateTime.Parse("6:00 PM"))
+                                    else if (dateTimeEnd >= DateTime.Parse("6:00 PM") || cardLogs.DateTimeStart >= DateTime.Parse("6:00 AM"))
                                     {
                                         intoMoney = intoMoney + 20000;
                                     }
-                                    else if (dateTimeEnd < DateTime.Parse("6:00 AM"))
+                                    else if (dateTimeEnd <= DateTime.Parse("6:00 AM") || cardLogs.DateTimeStart >= DateTime.Parse("6:00 PM"))
                                     {
                                         intoMoney = intoMoney + 20000;
                                     }

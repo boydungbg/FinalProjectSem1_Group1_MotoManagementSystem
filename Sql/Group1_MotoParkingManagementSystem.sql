@@ -4,7 +4,7 @@ use Group1_MotoParkingManagementSystem;
 create table if not exists Customer(
 cus_id varchar(20) primary key,
 cus_fullname nvarchar(50) not null,
-cus_address nvarchar(50) not null,
+cus_address nvarchar(70) not null,
 license_plate varchar(20) not null
 );
 insert into Customer(cus_id,cus_fullname,cus_address,license_plate)
@@ -107,6 +107,7 @@ group by c.card_id;*/
             inner join Card_detail cd on c.card_id = cd.card_id
             where c.card_id like 'CM%';*/
 select *from Card_logs;
+
 /*Update  Card_logs  SET cl_dateTimeEnd =current_timestamp()  , cl_sendTime ='asd',cl_intoMoney = 0
                         where card_id = 'CM01'  and  cl_licensePlate = '75-G1-2222' and cl_dateTimeStart = '2019-05-20 00:00:00';*/
 
