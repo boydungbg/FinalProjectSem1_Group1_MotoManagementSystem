@@ -3,24 +3,20 @@ using System.Collections.Generic;
 using BL;
 using Persistence;
 using PL_console;
-
-
 namespace PL_Console
 {
     public class ConsoleSecurity
     {
         private Menus menu = new Menus();
         string b = "══════════════════════════════════════════════════════════════";
-        Card card = new Card();
-        ConsoleManager manager = new ConsoleManager();
-        Card_Logs cardLogs = new Card_Logs();
-        Customer cus = new Customer();
-        CustomerBL cusBL = new CustomerBL();
-        Card_Detail cardDetail = new Card_Detail();
-        Card_detailBL cardDetailBL = new Card_detailBL();
-        List<Card> listcard = null;
-        CardBL cardBL = new CardBL();
-        Card_LogsBL cardLogsBL = new Card_LogsBL();
+        private ConsoleManager manager = new ConsoleManager();
+        private CardBL cardBL = new CardBL();
+        private Card_LogsBL cardLogsBL = new Card_LogsBL();
+        private Card_Logs cardLogs = null;
+        private List<Card> listcard = null;
+        private Card_Detail cardDetail = null;
+        private Customer cus = null;
+        private Card card = null;
         bool checkCardBL = false;
         bool checkCardLogsBL = false;
         char yesNo;
@@ -28,22 +24,7 @@ namespace PL_Console
         {
             do
             {
-                try
-                {
-                    listcard = cardBL.GetlistCard();
-                }
-                catch (System.NullReferenceException)
-                {
-                    Console.WriteLine("MẤT KẾT NỐI, MỜI BẠN ĐĂNG NHẬP LẠI !!!");
-                    Console.ReadKey();
-                    menu.MenuLogin();
-                }
-                catch (MySql.Data.MySqlClient.MySqlException)
-                {
-                    Console.WriteLine("MẤT KẾT NỐI, MỜI BẠN ĐĂNG NHẬP LẠI !!!");
-                    Console.ReadKey();
-                    menu.MenuLogin();
-                }
+                listcard = manager.GetlistCard();
                 if (listcard.Capacity == 0)
                 {
                     Console.Clear();
@@ -62,22 +43,7 @@ namespace PL_Console
                     var table = new ConsoleTable("Mã thẻ", "Biển số xe", "Loại thẻ", "Trạng thái", "Ngày giờ xe vào");
                     foreach (var item in listcard)
                     {
-                        try
-                        {
-                            cardLogs = cardLogsBL.GetCardLogsByLisencePlateAndCardID(item.LicensePlate, item.Card_id);
-                        }
-                        catch (System.NullReferenceException)
-                        {
-                            Console.WriteLine("MẤT KẾT NỐI, MỜI BẠN ĐĂNG NHẬP LẠI !!!");
-                            Console.ReadKey();
-                            menu.MenuLogin();
-                        }
-                        catch (MySql.Data.MySqlClient.MySqlException)
-                        {
-                            Console.WriteLine("MẤT KẾT NỐI, MỜI BẠN ĐĂNG NHẬP LẠI !!!");
-                            Console.ReadKey();
-                            menu.MenuLogin();
-                        }
+                        cardLogs = manager.GetCardLogsByLisencePlateAndCardID(item.LicensePlate, item.Card_id);
                         if (item.Card_Status == 0)
                         {
                             status = "Không hoạt động";
@@ -107,23 +73,7 @@ namespace PL_Console
                     do
                     {
                         card_id = manager.validate(1);
-                        try
-                        {
-                            cardBL = new CardBL();
-                            card = cardBL.GetCardByID(card_id);
-                        }
-                        catch (System.NullReferenceException)
-                        {
-                            Console.WriteLine("MẤT KẾT NỐI, MỜI BẠN ĐĂNG NHẬP LẠI !!!");
-                            Console.ReadKey();
-                            menu.MenuLogin();
-                        }
-                        catch (MySql.Data.MySqlClient.MySqlException)
-                        {
-                            Console.WriteLine("MẤT KẾT NỐI, MỜI BẠN ĐĂNG NHẬP LẠI !!!");
-                            Console.ReadKey();
-                            menu.MenuLogin();
-                        }
+                        card = manager.GetCardByID(card_id);
                         if (card == null)
                         {
                             Console.WriteLine("↻ Thẻ không tồn tại.");
@@ -147,58 +97,24 @@ namespace PL_Console
                             Console.WriteLine("- Hết hạn: Không có");
                             Console.Write("- Nhập biển số xe (VD:88-X8-8888): ");
                             licensePlate = manager.validate(5);
-                            Card newcard = null;
-                            try
-                            {
-                                cardLogsBL = new Card_LogsBL();
-                                cardLogs = cardLogsBL.GetCardLogsByLisencePlateAndCardID(licensePlate, card_id);
-                                cardBL = new CardBL();
-                                newcard = cardBL.GetCardByLicensePlate(licensePlate);
-                            }
-                            catch (System.NullReferenceException)
-                            {
-                                Console.WriteLine("MẤT KẾT NỐI, MỜI BẠN ĐĂNG NHẬP LẠI !!!");
-                                Console.ReadKey();
-                                menu.MenuLogin();
-                            }
-                            catch (MySql.Data.MySqlClient.MySqlException)
-                            {
-                                Console.WriteLine("MẤT KẾT NỐI, MỜI BẠN ĐĂNG NHẬP LẠI !!!");
-                                Console.ReadKey();
-                                menu.MenuLogin();
-                            }
+                            cardLogs = manager.GetCardLogsByLisencePlateAndCardID(licensePlate, card_id);
+                            cus = manager.GetCustomerByLincese_plate(licensePlate);
                             if (cardLogs != null)
                             {
                                 Console.WriteLine("↻ Biển số xe đã có trong bãi.");
                                 licensePlate = null;
                             }
-                            else if (newcard != null)
+                            else if (cus != null)
                             {
-                                Console.WriteLine("↻ Biển số xe đã tồn tại trong một thẻ khác.");
+                                Console.WriteLine("↻ Biển số xe trùng với một khách hàng khác.");
                                 licensePlate = null;
                             }
+                            card.Card_Status = 1;
                         }
                         if (card.Card_type == "Thẻ tháng")
                         {
-                            try
-                            {
-                                cusBL = new CustomerBL();
-                                cus = cusBL.GetCustomerByLincese_plate(card.LicensePlate);
-                                cardDetailBL = new Card_detailBL();
-                                cardDetail = cardDetailBL.GetCard_DetailbyID(card.Card_id);
-                            }
-                            catch (System.NullReferenceException)
-                            {
-                                Console.WriteLine("MẤT KẾT NỐI, MỜI BẠN ĐĂNG NHẬP LẠI !!!");
-                                Console.ReadKey();
-                                menu.MenuLogin();
-                            }
-                            catch (MySql.Data.MySqlClient.MySqlException)
-                            {
-                                Console.WriteLine("MẤT KẾT NỐI, MỜI BẠN ĐĂNG NHẬP LẠI !!!");
-                                Console.ReadKey();
-                                menu.MenuLogin();
-                            }
+                            cus = manager.GetCustomerByLincese_plate(card.LicensePlate);
+                            cardDetail = manager.GetCard_DetailbyID(card.Card_id);
                             Console.WriteLine("- Chủ xe: " + cus.Cus_name);
                             Console.WriteLine("- Địa chỉ: " + cus.Cus_address);
                             Console.WriteLine("- Hết hạn: " + cardDetail.End_day);
@@ -209,13 +125,10 @@ namespace PL_Console
                                 Console.WriteLine("↻ Biển số xe không trùng với biển số mà bạn đã đăng kí thẻ tháng. Vui lòng lấy thẻ ngày.");
                                 licensePlate = null;
                             }
+                            card.Card_Status = 1;
                         }
                         if (licensePlate != null)
                         {
-                            // Console.WriteLine(card_id);
-                            // Console.WriteLine(user.User_name);
-                            // Console.WriteLine(licensePlate);
-                            // Console.WriteLine(DateTime.Now);
                             try
                             {
                                 cardBL = new CardBL();
@@ -266,22 +179,7 @@ namespace PL_Console
         {
             do
             {
-                try
-                {
-                    listcard = cardBL.GetlistCard();
-                }
-                catch (System.NullReferenceException)
-                {
-                    Console.WriteLine("MẤT KẾT NỐI, MỜI BẠN ĐĂNG NHẬP LẠI !!!");
-                    Console.ReadKey();
-                    menu.MenuLogin();
-                }
-                catch (MySql.Data.MySqlClient.MySqlException)
-                {
-                    Console.WriteLine("MẤT KẾT NỐI, MỜI BẠN ĐĂNG NHẬP LẠI !!!");
-                    Console.ReadKey();
-                    menu.MenuLogin();
-                }
+                listcard = manager.GetlistCard();
                 if (listcard.Capacity == 0)
                 {
                     Console.Clear();
@@ -303,22 +201,7 @@ namespace PL_Console
                     var table = new ConsoleTable("Mã thẻ", "Biển số xe", "Loại thẻ", "Trạng thái", "Ngày giờ xe vào");
                     foreach (var item in listcard)
                     {
-                        try
-                        {
-                            cardLogs = cardLogsBL.GetCardLogsByLisencePlateAndCardID(item.LicensePlate, item.Card_id);
-                        }
-                        catch (System.NullReferenceException)
-                        {
-                            Console.WriteLine("MẤT KẾT NỐI, MỜI BẠN ĐĂNG NHẬP LẠI !!!");
-                            Console.ReadKey();
-                            menu.MenuLogin();
-                        }
-                        catch (MySql.Data.MySqlClient.MySqlException)
-                        {
-                            Console.WriteLine("MẤT KẾT NỐI, MỜI BẠN ĐĂNG NHẬP LẠI !!!");
-                            Console.ReadKey();
-                            menu.MenuLogin();
-                        }
+                        cardLogs = manager.GetCardLogsByLisencePlateAndCardID(item.LicensePlate, item.Card_id);
                         if (item.Card_Status == 1)
                         {
                             status = "Hoạt động";
@@ -348,23 +231,7 @@ namespace PL_Console
                     do
                     {
                         card_id = manager.validate(1);
-                        try
-                        {
-                            cardBL = new CardBL();
-                            card = cardBL.GetCardByID(card_id);
-                        }
-                        catch (System.NullReferenceException)
-                        {
-                            Console.WriteLine("MẤT KẾT NỐI, MỜI BẠN ĐĂNG NHẬP LẠI !!!");
-                            Console.ReadKey();
-                            menu.MenuLogin();
-                        }
-                        catch (MySql.Data.MySqlClient.MySqlException)
-                        {
-                            Console.WriteLine("MẤT KẾT NỐI, MỜI BẠN ĐĂNG NHẬP LẠI !!!");
-                            Console.ReadKey();
-                            menu.MenuLogin();
-                        }
+                        card = manager.GetCardByID(card_id);
                         if (card == null)
                         {
                             Console.WriteLine("↻ Mã thẻ không tồn tại.");
@@ -384,27 +251,9 @@ namespace PL_Console
                         DateTime dateTimeEnd = DateTime.Now;
                         if (card.Card_type == "Thẻ tháng")
                         {
-                            try
-                            {
-                                cusBL = new CustomerBL();
-                                cus = cusBL.GetCustomerByLincese_plate(card.LicensePlate);
-                                cardDetailBL = new Card_detailBL();
-                                cardDetail = cardDetailBL.GetCard_DetailbyID(card.Card_id);
-                                cardLogsBL = new Card_LogsBL();
-                                cardLogs = cardLogsBL.GetCardLogsByLisencePlateAndCardID(card.LicensePlate, card_id);
-                            }
-                            catch (System.NullReferenceException)
-                            {
-                                Console.WriteLine("MẤT KẾT NỐI, MỜI BẠN ĐĂNG NHẬP LẠI !!!");
-                                Console.ReadKey();
-                                menu.MenuLogin();
-                            }
-                            catch (MySql.Data.MySqlClient.MySqlException)
-                            {
-                                Console.WriteLine("MẤT KẾT NỐI, MỜI BẠN ĐĂNG NHẬP LẠI !!!");
-                                Console.ReadKey();
-                                menu.MenuLogin();
-                            }
+                            cus = manager.GetCustomerByLincese_plate(card.LicensePlate);
+                            cardDetail = manager.GetCard_DetailbyID(card_id);
+                            cardLogs = manager.GetCardLogsByLisencePlateAndCardID(card.LicensePlate, card_id);
                             Console.WriteLine("- Chủ xe: " + cus.Cus_name);
                             Console.WriteLine("- Địa chỉ: " + cus.Cus_address);
                             Console.WriteLine("- Hết hạn: " + cardDetail.End_day);
@@ -429,6 +278,14 @@ namespace PL_Console
                                     Console.WriteLine();
                                     Console.WriteLine("✔ Biển số xe giống nhau.");
                                     sendtime = Convert.ToString(dateTimeEnd - cardLogs.DateTimeStart);
+                                    for (int i = sendtime.Length - 1; i >= 0; i--)
+                                    {
+                                        if (sendtime[i] == '.')
+                                        {
+                                            sendtime = sendtime.Substring(0, i);
+                                            break;
+                                        }
+                                    }
                                     Console.WriteLine();
                                     Console.WriteLine(b);
                                     Console.WriteLine("- Thời gian gửi: " + sendtime);
@@ -438,23 +295,7 @@ namespace PL_Console
                         }
                         if (card.Card_type == "Thẻ ngày")
                         {
-                            try
-                            {
-                                cardLogsBL = new Card_LogsBL();
-                                cardLogs = cardLogsBL.GetCardLogsByLisencePlateAndCardID(card.LicensePlate, card_id);
-                            }
-                            catch (System.NullReferenceException)
-                            {
-                                Console.WriteLine("MẤT KẾT NỐI, MỜI BẠN ĐĂNG NHẬP LẠI !!!");
-                                Console.ReadKey();
-                                menu.MenuLogin();
-                            }
-                            catch (MySql.Data.MySqlClient.MySqlException)
-                            {
-                                Console.WriteLine("MẤT KẾT NỐI, MỜI BẠN ĐĂNG NHẬP LẠI !!!");
-                                Console.ReadKey();
-                                menu.MenuLogin();
-                            }
+                            cardLogs = manager.GetCardLogsByLisencePlateAndCardID(card.LicensePlate, card_id);
                             Console.WriteLine("- Chủ xe: Không có");
                             Console.WriteLine("- Địa chỉ: Không có");
                             Console.WriteLine("- Hết hạn: Không có");

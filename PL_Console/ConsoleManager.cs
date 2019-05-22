@@ -11,6 +11,15 @@ namespace PL_console
     public class ConsoleManager
     {
         private Menus menu = new Menus();
+        private CustomerBL cusBL = new CustomerBL();
+        private Card_detailBL cardDetailBL = new Card_detailBL();
+        private CardBL cardBL = new CardBL();
+        private Card_LogsBL cardLogsBL = new Card_LogsBL();
+        private Card_Logs cardLogs = null;
+        private List<Card> listcard = null;
+        private Card_Detail cardDetail = null;
+        private Customer cus = null;
+        private Card card = null;
         string b = "══════════════════════════════════════════════════════════════";
         public void CreateCard()
         {
@@ -101,22 +110,7 @@ namespace PL_console
                 do
                 {
                     customer_licenseplate = validate(5);
-                    try
-                    {
-                        newCus = cusBL.GetCustomerByLincese_plate(customer_licenseplate);
-                    }
-                    catch (System.NullReferenceException)
-                    {
-                        Console.WriteLine("MẤT KẾT NỐI, MỜI BẠN ĐĂNG NHẬP LẠI !!!");
-                        Console.ReadKey();
-                        menu.MenuLogin();
-                    }
-                    catch (MySql.Data.MySqlClient.MySqlException)
-                    {
-                        Console.WriteLine("MẤT KẾT NỐI, MỜI BẠN ĐĂNG NHẬP LẠI !!!");
-                        Console.ReadKey();
-                        menu.MenuLogin();
-                    }
+                    newCus = GetCustomerByLincese_plate(customer_licenseplate);
                     if (newCus != null)
                     {
                         Console.Write("↻ Biển số xe đã tồn tại. Nhập lại: ");
@@ -176,7 +170,7 @@ namespace PL_console
                         input = Console.ReadLine();
                         if (input == "")
                         {
-                            throw new Exception("↻ Mã thẻ không quá 4 kí tự và phải chứa chữ 'CM' ở đầu (VD:CM01). Nhập lại: ");
+                            throw new Exception("↻ Mã thẻ không quá 4 kí tự và phải chứa chữ 'CM' ở đầu (VD:CD01). Nhập lại: ");
                         }
                     }
                     catch (Exception e)
@@ -189,12 +183,12 @@ namespace PL_console
                     if (matchCollectionstr.Count == 0)
                     {
 
-                        Console.Write("↻ Mã thẻ không quá 4 kí tự và phải chứa chữ 'CM' ở đầu (VD:CM01). Nhập lại: ");
+                        Console.Write("↻ Mã thẻ không quá 4 kí tự và phải chứa chữ 'CD' ở đầu (VD:CD01). Nhập lại: ");
                         continue;
                     }
                     if (input.Length <= 3 || input.Length >= 5)
                     {
-                        Console.Write("↻ Mã thẻ không quá 4 kí tự và phải chứa chữ 'CM' ở đầu (VD:CM01). Nhập lại: ");
+                        Console.Write("↻ Mã thẻ không quá 4 kí tự và phải chứa chữ 'CD' ở đầu (VD:CD01). Nhập lại: ");
                         continue;
                     }
                     break;
@@ -334,34 +328,6 @@ namespace PL_console
                 }
                 return input;
             }
-            // if (check == 6)
-            // {
-            //     while (true)
-            //     {
-            //         try
-            //         {
-            //             input = Console.ReadLine();
-            //             if (input == "")
-            //             {
-            //                 throw new Exception("↻ Vui lòng nhập theo đúng định dạng NĂM-THÁNG-NGÀY (VD:2019-05-20). Nhập lại: ");
-            //             }
-            //         }
-            //         catch (System.Exception e)
-            //         {
-            //             Console.Write(e.Message);
-            //             continue;
-            //         }
-            //         Regex regex = new Regex("[0-9]{4}[-][0-9]{2}[-][0-9]{2}");
-            //         MatchCollection matchCollectionstr = regex.Matches(input);
-            //         if (matchCollectionstr.Count == 0)
-            //         {
-            //             Console.Write("↻ Vui lòng nhập theo đúng định dạng NĂM-THÁNG-NGÀY (VD:2019-05-20). Nhập lại: ");
-            //             continue;
-            //         }
-            //         break;
-            //     }
-            //     return input;
-            // }
             return input;
         }
         public void GetListCardByCardType()
@@ -437,6 +403,111 @@ namespace PL_console
                 Console.ReadKey();
                 menu.MenuManager();
             }
+        }
+        public Card_Detail GetCard_DetailbyID(string cardid)
+        {
+            try
+            {
+                cardDetailBL = new Card_detailBL();
+                cardDetail = cardDetailBL.GetCard_DetailbyID(cardid);
+            }
+            catch (System.NullReferenceException)
+            {
+                Console.WriteLine("MẤT KẾT NỐI, MỜI BẠN ĐĂNG NHẬP LẠI !!!");
+                Console.ReadKey();
+                menu.MenuLogin();
+            }
+            catch (MySql.Data.MySqlClient.MySqlException)
+            {
+                Console.WriteLine("MẤT KẾT NỐI, MỜI BẠN ĐĂNG NHẬP LẠI !!!");
+                Console.ReadKey();
+                menu.MenuLogin();
+            }
+            return cardDetail;
+        }
+        public Customer GetCustomerByLincese_plate(string licensePlate)
+        {
+            try
+            {
+                cusBL = new CustomerBL();
+                cus = cusBL.GetCustomerByLincese_plate(licensePlate);
+            }
+            catch (System.NullReferenceException)
+            {
+                Console.WriteLine("MẤT KẾT NỐI, MỜI BẠN ĐĂNG NHẬP LẠI !!!");
+                Console.ReadKey();
+                menu.MenuLogin();
+            }
+            catch (MySql.Data.MySqlClient.MySqlException)
+            {
+                Console.WriteLine("MẤT KẾT NỐI, MỜI BẠN ĐĂNG NHẬP LẠI !!!");
+                Console.ReadKey();
+                menu.MenuLogin();
+            }
+            return cus;
+        }
+        public Card_Logs GetCardLogsByLisencePlateAndCardID(string licensePlate, string cardid)
+        {
+            try
+            {
+                cardLogsBL = new Card_LogsBL();
+                cardLogs = cardLogsBL.GetCardLogsByLisencePlateAndCardID(licensePlate, cardid);
+            }
+            catch (System.NullReferenceException)
+            {
+                Console.WriteLine("MẤT KẾT NỐI, MỜI BẠN ĐĂNG NHẬP LẠI !!!");
+                Console.ReadKey();
+                menu.MenuLogin();
+            }
+            catch (MySql.Data.MySqlClient.MySqlException)
+            {
+                Console.WriteLine("MẤT KẾT NỐI, MỜI BẠN ĐĂNG NHẬP LẠI !!!");
+                Console.ReadKey();
+                menu.MenuLogin();
+            }
+            return cardLogs;
+        }
+        public List<Card> GetlistCard()
+        {
+            try
+            {
+                cardBL = new CardBL();
+                listcard = cardBL.GetlistCard();
+            }
+            catch (System.NullReferenceException)
+            {
+                Console.WriteLine("MẤT KẾT NỐI, MỜI BẠN ĐĂNG NHẬP LẠI !!!");
+                Console.ReadKey();
+                menu.MenuLogin();
+            }
+            catch (MySql.Data.MySqlClient.MySqlException)
+            {
+                Console.WriteLine("MẤT KẾT NỐI, MỜI BẠN ĐĂNG NHẬP LẠI !!!");
+                Console.ReadKey();
+                menu.MenuLogin();
+            }
+            return listcard;
+        }
+        public Card GetCardByID(string cardid)
+        {
+            try
+            {
+                cardBL = new CardBL();
+                card = cardBL.GetCardByID(cardid);
+            }
+            catch (System.NullReferenceException)
+            {
+                Console.WriteLine("MẤT KẾT NỐI, MỜI BẠN ĐĂNG NHẬP LẠI !!!");
+                Console.ReadKey();
+                menu.MenuLogin();
+            }
+            catch (MySql.Data.MySqlClient.MySqlException)
+            {
+                Console.WriteLine("MẤT KẾT NỐI, MỜI BẠN ĐĂNG NHẬP LẠI !!!");
+                Console.ReadKey();
+                menu.MenuLogin();
+            }
+            return card;
         }
     }
 }

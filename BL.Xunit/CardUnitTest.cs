@@ -78,7 +78,7 @@ namespace BL.Xunit
         }
         [Theory]
         [InlineData("88-A1-8888")]
-        [InlineData("44-B1-4444")]
+        [InlineData("44-S1-4422")]
         public void GetCardByLicensePlateTest1(string licensePlate)
         {
             CardBL cardBL = new CardBL();

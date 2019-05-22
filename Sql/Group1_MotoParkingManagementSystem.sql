@@ -37,7 +37,7 @@ insert into Card(card_id,card_type,license_plate)
 values('CM01','Thẻ tháng','75-G1-2222'),
 ('CM02','Thẻ tháng','33-G1-3333'),
 ('CM03','Thẻ tháng','22-E1-2222'),
-('CM04','Thẻ tháng','44-B1-4444'),
+('CM04','Thẻ tháng','44-S1-4422'),
 ('CM05','Thẻ tháng','88-G1-8888'),
 ('CM06','Thẻ tháng','88-A1-8888');
 select * from Card;

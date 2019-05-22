@@ -77,7 +77,7 @@ namespace DAL.Xunit
             Assert.NotEmpty(card);
         }
         [Theory]
-        [InlineData("44-B1-4444")]
+        [InlineData("44-S1-4422")]
         [InlineData("22-E1-2222")]
         public void GetCardByLicensePlateTest1(string licensePlate)
         {
