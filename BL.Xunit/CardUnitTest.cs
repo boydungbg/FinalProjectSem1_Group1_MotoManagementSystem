@@ -37,7 +37,7 @@ namespace BL.Xunit
             string cus_id = "123456789";
             string cus_name = "Lê Chí Dũng";
             string cus_address = "Bắc Giang";
-            string cus_licensePlate = "89-B5-8888";
+            string cus_licensePlate = "89B5-8888";
             DateTime start_day = new DateTime(2019, 05, 17);
             DateTime end_day = new DateTime(2019, 06, 17);
             string cardType = "Thẻ tháng";
@@ -45,7 +45,7 @@ namespace BL.Xunit
             Card card = new Card(card_id, cus_licensePlate, cardType, null, null, null);
             Customer cus = new Customer(cus_id, cus_name, cus_address, cus_licensePlate);
             Assert.False(cardBL.CreateCard(card, cus, card_Detail));
-            card = new Card(card_id, "89-B5-9988", cardType, 1, null, null);
+            card = new Card(card_id, "89B5-9988", cardType, 1, null, null);
             Assert.False(cardBL.UpdateCardByID(null, "CM21"));
             cardBL = new CardBL();
             Assert.False(cardBL.DeleteCardByID("CM99", null));
@@ -77,8 +77,8 @@ namespace BL.Xunit
             Assert.NotEmpty(card);
         }
         [Theory]
-        [InlineData("88-A1-8888")]
-        [InlineData("44-S1-4422")]
+        [InlineData("88A1-8888")]
+        [InlineData("44S1-4422")]
         public void GetCardByLicensePlateTest1(string licensePlate)
         {
             CardBL cardBL = new CardBL();
@@ -87,7 +87,7 @@ namespace BL.Xunit
             Assert.Equal(licensePlate, card.LicensePlate);
         }
         [Theory]
-        [InlineData("44-B1-5544")]
+        [InlineData("44B1-5544")]
         [InlineData(null)]
         public void GetCardByLicensePlateTest2(string licensePlate)
         {

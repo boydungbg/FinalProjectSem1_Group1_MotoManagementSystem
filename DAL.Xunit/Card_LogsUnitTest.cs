@@ -10,11 +10,11 @@ namespace DAL.Xunit
         public void CreateCardLogsTest1()
         {
             Card_LogsDAL cardLogsDAL = new Card_LogsDAL();
-            Card_Logs cardLogs = new Card_Logs("CM06", "security_01", "75-G1-2222", new DateTime(2019, 05, 20), null, null, null);
+            Card_Logs cardLogs = new Card_Logs("CM06", "security_01", "75G1-2222", new DateTime(2019, 05, 20), null, null, null);
             Assert.True(cardLogsDAL.CreateCardLogs(cardLogs));
             cardLogsDAL = new Card_LogsDAL();
             cardLogs = new Card_Logs(null, null, null, null, DateTime.Now, "08:00", 0);
-            Assert.True(cardLogsDAL.UpdateCardLogsByLicensePlateAndCardID(cardLogs, "75-G1-2222", "CM06", "2019-05-20 00:00:00"));
+            Assert.True(cardLogsDAL.UpdateCardLogsByLicensePlateAndCardID(cardLogs, "75G1-2222", "CM06", "2019-05-20 00:00:00"));
             cardLogsDAL = new Card_LogsDAL();
             Assert.True(cardLogsDAL.DeleteCardLogsByID("CM06"));
         }
@@ -26,7 +26,7 @@ namespace DAL.Xunit
             Assert.False(cardLogsDAL.CreateCardLogs(null));
             cardLogsDAL = new Card_LogsDAL();
             cardLogs = new Card_Logs(null, null, null, null, DateTime.Now, "07:00", 0);
-            Assert.False(cardLogsDAL.UpdateCardLogsByLicensePlateAndCardID(null, "CM06", "75-G1-2222", "2019-05-20 00:00:00"));
+            Assert.False(cardLogsDAL.UpdateCardLogsByLicensePlateAndCardID(null, "CM06", "75G1-2222", "2019-05-20 00:00:00"));
             cardLogsDAL = new Card_LogsDAL();
             Assert.False(cardLogsDAL.DeleteCardLogsByID(null));
         }
@@ -34,7 +34,7 @@ namespace DAL.Xunit
         public void GetCardLogsByLinceseAndCardIDTest1()
         {
             Card_LogsDAL cardLogsDAL = new Card_LogsDAL();
-            Card_Logs cardLogs = cardLogsDAL.GetCardLogsByLicensePlateAndCardID("11-X8-2222", "CM01");
+            Card_Logs cardLogs = cardLogsDAL.GetCardLogsByLicensePlateAndCardID("11X8-2222", "CM01");
             Assert.Null(cardLogs);
         }
     }

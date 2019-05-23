@@ -23,7 +23,7 @@ namespace DAL.Xunit
             Card_Detail card_Detail = new Card_Detail(card_id, cus_id, start_day, end_day, null);
             Assert.True(cardDAL.CreateCard(card, cus, card_Detail));
             cardDAL = new CardDAL();
-            card = new Card(null, "89-B5-9988", cardType, 1, null, null);
+            card = new Card(null, "89B5-9988", cardType, 1, null, null);
             Assert.True(cardDAL.UpdateCardByID(card, "CM21"));
             cardDAL = new CardDAL();
             Assert.True(cardDAL.DeleteCardByID("CM21", "101029011"));
@@ -36,7 +36,7 @@ namespace DAL.Xunit
             string cus_id = "123456789";
             string cus_name = "Lê Chí Dũng";
             string cus_address = "Bắc Giang";
-            string cus_licensePlate = "89-B5-8888";
+            string cus_licensePlate = "89B5-8888";
             DateTime start_day = new DateTime(2019, 05, 17);
             DateTime end_day = new DateTime(2019, 06, 17);
             string cardType = "Thẻ tháng";
@@ -45,7 +45,7 @@ namespace DAL.Xunit
             Customer cus = new Customer(cus_id, cus_name, cus_address, cus_licensePlate);
             Assert.False(cardDAL.CreateCard(card, cus, card_Detail));
             cardDAL = new CardDAL();
-            card = new Card(null, "89-B5-9988", cardType, 1, null, null);
+            card = new Card(null, "89B5-9988", cardType, 1, null, null);
             Assert.False(cardDAL.UpdateCardByID(null, null));
             cardDAL = new CardDAL();
             Assert.False(cardDAL.DeleteCardByID(null, "100000000"));
@@ -77,8 +77,8 @@ namespace DAL.Xunit
             Assert.NotEmpty(card);
         }
         [Theory]
-        [InlineData("44-S1-4422")]
-        [InlineData("22-E1-2222")]
+        [InlineData("44S1-4422")]
+        [InlineData("22E1-2222")]
         public void GetCardByLicensePlateTest1(string licensePlate)
         {
             CardDAL cardDAL = new CardDAL();
@@ -87,7 +87,7 @@ namespace DAL.Xunit
             Assert.Equal(licensePlate, card.LicensePlate);
         }
         [Theory]
-        [InlineData("89-B5-9988")]
+        [InlineData("89B5-9988")]
         [InlineData(null)]
         public void GetCardByLicensePlateTest2(string licensePlate)
         {

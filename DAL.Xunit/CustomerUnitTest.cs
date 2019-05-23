@@ -27,8 +27,8 @@ namespace DAL.Xunit
             Assert.Null(cus);
         }
         [Theory]
-        [InlineData("88-A1-8888")]
-        [InlineData("75-G1-2222")]
+        [InlineData("88A1-8888")]
+        [InlineData("75G1-2222")]
         public void GetCustomerByLincese_plateTest1(string licensePlate)
         {
             CustomerDAL CusDAL = new CustomerDAL();
@@ -37,7 +37,7 @@ namespace DAL.Xunit
             Assert.Equal(licensePlate, cus.Cus_licensePlate);
         }
         [Theory]
-        [InlineData("88-A1-1234")]
+        [InlineData("88A1-1234")]
         [InlineData(null)]
         public void GetCustomerByLincese_plateTest2(string licensePlate)
         {

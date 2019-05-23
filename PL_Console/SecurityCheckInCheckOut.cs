@@ -5,11 +5,11 @@ using Persistence;
 using PL_console;
 namespace PL_Console
 {
-    public class ConsoleSecurity
+    public class SecurityCheckInCheckOut
     {
         private Menus menu = new Menus();
         string b = "══════════════════════════════════════════════════════════════";
-        private ConsoleManager manager = new ConsoleManager();
+        private ManagerCardAndStatistic manager = new ManagerCardAndStatistic();
         private CardBL cardBL = new CardBL();
         private Card_LogsBL cardLogsBL = new Card_LogsBL();
         private Card_Logs cardLogs = null;
@@ -87,24 +87,20 @@ namespace PL_Console
                     } while (card == null || card.Card_Status == 1);
                     if (card != null && card.Card_Status == 0)
                     {
+
                         Console.WriteLine(b);
                         Console.WriteLine("- Vé xe: " + card_id);
                         Console.WriteLine("- Loại thẻ: " + card.Card_type);
                         if (card.Card_type == "Thẻ ngày")
                         {
+                            Card newcard = null;
                             Console.WriteLine("- Chủ xe: Không có");
                             Console.WriteLine("- Địa chỉ: Không có");
                             Console.WriteLine("- Hết hạn: Không có");
                             Console.Write("- Nhập biển số xe (VD:88-X8-8888): ");
                             licensePlate = manager.validate(5);
-                            cardLogs = manager.GetCardLogsByLisencePlateAndCardID(licensePlate, card_id);
-                            cus = manager.GetCustomerByLincese_plate(licensePlate);
-                            if (cardLogs != null)
-                            {
-                                Console.WriteLine("↻ Biển số xe đã có trong bãi.");
-                                licensePlate = null;
-                            }
-                            else if (cus != null)
+                            newcard = manager.GetCardByLicensePlate(licensePlate);
+                            if (newcard != null)
                             {
                                 Console.WriteLine("↻ Biển số xe trùng với một khách hàng khác.");
                                 licensePlate = null;
@@ -195,7 +191,7 @@ namespace PL_Console
                     int count = 0;
                     string card_id;
                     string status = "";
-                    string dateTimeStart = "";
+                    string dateTimeBikeIn = "";
                     string sendtime = "";
                     double intoMoney = 0;
                     var table = new ConsoleTable("Mã thẻ", "Biển số xe", "Loại thẻ", "Trạng thái", "Ngày giờ xe vào");
@@ -207,16 +203,16 @@ namespace PL_Console
                             status = "Hoạt động";
                             if (cardLogs != null)
                             {
-                                dateTimeStart = Convert.ToString(cardLogs.DateTimeStart);
+                                dateTimeBikeIn = Convert.ToString(cardLogs.DateTimeStart);
                             }
-                            table.AddRow(item.Card_id, item.LicensePlate, item.Card_type, status, dateTimeStart);
+                            table.AddRow(item.Card_id, item.LicensePlate, item.Card_type, status, dateTimeBikeIn);
                             count++;
                         }
                     }
                     if (count == 0)
                     {
                         Console.Clear();
-                        Console.WriteLine("Không có xe nào gửi!!! Nhấn Enter để quay lại.");
+                        Console.WriteLine("Không có xe trong bãi!!! Nhấn Enter để quay lại.");
                         Console.ReadKey();
                         menu.CheckInCheckOut(user);
                     }
@@ -277,18 +273,16 @@ namespace PL_Console
                                     Console.WriteLine(b);
                                     Console.WriteLine();
                                     Console.WriteLine("✔ Biển số xe giống nhau.");
-                                    sendtime = Convert.ToString(dateTimeEnd - cardLogs.DateTimeStart);
-                                    for (int i = sendtime.Length - 1; i >= 0; i--)
-                                    {
-                                        if (sendtime[i] == '.')
-                                        {
-                                            sendtime = sendtime.Substring(0, i);
-                                            break;
-                                        }
-                                    }
+                                    sendtime = GetSendtime(cardLogs.DateTimeStart.Value, dateTimeEnd);
+
                                     Console.WriteLine();
                                     Console.WriteLine(b);
                                     Console.WriteLine("- Thời gian gửi: " + sendtime);
+                                    if (cardDetail.End_day >= DateTime.Now)
+                                    {
+                                        intoMoney = Pay(cardLogs.DateTimeStart.Value, dateTimeEnd);
+                                        Console.WriteLine("- Thẻ của bạn đã quá hạn sử dụng.");
+                                    }
                                     Console.WriteLine("- Số tiền là: {0} VNĐ", intoMoney);
                                 }
                             } while (licensePlate == null);
@@ -318,34 +312,11 @@ namespace PL_Console
                                     Console.WriteLine(b);
                                     Console.WriteLine();
                                     Console.WriteLine("✔ Biển số xe giống nhau.");
-                                    sendtime = Convert.ToString(dateTimeEnd - cardLogs.DateTimeStart);
-                                    for (int i = sendtime.Length - 1; i >= 0; i--)
-                                    {
-                                        if (sendtime[i] == '.')
-                                        {
-                                            sendtime = sendtime.Substring(0, i);
-                                            break;
-                                        }
-                                    }
+                                    sendtime = GetSendtime(cardLogs.DateTimeStart.Value, dateTimeEnd);
                                     Console.WriteLine();
                                     Console.WriteLine(b);
                                     Console.WriteLine("- Thời gian gửi: " + sendtime);
-                                    if (dateTimeEnd >= DateTime.Parse("6:00 AM") || cardLogs.DateTimeStart < DateTime.Parse("6:00 PM"))
-                                    {
-                                        intoMoney = intoMoney + 10000;
-                                    }
-                                    else if (dateTimeEnd <= DateTime.Parse("6:00 PM") || cardLogs.DateTimeStart >= DateTime.Parse("6:00 AM"))
-                                    {
-                                        intoMoney = intoMoney + 10000;
-                                    }
-                                    else if (dateTimeEnd >= DateTime.Parse("6:00 PM") || cardLogs.DateTimeStart >= DateTime.Parse("6:00 AM"))
-                                    {
-                                        intoMoney = intoMoney + 20000;
-                                    }
-                                    else if (dateTimeEnd <= DateTime.Parse("6:00 AM") || cardLogs.DateTimeStart >= DateTime.Parse("6:00 PM"))
-                                    {
-                                        intoMoney = intoMoney + 20000;
-                                    }
+                                    intoMoney = Pay(cardLogs.DateTimeStart.Value, dateTimeEnd);
                                     Console.WriteLine("- Số tiền là: {0} VNĐ", intoMoney);
                                     licensePlate = "No License Plate";
                                 }
@@ -398,6 +369,40 @@ namespace PL_Console
                     menu.CheckInCheckOut(user);
                 }
             } while (yesNo != 'N');
+        }
+        public double Pay(DateTime start, DateTime end)
+        {
+            double intoMoney = 0;
+            if (start <= DateTime.Parse("06:00:00 PM") && start >= DateTime.Parse("06:00:00 AM"))
+            {
+                intoMoney = intoMoney + 10000;
+            }
+            else if (start <= DateTime.Parse("06:00:00 AM") && start >= DateTime.Parse("06:00:00 PM"))
+            {
+                intoMoney = intoMoney + 20000;
+            }
+            else if (end >= DateTime.Parse("06:00:00 AM") && end <= DateTime.Parse("06:00:00 PM"))
+            {
+                intoMoney = intoMoney + 10000;
+            }
+            else if (end <= DateTime.Parse("06:00:00 AM") && end >= DateTime.Parse("06:00:00 pM"))
+            {
+                intoMoney = intoMoney + 20000;
+            }
+            return intoMoney;
+        }
+        public string GetSendtime(DateTime start, DateTime end)
+        {
+            string sendtime = Convert.ToString(end - start);
+            for (int i = sendtime.Length - 1; i >= 0; i--)
+            {
+                if (sendtime[i] == '.')
+                {
+                    sendtime = sendtime.Substring(0, i);
+                    break;
+                }
+            }
+            return sendtime;
         }
     }
 }

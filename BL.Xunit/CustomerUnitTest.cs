@@ -25,8 +25,8 @@ namespace BL.Xunit
             Assert.Null(cus);
         }
         [Theory]
-        [InlineData("88-G1-8888")]
-        [InlineData("22-E1-2222")]
+        [InlineData("88G1-8888")]
+        [InlineData("22E1-2222")]
         public void GetCustomerByLincese_plateTest1(string licensePlate)
         {
             CustomerBL cusBL = new CustomerBL();
@@ -35,7 +35,7 @@ namespace BL.Xunit
             Assert.Equal(licensePlate, cus.Cus_licensePlate);
         }
         [Theory]
-        [InlineData("88-A1-1234")]
+        [InlineData("88A1-1234")]
         [InlineData(null)]
         public void GetCustomerByLincese_plateTest2(string licensePlate)
         {

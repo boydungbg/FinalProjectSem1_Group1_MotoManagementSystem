@@ -179,7 +179,7 @@ namespace PL_Console
             do
             {
                 Console.Clear();
-                ConsoleManager manager = new ConsoleManager();
+                ManagerCardAndStatistic manager = new ManagerCardAndStatistic();
                 string[] menuItem = { "Tạo thẻ tháng", "Hiển thị danh sách thẻ tháng", "Thống kê", "Đăng xuất" };
                 choose = Menu(menuItem, 4, "Chào mừng bạn đã đến với hệ thống quản lý bãi gửi xe", "#Chọn: ");
                 switch (choose)
@@ -251,7 +251,7 @@ namespace PL_Console
         }
         public void CheckInCheckOut(User user)
         {
-            ConsoleSecurity security = new ConsoleSecurity();
+            SecurityCheckInCheckOut security = new SecurityCheckInCheckOut();
             char choose;
             do
             {

@@ -8,7 +8,7 @@ using PL_Console;
 
 namespace PL_console
 {
-    public class ConsoleManager
+    public class ManagerCardAndStatistic
     {
         private Menus menu = new Menus();
         private CustomerBL cusBL = new CustomerBL();
@@ -106,7 +106,7 @@ namespace PL_console
                 customer_name = validate(3);
                 Console.Write("- Nhập địa chỉ (VD:BAC GIANG): ");
                 customer_address = validate(4);
-                Console.Write("- Nhập biển số xe(VD:88-X8-8888): ");
+                Console.Write("- Nhập biển số xe(VD:88X8-8888): ");
                 do
                 {
                     customer_licenseplate = validate(5);
@@ -304,7 +304,7 @@ namespace PL_console
                         input = Console.ReadLine();
                         if (input == "")
                         {
-                            throw new Exception("↻ Biển số xe không hợp lệ (VD:88-X8-8888). Nhập lại: ");
+                            throw new Exception("↻ Biển số xe không hợp lệ (VD:88X8-8888). Nhập lại: ");
                         }
                     }
                     catch (System.Exception e)
@@ -312,16 +312,16 @@ namespace PL_console
                         Console.Write(e.Message);
                         continue;
                     }
-                    Regex regex = new Regex("^[0-9-]+(([',.-][A-Z0-9-])?[0-9-]*)*$");
+                    Regex regex = new Regex("^[0-9]+[A-Z0-9]+[-]+(([0-9])?[0-9]*)*$");
                     MatchCollection matchCollectionstr = regex.Matches(input);
                     if (matchCollectionstr.Count == 0)
                     {
-                        Console.Write("↻ Biển số xe không hợp lệ (VD:88-X8-8888). Nhập lại: ");
+                        Console.Write("↻ Biển số xe không hợp lệ (VD:88X8-8888). Nhập lại: ");
                         continue;
                     }
-                    if (input.Length <= 9 || input.Length >= 12)
+                    if (input.Length != 9 && input.Length != 10)
                     {
-                        Console.Write("↻ Biển số xe không hợp lệ (VD:88-X8-8888). Nhập lại: ");
+                        Console.Write("↻ Biển số xe không hợp lệ (VD:88X8-8888). Nhập lại: ");
                         continue;
                     }
                     break;
@@ -508,6 +508,28 @@ namespace PL_console
                 menu.MenuLogin();
             }
             return card;
+        }
+        public Card GetCardByLicensePlate(string licensePlate)
+        {
+            Card newCard = null;
+            try
+            {
+                cardBL = new CardBL();
+                newCard = cardBL.GetCardByLicensePlate(licensePlate);
+            }
+            catch (System.NullReferenceException)
+            {
+                Console.WriteLine("MẤT KẾT NỐI, MỜI BẠN ĐĂNG NHẬP LẠI !!!");
+                Console.ReadKey();
+                menu.MenuLogin();
+            }
+            catch (MySql.Data.MySqlClient.MySqlException)
+            {
+                Console.WriteLine("MẤT KẾT NỐI, MỜI BẠN ĐĂNG NHẬP LẠI !!!");
+                Console.ReadKey();
+                menu.MenuLogin();
+            }
+            return newCard;
         }
     }
 }

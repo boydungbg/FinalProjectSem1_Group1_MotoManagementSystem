@@ -8,12 +8,12 @@ cus_address nvarchar(70) not null,
 license_plate varchar(20) not null
 );
 insert into Customer(cus_id,cus_fullname,cus_address,license_plate)
-values ('123456789','Đào Văn Đức','Thái Bình','75-G1-2222'),
-('123456709','Lê Chí Dũng','Bắc Giang','33-G1-3333'),
-('122332387','Nguyễn Văn A','Hà Nội','22-E1-2222'),
-('123445785','Dũng đẹp zai','Hà Nội','44-b1-4444'),
-('122446775','Bùi Việt Hoàng','Phú Thọ','88-G1-8888'),
-('123567436','Boydung','Bắc Giang','88-A1-8888');
+values ('123456789','Đào Văn Đức','Thái Bình','75G1-2222'),
+('123456709','Lê Chí Dũng','Bắc Giang','33G1-3333'),
+('122332387','Nguyễn Văn A','Hà Nội','22E1-2222'),
+('123445785','Dũng đẹp zai','Hà Nội','44S1-4422'),
+('122446775','Bùi Việt Hoàng','Phú Thọ','88G1-8888'),
+('123567436','Boydung','Bắc Giang','88A1-8888');
 select * from Customer;
 create table if not exists Card(
 card_id varchar(10) primary key,
@@ -34,12 +34,12 @@ values('CD01','Thẻ ngày','No License Plate'),
 ('CD10','Thẻ ngày','No License Plate');
 
 insert into Card(card_id,card_type,license_plate)
-values('CM01','Thẻ tháng','75-G1-2222'),
-('CM02','Thẻ tháng','33-G1-3333'),
-('CM03','Thẻ tháng','22-E1-2222'),
-('CM04','Thẻ tháng','44-S1-4422'),
-('CM05','Thẻ tháng','88-G1-8888'),
-('CM06','Thẻ tháng','88-A1-8888');
+values('CM01','Thẻ tháng','75G1-2222'),
+('CM02','Thẻ tháng','33G1-3333'),
+('CM03','Thẻ tháng','22E1-2222'),
+('CM04','Thẻ tháng','44S1-4422'),
+('CM05','Thẻ tháng','88G1-8888'),
+('CM06','Thẻ tháng','88A1-8888');
 select * from Card;
 create table if not exists Card_detail(
 card_id varchar(10)  not null,
