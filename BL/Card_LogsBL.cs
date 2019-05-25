@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using DAL;
 using Persistence;
 
@@ -9,35 +10,25 @@ namespace BL
         private Card_LogsDAL card_LogsDAL = new Card_LogsDAL();
         public bool CreateCardLogs(Card_Logs card_Logs)
         {
-            if (card_Logs == null)
-            {
-                return false;
-            }
+
             return card_LogsDAL.CreateCardLogs(card_Logs);
         }
         public bool DeleteCardLogsByID(string id)
         {
-            if (id == null)
-            {
-                return false;
-            }
             return card_LogsDAL.DeleteCardLogsByID(id);
         }
         public Card_Logs GetCardLogsByLisencePlateAndCardID(string LicensePlate, string cardid)
         {
-            if (LicensePlate == null)
-            {
-                return null;
-            }
-            return card_LogsDAL.GetCardLogsByLicensePlateAndCardID(LicensePlate,cardid);
+            return card_LogsDAL.GetCardLogsByLicensePlateAndCardID(LicensePlate, cardid);
         }
-        public bool UpdateCardLogsByLicensePlateAndCardID(Card_Logs cardLogs ,string licensePlate , string cardid , string dateTimeStart)
+        public bool UpdateCardLogsByLicensePlateAndCardID(Card_Logs cardLogs, string licensePlate, string cardid, string dateTimeStart)
         {
-             if (licensePlate == null || cardid == null || dateTimeStart == null || cardLogs == null)
-            {
-                return false;
-            }
-            return card_LogsDAL.UpdateCardLogsByLicensePlateAndCardID(cardLogs,licensePlate,cardid,dateTimeStart);
+
+            return card_LogsDAL.UpdateCardLogsByLicensePlateAndCardID(cardLogs, licensePlate, cardid, dateTimeStart);
+        }
+        public List<Card_Logs> GetListCardLogs(string from, string to)
+        {
+            return card_LogsDAL.GetListCardLogs(from, to);
         }
     }
 }

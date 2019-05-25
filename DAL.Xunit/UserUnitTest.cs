@@ -13,19 +13,20 @@ namespace DAL.Xunit
         public void LoginTest1(string username, string password)
         {
             UserDAL userDAL = new UserDAL();
-            User user = userDAL.Login(username, password);
+            User user = userDAL.GetUserByUsernameAndPassWord(username, password);
             Assert.NotNull(user);
-            Assert.Equal(username,user.User_name);
+            Assert.Equal(username, user.User_name);
         }
+        
         [Theory]
         [InlineData("manager_02", "123456789")]
-        [InlineData("'?^%'", "'.:=='")]
-        [InlineData("'?^%'", null)]
-        [InlineData(null, "'.:=='")]
+        [InlineData("manager_02", "1231123")]
+        [InlineData("21312", null)]
+        [InlineData(null, "4234123")]
         public void LoginTest2(string username, string password)
         {
             UserDAL userDAL = new UserDAL();
-            Assert.Null(userDAL.Login(username, password));
+            Assert.Null(userDAL.GetUserByUsernameAndPassWord(username, password));
         }
     }
 }

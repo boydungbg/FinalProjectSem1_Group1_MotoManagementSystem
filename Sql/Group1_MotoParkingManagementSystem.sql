@@ -19,7 +19,8 @@ create table if not exists Card(
 card_id varchar(10) primary key,
 card_type nvarchar(50) not null,
 license_plate varchar(20) not null,
-card_status bit not null default 0
+card_status tinyint not null default 0 ,
+date_created datetime not null default current_timestamp
 ); 
 insert into Card(card_id,card_type,license_plate)
 values('CD01','Thẻ ngày','No License Plate'),
@@ -48,23 +49,22 @@ constraint pk_carddetail primary key (card_id,cus_id),
 constraint fk_CardDetail_Card foreign key (card_id) references Card(card_id),
 constraint fk_CardDetail_Customer foreign key (cus_id) references Customer(cus_id),
 start_day datetime not null,
-end_day datetime not null,
-date_created datetime not null default current_timestamp
+end_day datetime not null
 );
 insert into Card_detail (card_id,cus_id,start_day,end_day)
-values('CM01','123456789','2019-05-17','2019-06-17'),
-('CM02','123456709','2019-05-17','2019-06-17'),
-('CM03','122332387','2019-05-17','2019-06-17'),
-('CM04','123445785','2019-05-17','2019-06-17'),
-('CM05','122446775','2019-05-17','2019-06-17'),
-('CM06','123567436','2019-05-17','2019-06-17');
+values('CM01','123456789','2019-05-24','2019-06-24'),
+('CM02','123456709','2019-05-24','2019-06-24'),
+('CM03','122332387','2019-05-24','2019-06-24'),
+('CM04','123445785','2019-05-24','2019-06-24'),
+('CM05','122446775','2019-05-24','2019-06-24'),
+('CM06','123567436','2019-05-24','2019-06-24');
 select * from Card_detail;
 create table if not exists Accounts(
 acc_name varchar(50) primary key,
 acc_pass varchar(30) not null,
 acc_fullname nvarchar(50) not null,
 acc_email varchar(50) not null,
-acc_level bit not null,
+acc_level tinyint not null,
 acc_dateCreated datetime not null default current_timestamp
 );
 insert into Accounts(acc_name,acc_pass, acc_fullname, acc_email,acc_level)

@@ -5,7 +5,6 @@ namespace DAL
 {
     public class CustomerDAL
     {
-        private MySqlConnection connection;
         private MySqlDataReader reader;
         private string query;
         public Customer GetCustomerByID(string customerid)
@@ -14,26 +13,16 @@ namespace DAL
             {
                 return null;
             }
-            if (connection == null)
-            {
-                connection = DBHelper.OpenConnection();
-            }
-            if (connection.State == System.Data.ConnectionState.Closed)
-            {
-                connection.Open();
-            }
-            MySqlCommand command = new MySqlCommand("", connection);
-            query = @"select * from Customer where cus_id = @customerid ;";
-            command.Parameters.AddWithValue("@customerid", customerid);
-            command.CommandText = query;
+            query = @"select * from Customer where cus_id = '" + customerid + "' ;";
+            DBHelper.OpenConnection();
+            // reader = DBHelper.ExecQuery(query);
             Customer cus = null;
-            using (reader = command.ExecuteReader())
+            reader = DBHelper.ExecQuery(query);
+            if (reader.Read())
             {
-                if (reader.Read())
-                {
-                    cus = GetCustomer(reader);
-                }
+                cus = GetCustomerInfo(reader);
             }
+            DBHelper.CloseConnection();
             return cus;
         }
         public Customer GetCustomerByLincese_plate(string Lincese_plate)
@@ -42,35 +31,26 @@ namespace DAL
             {
                 return null;
             }
-            if (connection == null)
-            {
-                connection = DBHelper.OpenConnection();
-            }
-            if (connection.State == System.Data.ConnectionState.Closed)
-            {
-                connection.Open();
-            }
-            MySqlCommand command = new MySqlCommand("", connection);
-            query = @"select * from Customer where license_plate = @license_plate ;";
-            command.Parameters.AddWithValue("@license_plate", Lincese_plate);
-            command.CommandText = query;
+            query = @"select * from Customer where license_plate = '" + Lincese_plate + "' ;";
+            DBHelper.OpenConnection();
+            // reader = DBHelper.ExecQuery(query);
             Customer cus = null;
-            using (reader = command.ExecuteReader())
+            reader = DBHelper.ExecQuery(query);
+            if (reader.Read())
             {
-                if (reader.Read())
-                {
-                    cus = GetCustomer(reader);
-                }
+                cus = GetCustomerInfo(reader);
             }
+            DBHelper.CloseConnection();
             return cus;
+
         }
-        private Customer GetCustomer(MySqlDataReader reader)
+        private Customer GetCustomerInfo(MySqlDataReader reader)
         {
-            string customerid = reader.GetString("cus_id");
-            string customerName = reader.GetString("cus_fullname");
-            string customerAddress = reader.GetString("cus_address");
-            string licensePlate = reader.GetString("license_plate");
-            Customer cus = new Customer(customerid, customerName, customerAddress, licensePlate);
+            Customer cus = new Customer();
+            cus.Cus_id = reader.GetString("cus_id");
+            cus.Cus_name = reader.GetString("cus_fullname");
+            cus.Cus_address = reader.GetString("cus_address");
+            cus.Cus_licensePlate = reader.GetString("license_plate");
             return cus;
         }
     }

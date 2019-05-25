@@ -10,20 +10,14 @@ namespace DAL.Xunit
         public void CreateCardTest1()
         {
             CardDAL cardDAL = new CardDAL();
-            string card_id = "CM21";
-            string cus_id = "101029011";
-            string cus_name = "Lê Chí Dũng";
-            string cus_address = "Bắc Giang";
-            string cus_licensePlate = "89-B5-8888";
             DateTime start_day = new DateTime(2019, 5, 17);
             DateTime end_day = new DateTime(2019, 6, 17);
-            string cardType = "Thẻ tháng";
-            Card card = new Card(card_id, cus_licensePlate, cardType, null, null, null);
-            Customer cus = new Customer(cus_id, cus_name, cus_address, cus_licensePlate);
-            Card_Detail card_Detail = new Card_Detail(card_id, cus_id, start_day, end_day, null);
+            Card card = new Card("CM21", "89B5-8888", "Thẻ tháng", null, null, null, null);
+            Customer cus = new Customer("101029011", "Lê Chí Dũng", "Bắc Giang", "89B5-8888");
+            Card_Detail card_Detail = new Card_Detail("CM21", "101029011", start_day, end_day);
             Assert.True(cardDAL.CreateCard(card, cus, card_Detail));
             cardDAL = new CardDAL();
-            card = new Card(null, "89B5-9988", cardType, 1, null, null);
+            card = new Card(null, "89B5-9988", null, 1, null, null, null);
             Assert.True(cardDAL.UpdateCardByID(card, "CM21"));
             cardDAL = new CardDAL();
             Assert.True(cardDAL.DeleteCardByID("CM21", "101029011"));
@@ -32,20 +26,14 @@ namespace DAL.Xunit
         public void CreateCardTest2()
         {
             CardDAL cardDAL = new CardDAL();
-            string card_id = "CM01";
-            string cus_id = "123456789";
-            string cus_name = "Lê Chí Dũng";
-            string cus_address = "Bắc Giang";
-            string cus_licensePlate = "89B5-8888";
             DateTime start_day = new DateTime(2019, 05, 17);
             DateTime end_day = new DateTime(2019, 06, 17);
-            string cardType = "Thẻ tháng";
-            Card_Detail card_Detail = new Card_Detail(card_id, cus_id, start_day, end_day, null);
-            Card card = new Card(card_id, cus_licensePlate, cardType, null, null, null);
-            Customer cus = new Customer(cus_id, cus_name, cus_address, cus_licensePlate);
-            Assert.False(cardDAL.CreateCard(card, cus, card_Detail));
+            Card card = new Card("CM21", "89B5-8888", "Thẻ tháng", null, null, null, null);
+            Customer cus = new Customer("101029011", "Lê Chí Dũng", "Bắc Giang", "89B5-8888");
+            Card_Detail card_Detail = new Card_Detail("CM21", "101029011", start_day, end_day);
+            Assert.False(cardDAL.CreateCard(null, cus, card_Detail));
             cardDAL = new CardDAL();
-            card = new Card(null, "89B5-9988", cardType, 1, null, null);
+            card = new Card(null, "89B5-9988", null, 1, null, null, null);
             Assert.False(cardDAL.UpdateCardByID(null, null));
             cardDAL = new CardDAL();
             Assert.False(cardDAL.DeleteCardByID(null, "100000000"));
@@ -102,13 +90,5 @@ namespace DAL.Xunit
             Card card = cardDAL.GetCardByWord();
             Assert.NotNull(card);
         }
-        [Fact]
-        public void GetListCardByCardTypeTest1()
-        {
-            CardDAL cardDAL = new CardDAL();
-            List<Card> card = cardDAL.GetListCardByCardType();
-            Assert.NotEmpty(card);
-        }
-
     }
 }

@@ -188,10 +188,11 @@ namespace PL_Console
                         manager.CreateCard();
                         break;
                     case '2':
-                        manager.GetListCardByCardType();
+                        manager.DisplayListCardsMonth();
                         break;
                     case '3':
-                        MenuStatictis();
+                        // MenuStatictis();
+                        manager.Statistical();
                         break;
                     case '4':
                         MenuChoice();
@@ -202,30 +203,30 @@ namespace PL_Console
                 }
             } while (choose != '4');
         }
-        public void MenuStatictis()
-        {
-            char choose;
-            do
-            {
-                Console.Clear();
-                string[] menuItem = { "Thống kê theo ngày", "Thống kê theo tháng", "Quay lại" };
-                choose = Menu(menuItem, 3, "Thống kê", "#Chọn: ");
-                switch (choose)
-                {
-                    case '1':
+        // public void MenuStatictis()
+        // {
+        //     char choose;
+        //     do
+        //     {
+        //         Console.Clear();
+        //         string[] menuItem = { "Thống kê theo ngày", "Thống kê theo tháng", "Quay lại" };
+        //         choose = Menu(menuItem, 3, "Thống kê", "#Chọn: ");
+        //         switch (choose)
+        //         {
+        //             case '1':
 
-                        break;
-                    case '2':
-                        Console.WriteLine("Thống kê");
-                        break;
-                    case '3':
-                        MenuManager();
-                        break;
-                    default:
-                        break;
-                }
-            } while (choose != '3');
-        }
+        //                 break;
+        //             case '2':
+        //                 Console.WriteLine("Thống kê");
+        //                 break;
+        //             case '3':
+        //                 MenuManager();
+        //                 break;
+        //             default:
+        //                 break;
+        //         }
+        //     } while (choose != '3');
+        // }
         public void MenuSecurity(User user)
         {
             char choose;
@@ -264,7 +265,7 @@ namespace PL_Console
                         security.CheckIn(user);
                         break;
                     case '2':
-                        security.ChecOut(user);
+                        security.CheckOut(user);
                         break;
                     case '3':
                         MenuSecurity(user);

@@ -5,54 +5,36 @@ namespace DAL
 {
     public class Card_detailDAL
     {
-        private MySqlConnection connection;
         private MySqlDataReader reader;
         private string query;
-        public Card_detailDAL()
-        {
-            connection = DBHelper.OpenConnection();
-        }
-
         public Card_Detail GetCard_DetailByID(string card_id)
         {
             if (card_id == null)
             {
                 return null;
             }
-            if (connection == null)
-            {
-                connection = DBHelper.OpenConnection();
-            }
-            if (connection.State == System.Data.ConnectionState.Closed)
-            {
-                connection.Open();
-            }
-            MySqlCommand cmd = new MySqlCommand("", connection);
-            query = @"Select card_id,cus_id,start_day,end_day,max(date_created) from Card_detail where card_id = @card_id;";
-            cmd.Parameters.AddWithValue("@card_id", card_id);
-            cmd.CommandText = query;
+            query = @"Select card_id,cus_id,start_day,max(end_day) from Card_detail where card_id = '" + card_id + "' ;";
+            DBHelper.OpenConnection();
             Card_Detail card_Detail = null;
-            using (reader = cmd.ExecuteReader())
+            reader = DBHelper.ExecQuery(query);
+            if (reader.Read())
             {
-                if (reader.Read())
-                {
-                    card_Detail = GetCard_detail(reader);
-                }
+                card_Detail = GetCard_detailInfo(reader);
             }
+            DBHelper.CloseConnection();
             return card_Detail;
         }
-        private Card_Detail GetCard_detail(MySqlDataReader reader)
+        private Card_Detail GetCard_detailInfo(MySqlDataReader reader)
         {
+            Card_Detail card_Detail = new Card_Detail();
             if (reader.IsDBNull(reader.GetOrdinal("card_id")))
             {
                 return null;
             }
-            string cardid = reader.GetString("card_id");
-            string cusid = reader.GetString("cus_id");
-            DateTime startday = reader.GetDateTime("start_day");
-            DateTime endday = reader.GetDateTime("end_day");
-            DateTime date_created = reader.GetDateTime("max(date_created)");
-            Card_Detail card_Detail = new Card_Detail(cardid, cusid, startday, endday, date_created);
+            card_Detail.Card_id = reader.GetString("card_id");
+            card_Detail.Cus_id = reader.GetString("cus_id");
+            card_Detail.Start_day = reader.GetDateTime("start_day");
+            card_Detail.End_day = reader.GetDateTime("max(end_day)");
             return card_Detail;
         }
     }

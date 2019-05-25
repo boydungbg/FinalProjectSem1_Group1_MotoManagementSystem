@@ -22,7 +22,7 @@ namespace BL
             {
                 return null;
             }
-            return userdal.Login(username, password);
+            return userdal.GetUserByUsernameAndPassWord(username, password);
         }
     }
 }

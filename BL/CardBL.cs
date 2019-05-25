@@ -51,9 +51,5 @@ namespace BL
         {
             return cardDAL.GetCardByWord();
         }
-        public List<Card> GetListCardByCardType()
-        {
-            return cardDAL.GetListCardByCardType();
-        }
     }
 }

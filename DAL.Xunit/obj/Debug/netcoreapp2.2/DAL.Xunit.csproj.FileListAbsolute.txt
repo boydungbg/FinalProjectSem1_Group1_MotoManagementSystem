@@ -38,3 +38,23 @@ E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSyst
 E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem-1\DAL.Xunit\obj\Debug\netcoreapp2.2\DAL.Xunit.csproj.CopyComplete
 E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem-1\DAL.Xunit\obj\Debug\netcoreapp2.2\DAL.Xunit.dll
 E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem-1\DAL.Xunit\obj\Debug\netcoreapp2.2\DAL.Xunit.pdb
+c:\Users\luvso\Desktop\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL.Xunit\obj\Debug\netcoreapp2.2\DAL.Xunit.dll
+c:\Users\luvso\Desktop\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL.Xunit\obj\Debug\netcoreapp2.2\DAL.Xunit.pdb
+c:\Users\luvso\Desktop\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL.Xunit\bin\Debug\netcoreapp2.2\xunit.runner.visualstudio.dotnetcore.testadapter.dll
+c:\Users\luvso\Desktop\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL.Xunit\bin\Debug\netcoreapp2.2\xunit.runner.reporters.netcoreapp10.dll
+c:\Users\luvso\Desktop\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL.Xunit\bin\Debug\netcoreapp2.2\xunit.runner.utility.netcoreapp10.dll
+c:\Users\luvso\Desktop\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL.Xunit\bin\Debug\netcoreapp2.2\ConnectionString.txt
+c:\Users\luvso\Desktop\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL.Xunit\bin\Debug\netcoreapp2.2\DAL.Xunit.deps.json
+c:\Users\luvso\Desktop\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL.Xunit\bin\Debug\netcoreapp2.2\DAL.Xunit.runtimeconfig.json
+c:\Users\luvso\Desktop\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL.Xunit\bin\Debug\netcoreapp2.2\DAL.Xunit.runtimeconfig.dev.json
+c:\Users\luvso\Desktop\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL.Xunit\bin\Debug\netcoreapp2.2\DAL.Xunit.dll
+c:\Users\luvso\Desktop\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL.Xunit\bin\Debug\netcoreapp2.2\DAL.Xunit.pdb
+c:\Users\luvso\Desktop\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL.Xunit\bin\Debug\netcoreapp2.2\DAL.dll
+c:\Users\luvso\Desktop\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL.Xunit\bin\Debug\netcoreapp2.2\Persistence.dll
+c:\Users\luvso\Desktop\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL.Xunit\bin\Debug\netcoreapp2.2\DAL.pdb
+c:\Users\luvso\Desktop\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL.Xunit\bin\Debug\netcoreapp2.2\Persistence.pdb
+c:\Users\luvso\Desktop\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL.Xunit\obj\Debug\netcoreapp2.2\DAL.Xunit.csprojAssemblyReference.cache
+c:\Users\luvso\Desktop\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL.Xunit\obj\Debug\netcoreapp2.2\DAL.Xunit.csproj.CoreCompileInputs.cache
+c:\Users\luvso\Desktop\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL.Xunit\obj\Debug\netcoreapp2.2\DAL.Xunit.AssemblyInfoInputs.cache
+c:\Users\luvso\Desktop\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL.Xunit\obj\Debug\netcoreapp2.2\DAL.Xunit.AssemblyInfo.cs
+c:\Users\luvso\Desktop\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL.Xunit\obj\Debug\netcoreapp2.2\DAL.Xunit.csproj.CopyComplete

@@ -37,3 +37,16 @@ E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSyst
 E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem-1\DAL\obj\Debug\netstandard2.0\DAL.csproj.CopyComplete
 E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem-1\DAL\obj\Debug\netstandard2.0\DAL.dll
 E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem-1\DAL\obj\Debug\netstandard2.0\DAL.pdb
+c:\Users\luvso\Desktop\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL\obj\Debug\netstandard2.0\DAL.csprojAssemblyReference.cache
+c:\Users\luvso\Desktop\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL\obj\Debug\netstandard2.0\DAL.csproj.CoreCompileInputs.cache
+c:\Users\luvso\Desktop\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL\obj\Debug\netstandard2.0\DAL.AssemblyInfoInputs.cache
+c:\Users\luvso\Desktop\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL\obj\Debug\netstandard2.0\DAL.AssemblyInfo.cs
+c:\Users\luvso\Desktop\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL\obj\Debug\netstandard2.0\DAL.dll
+c:\Users\luvso\Desktop\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL\obj\Debug\netstandard2.0\DAL.pdb
+c:\Users\luvso\Desktop\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL\bin\Debug\netstandard2.0\ConnectionString.txt
+c:\Users\luvso\Desktop\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL\bin\Debug\netstandard2.0\DAL.deps.json
+c:\Users\luvso\Desktop\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL\bin\Debug\netstandard2.0\DAL.dll
+c:\Users\luvso\Desktop\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL\bin\Debug\netstandard2.0\DAL.pdb
+c:\Users\luvso\Desktop\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL\bin\Debug\netstandard2.0\Persistence.dll
+c:\Users\luvso\Desktop\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL\bin\Debug\netstandard2.0\Persistence.pdb
+c:\Users\luvso\Desktop\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL\obj\Debug\netstandard2.0\DAL.csproj.CopyComplete

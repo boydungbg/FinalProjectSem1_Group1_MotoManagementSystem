@@ -15,7 +15,6 @@ namespace DAL.Xunit
             Customer cus = CusDAL.GetCustomerByID(cusid);
             Assert.NotNull(cus);
             Assert.Equal(cusid, cus.Cus_id);
-            
         }
         [Theory]
         [InlineData("121252789")]
@@ -27,8 +26,8 @@ namespace DAL.Xunit
             Assert.Null(cus);
         }
         [Theory]
-        [InlineData("88A1-8888")]
         [InlineData("75G1-2222")]
+        [InlineData("88A1-8888")]
         public void GetCustomerByLincese_plateTest1(string licensePlate)
         {
             CustomerDAL CusDAL = new CustomerDAL();

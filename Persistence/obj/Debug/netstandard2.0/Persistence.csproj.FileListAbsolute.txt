@@ -25,3 +25,12 @@ E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSyst
 E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem-1\Persistence\obj\Debug\netstandard2.0\Persistence.AssemblyInfo.cs
 E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem-1\Persistence\obj\Debug\netstandard2.0\Persistence.dll
 E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem-1\Persistence\obj\Debug\netstandard2.0\Persistence.pdb
+c:\Users\luvso\Desktop\FinalProjectSem1_Group1_MotoParkingManagementSystem\Persistence\bin\Debug\netstandard2.0\Persistence.deps.json
+c:\Users\luvso\Desktop\FinalProjectSem1_Group1_MotoParkingManagementSystem\Persistence\bin\Debug\netstandard2.0\Persistence.dll
+c:\Users\luvso\Desktop\FinalProjectSem1_Group1_MotoParkingManagementSystem\Persistence\bin\Debug\netstandard2.0\Persistence.pdb
+c:\Users\luvso\Desktop\FinalProjectSem1_Group1_MotoParkingManagementSystem\Persistence\obj\Debug\netstandard2.0\Persistence.csprojAssemblyReference.cache
+c:\Users\luvso\Desktop\FinalProjectSem1_Group1_MotoParkingManagementSystem\Persistence\obj\Debug\netstandard2.0\Persistence.csproj.CoreCompileInputs.cache
+c:\Users\luvso\Desktop\FinalProjectSem1_Group1_MotoParkingManagementSystem\Persistence\obj\Debug\netstandard2.0\Persistence.AssemblyInfoInputs.cache
+c:\Users\luvso\Desktop\FinalProjectSem1_Group1_MotoParkingManagementSystem\Persistence\obj\Debug\netstandard2.0\Persistence.AssemblyInfo.cs
+c:\Users\luvso\Desktop\FinalProjectSem1_Group1_MotoParkingManagementSystem\Persistence\obj\Debug\netstandard2.0\Persistence.dll
+c:\Users\luvso\Desktop\FinalProjectSem1_Group1_MotoParkingManagementSystem\Persistence\obj\Debug\netstandard2.0\Persistence.pdb
