@@ -1222,8 +1222,8 @@
       "frameworks": {
         "netstandard2.0": {
           "projectReferences": {
-            "c:\\Users\\luvso\\Desktop\\FinalProjectSem1_Group1_MotoParkingManagementSystem\\Persistence\\Persistence.csproj": {
-              "projectPath": "c:\\Users\\luvso\\Desktop\\FinalProjectSem1_Group1_MotoParkingManagementSystem\\Persistence\\Persistence.csproj"
+            "C:\\Users\\luvso\\Desktop\\FinalProjectSem1_Group1_MotoParkingManagementSystem\\Persistence\\Persistence.csproj": {
+              "projectPath": "C:\\Users\\luvso\\Desktop\\FinalProjectSem1_Group1_MotoParkingManagementSystem\\Persistence\\Persistence.csproj"
             }
           }
         }

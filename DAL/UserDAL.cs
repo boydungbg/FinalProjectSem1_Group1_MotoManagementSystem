@@ -23,6 +23,8 @@ namespace DAL
             {
                 user = GetUserInfo(reader);
             }
+            // reader.Close();
+            // reader.Dispose();
             DBHelper.CloseConnection();
             return user;
         }

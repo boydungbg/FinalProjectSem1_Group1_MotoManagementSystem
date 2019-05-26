@@ -14,7 +14,7 @@ namespace PL_Console
             char choose;
             do
             {
-                Console.Clear();
+                // Console.Clear();
                 string[] menuItem = { "Đăng nhập", "Thoát chương trình" };
                 choose = Menu(menuItem, 2, "HỆ THỐNG QUẢN LÝ BÃI GỬI XE MÁY", "#Chọn: ");
                 switch (choose)

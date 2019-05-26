@@ -280,6 +280,15 @@ namespace PL_console
                     return false;
                 }
             }
+            if (check == 5)
+            {
+                Regex regex = new Regex("^([0-2][0-9]|(3)[0-1])(\\/)(((0)[0-9])|((1)[0-2]))(\\/)\\d{4}$");
+                MatchCollection matchCollectionstr = regex.Matches(input);
+                if (matchCollectionstr.Count == 0)
+                {
+                    return false;
+                }
+            }
             return true;
         }
         public List<Card> GetListCards()
@@ -373,13 +382,13 @@ namespace PL_console
             }
             return cd;
         }
-        public Card_Logs GetCardLogsByLisencePlateAndCardID(string licensePlate, string cardid)
+        public Card_Logs GetCardLogsByCardID(string cardid)
         {
             Card_Logs cardLogs = null;
             try
             {
                 Card_LogsBL cardLogsBL = new Card_LogsBL();
-                cardLogs = cardLogsBL.GetCardLogsByLisencePlateAndCardID(licensePlate, cardid);
+                cardLogs = cardLogsBL.GetCardLogsbyCardID(cardid);
             }
             catch (System.NullReferenceException)
             {
@@ -529,46 +538,112 @@ namespace PL_console
             string datimeEnd = "";
             string status = "";
             string intoMoney = "";
+            string from;
+            string to;
             double totalmoney = 0;
             int Inturn = 0;
             Console.Clear();
-            Console.WriteLine("Từ: ");
-            string from = Console.ReadLine();
-            Console.WriteLine("Đến: ");
-            string to = Console.ReadLine();
-            List<Card_Logs> cardLogs = GetListCardLogs(from, to);
+            Console.WriteLine(b);
+            Console.WriteLine(" Thống kê");
+            Console.WriteLine(b);
+            Console.Write("Từ ngày(VD:24/12/2000): ");
+            do
+            {
+                from = Console.ReadLine();
+                if (validate(5, from) == false)
+                {
+                    Console.Write("Thời gian nhập vào không hợp lệ. Nhập lại: ");
+                    from = null;
+                    continue;
+                }
+                try
+                {
+                    if (Convert.ToDateTime(from) > DateTime.Now || Convert.ToDateTime(from) < new DateTime(2015, 1, 1))
+                    {
+                        Console.Write("Thời gian nhập vào phải nhỏ hơn thời gian hiện tại và phải lớn hơn năm 2015. Nhập lại: ");
+                        from = null;
+                    }
+                }
+                catch (System.Exception)
+                {
+                    Console.Write("Thời gian nhập vào không hợp lệ. Nhập lại: ");
+                    from = null;
+                }
+            } while (from == null);
+            Console.Write("Đến ngày(VD:24/12/2000): ");
+            do
+            {
+                to = Console.ReadLine();
+                if (validate(5, from) == false)
+                {
+                    Console.Write("Thời gian không hợp lệ. Nhập lại: ");
+                    to = null;
+                    continue;
+                }
+                try
+                {
+                    if (Convert.ToDateTime(to) <= Convert.ToDateTime(from))
+                    {
+                        Console.Write("Thời gian nhập vào phải lớn hơn thời gian bắt đầu. Nhập lại: ");
+                        to = null;
+                    }
+                }
+                catch (System.Exception)
+                {
+                    Console.Write("Thời gian không hợp lệ. Nhập lại: ");
+                    to = null;
+                }
+            } while (to == null);
+            List<Card_Logs> cardLogs = GetListCardLogs(Convert.ToDateTime(from).ToString("yyyy-MM-dd"), Convert.ToDateTime(to).ToString("yyyy-MM-dd"));
             var table = new ConsoleTable("STT", "Biển số xe", "Thời gian vào", "Thời gian ra", "Mã thẻ", "Loại thẻ", "Trạng thái", "Giá tiền");
             int STT = 0;
             Card card = null;
             foreach (var item in cardLogs)
             {
-                STT += 1;
                 card = GetCardByID(item.Card_id);
-                if (item.DateTimeEnd == new DateTime(0))
+                if (card.Card_type == "Thẻ ngày")
                 {
-                    datimeEnd = "             ";
-                    status = "Chưa lấy xe ";
-                    intoMoney = "             ";
+                    STT = STT + 1;
+                    if (item.DateTimeEnd == new DateTime(0))
+                    {
+                        datimeEnd = "             ";
+                        status = "Chưa lấy xe ";
+                        intoMoney = "             ";
+                    }
+                    if (item.DateTimeEnd != new DateTime(0))
+                    {
+                        datimeEnd = Convert.ToString(item.DateTimeEnd);
+                        status = "Đã lấy xe ";
+                        intoMoney = Convert.ToString(item.IntoMoney) + "  VNĐ";
+                        totalmoney = totalmoney + Convert.ToDouble(item.IntoMoney);
+                        Inturn++;
+                    }
+                    table.AddRow(STT, item.LisensePlate, item.DateTimeStart, datimeEnd, item.Card_id, card.Card_type, status, intoMoney);
                 }
-                if (item.DateTimeEnd != new DateTime(0))
-                {
-                    datimeEnd = Convert.ToString(item.DateTimeEnd);
-                    status = "Đã lấy xe ";
-                    intoMoney = Convert.ToString(item.IntoMoney) + "  VNĐ";
-                    totalmoney = totalmoney + Convert.ToDouble(item.IntoMoney);
-                    Inturn++;
-                }
-                table.AddRow(STT, item.LisensePlate, item.DateTimeStart, datimeEnd, item.Card_id, card.Card_type, status, intoMoney);
             }
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine("                        Thổng số tiền: {0}              Số lượt:  {1}", totalmoney, Inturn);
-            table.Write(Format.Alternative);
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.Write("Nhấn Enter để tiếp tục");
-            Console.ReadKey();
-            Console.WriteLine();
+            // Console.WriteLine(STT);
+            if (STT <= 0)
+            {
+                Console.WriteLine("Không có dữ liệu nào về xe ra xe vào! Nhấn Enter để quay lại.");
+                Console.ReadKey();
+            }
+            else
+            {
+                Console.Clear();
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.WriteLine("                   Từ ngày: {0}                                  Đến ngày: {1}", from, to);
+                Console.WriteLine();
+                Console.WriteLine("                   Thổng số tiền: {0} VND                            Số lượt:  {1}", totalmoney, Inturn);
+                Console.WriteLine();
+                Console.WriteLine("                   Số tiền chỉ dành cho các xe dùng thẻ ngày.");
+                Console.WriteLine();
+                Console.WriteLine();
+                table.Write(Format.Alternative);
+                Console.Write("Nhấn Enter để quay lại.");
+                Console.ReadKey();
+                Console.WriteLine();
+            }
         }
     }
 }

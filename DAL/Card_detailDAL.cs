@@ -21,6 +21,8 @@ namespace DAL
             {
                 card_Detail = GetCard_detailInfo(reader);
             }
+            // reader.Close();
+            // reader.Dispose();
             DBHelper.CloseConnection();
             return card_Detail;
         }

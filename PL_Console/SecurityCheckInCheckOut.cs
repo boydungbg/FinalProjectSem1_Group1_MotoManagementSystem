@@ -24,22 +24,19 @@ namespace PL_Console
             {
                 Console.Clear();
                 Console.WriteLine();
-
                 string status = "";
                 string dateTimeStart = "";
                 var table = new ConsoleTable("Mã thẻ", "Biển số xe", "Loại thẻ", "Trạng thái", "Ngày giờ xe vào");
+                Card_Logs cardLogs = null;
                 foreach (var item in ListCards)
                 {
-                    Card_Logs cardLogs = manager.GetCardLogsByLisencePlateAndCardID(item.LicensePlate, item.Card_id);
+                    cardLogs = manager.GetCardLogsByCardID(item.Card_id);
                     if (item.Card_Status == 0)
                     {
                         status = "Không hoạt động";
-                        if (cardLogs == null)
-                        {
-                            dateTimeStart = "Không có";
-                        }
+                        dateTimeStart = "Không có";
                     }
-                    else if (item.Card_Status == 1)
+                    if (item.Card_Status == 1)
                     {
                         status = "Hoạt động";
                         if (cardLogs != null)
@@ -79,25 +76,42 @@ namespace PL_Console
         public string EnterLicensePlateCheckIn(Card card)
         {
             string licensePlate = "";
+            string timeCard = "";
+            string name = "";
+            string address = "";
             Console.WriteLine(b);
             Console.WriteLine("- Vé xe: " + card.Card_id);
             Console.WriteLine("- Loại thẻ: " + card.Card_type);
+            Customer cus = manager.GetCustomerByLincese_plate(card.LicensePlate);
+            Card_Detail cardDetail = manager.GetCardDetailByID(card.Card_id);
+            if (cus == null)
+            {
+                name = "Không có";
+                address = "Không có";
+                timeCard = "Không có";
+            }
+            if (cardDetail != null)
+            {
+                name = cus.Cus_name;
+                address = cus.Cus_address;
+                timeCard = "Từ " + Convert.ToString(cardDetail.Start_day) + " đến " + Convert.ToString(cardDetail.End_day);
+            }
+            Console.WriteLine("- Chủ xe: " + name);
+            Console.WriteLine("- Địa chỉ: " + address);
+            Console.WriteLine("- Hết hạn: " + timeCard);
+            Console.Write("- Nhập biển số xe (VD:88-X8-8888): ");
+            do
+            {
+                licensePlate = Console.ReadLine();
+                if (manager.validate(4, licensePlate) == false)
+                {
+                    Console.Write("↻ Biển số xe không hợp lệ (VD:88X8-8888). Nhập lại: ");
+                    licensePlate = null;
+                }
+            } while (licensePlate == null);
             if (card.Card_type == "Thẻ ngày")
             {
                 Card newcard = null;
-                Console.WriteLine("- Chủ xe: Không có");
-                Console.WriteLine("- Địa chỉ: Không có");
-                Console.WriteLine("- Hết hạn: Không có");
-                Console.Write("- Nhập biển số xe (VD:88-X8-8888): ");
-                do
-                {
-                    licensePlate = Console.ReadLine();
-                    if (manager.validate(4, licensePlate) == false)
-                    {
-                        Console.Write("↻ Biển số xe không hợp lệ (VD:88X8-8888). Nhập lại: ");
-                        licensePlate = null;
-                    }
-                } while (licensePlate == null);
                 newcard = manager.GetCardByLicensePlate(licensePlate);
                 if (newcard != null)
                 {
@@ -107,21 +121,6 @@ namespace PL_Console
             }
             if (card.Card_type == "Thẻ tháng")
             {
-                Customer cus = manager.GetCustomerByLincese_plate(card.LicensePlate);
-                Card_Detail cardDetail = manager.GetCardDetailByID(card.Card_id);
-                Console.WriteLine("- Chủ xe: " + cus.Cus_name);
-                Console.WriteLine("- Địa chỉ: " + cus.Cus_address);
-                Console.WriteLine("- Hết hạn: " + cardDetail.End_day);
-                Console.Write("- Nhập biển số xe (VD:88-X8-8888): ");
-                do
-                {
-                    licensePlate = Console.ReadLine();
-                    if (manager.validate(4, licensePlate) == false)
-                    {
-                        Console.Write("↻ Biển số xe không hợp lệ (VD:88X8-8888). Nhập lại: ");
-                        licensePlate = null;
-                    }
-                } while (licensePlate == null);
                 if (licensePlate != cus.Cus_licensePlate)
                 {
                     Console.WriteLine("↻ Biển số xe không trùng với biển số mà bạn đã đăng kí thẻ tháng. Vui lòng lấy thẻ ngày.");
@@ -187,88 +186,67 @@ namespace PL_Console
         public Card_Logs EnterLicensePlateCheckOut(Card card)
         {
             Card_Logs cardLogs;
+            string timeCard = "";
             string licensePlate = "";
+            string name = "";
+            string address = "";
             Console.WriteLine(b);
             Console.WriteLine("- Vé xe: " + card.Card_id);
             Console.WriteLine("- Loại thẻ: " + card.Card_type);
-            cardLogs = manager.GetCardLogsByLisencePlateAndCardID(card.LicensePlate, card.Card_id);
+            cardLogs = manager.GetCardLogsByCardID(card.Card_id);
+            Customer cus = manager.GetCustomerByLincese_plate(card.LicensePlate);
+            Card_Detail cardDetail = manager.GetCardDetailByID(card.Card_id);
             cardLogs.IntoMoney = 0;
             cardLogs.DateTimeEnd = DateTime.Now;
-            if (card.Card_type == "Thẻ tháng")
+            if (cus == null)
             {
-                Customer cus = manager.GetCustomerByLincese_plate(card.LicensePlate);
-                Card_Detail cardDetail = manager.GetCardDetailByID(card.Card_id);
-                Console.WriteLine("- Chủ xe: " + cus.Cus_name);
-                Console.WriteLine("- Địa chỉ: " + cus.Cus_address);
-                Console.WriteLine("- Hết hạn: " + cardDetail.End_day);
-                Console.WriteLine("- Biển số xe: " + cardLogs.LisensePlate);
-                Console.WriteLine("- Giờ vào: " + cardLogs.DateTimeStart);
-                Console.WriteLine("- Giờ ra: " + cardLogs.DateTimeEnd);
-                Console.WriteLine(b);
-                Console.Write("- Nhập biển số xe (VD:88-X8-8888): ");
-                do
+                name = "Không có";
+                address = "Không có";
+                timeCard = "Không có";
+            }
+            if (cardDetail != null)
+            {
+                name = cus.Cus_name;
+                address = cus.Cus_address;
+                timeCard = "Từ " + Convert.ToString(cardDetail.Start_day) + " đến " + Convert.ToString(cardDetail.End_day);
+            }
+            Console.WriteLine("- Chủ xe: " + name);
+            Console.WriteLine("- Địa chỉ: " + address);
+            Console.WriteLine("- Hết hạn: " + timeCard);
+            Console.WriteLine("- Biển số xe: " + cardLogs.LisensePlate);
+            Console.WriteLine("- Giờ vào: " + cardLogs.DateTimeStart);
+            Console.WriteLine("- Giờ ra: " + cardLogs.DateTimeEnd);
+            Console.WriteLine(b);
+            Console.Write("- Nhập biển số xe (VD:88-X8-8888): ");
+            do
+            {
+                licensePlate = Console.ReadLine();
+                if (manager.validate(4, licensePlate) == false)
                 {
-                    licensePlate = Console.ReadLine();
-                    if (manager.validate(4, licensePlate) == false)
-                    {
-                        Console.Write("↻ Biển số xe không hợp lệ (VD:88X8-8888). Nhập lại: ");
-                        licensePlate = null;
-                    }
-                } while (licensePlate == null);
-                if (licensePlate != cardLogs.LisensePlate)
-                {
-                    Console.WriteLine("↻ Biển số xe không giống nhau.");
-                    cardLogs = null;
+                    Console.Write("↻ Biển số xe không hợp lệ (VD:88X8-8888). Nhập lại: ");
+                    licensePlate = null;
                 }
-                else
+            } while (licensePlate == null);
+            if (licensePlate != cardLogs.LisensePlate)
+            {
+                Console.WriteLine("↻ Biển số xe không giống nhau.");
+                cardLogs = null;
+            }
+            else
+            {
+                Console.WriteLine(b);
+                Console.WriteLine();
+                Console.WriteLine("✔ Biển số xe giống nhau.");
+                cardLogs.SendTime = GetSendtime(cardLogs.DateTimeStart.Value, cardLogs.DateTimeEnd.Value);
+                Console.WriteLine();
+                Console.WriteLine(b);
+                if (card.Card_type == "Thẻ tháng")
                 {
-                    Console.WriteLine(b);
-                    Console.WriteLine();
-                    Console.WriteLine("✔ Biển số xe giống nhau.");
-                    cardLogs.SendTime = GetSendtime(cardLogs.DateTimeStart.Value, cardLogs.DateTimeEnd.Value);
-                    Console.WriteLine();
-                    Console.WriteLine(b);
                     Console.WriteLine("- Thời gian gửi: " + cardLogs.SendTime);
-                    if (cardDetail.End_day <= DateTime.Now)
-                    {
-                        cardLogs.IntoMoney = Pay(cardLogs.DateTimeStart.Value, cardLogs.DateTimeEnd.Value);
-                        Console.WriteLine("- Thẻ của bạn đã quá hạn sử dụng.");
-                    }
                     Console.WriteLine("- Số tiền là: {0} VNĐ", cardLogs.IntoMoney);
                 }
-            }
-            if (card.Card_type == "Thẻ ngày")
-            {
-                Console.WriteLine("- Chủ xe: Không có");
-                Console.WriteLine("- Địa chỉ: Không có");
-                Console.WriteLine("- Hết hạn: Không có");
-                Console.WriteLine("- Biển số xe: " + cardLogs.LisensePlate);
-                Console.WriteLine("- Giờ vào: " + cardLogs.DateTimeStart);
-                Console.WriteLine("- Giờ ra: " + cardLogs.DateTimeEnd);
-                Console.WriteLine(b);
-                Console.Write("- Nhập biển số xe (VD:88-X8-8888): ");
-                do
+                if (card.Card_type == "Thẻ ngày")
                 {
-                    licensePlate = Console.ReadLine();
-                    if (manager.validate(4, licensePlate) == false)
-                    {
-                        Console.Write("↻ Biển số xe không hợp lệ (VD:88X8-8888). Nhập lại: ");
-                        licensePlate = null;
-                    }
-                } while (licensePlate == null);
-                if (licensePlate != cardLogs.LisensePlate)
-                {
-                    Console.WriteLine("↻ Biển số xe không giống nhau.");
-                    cardLogs = null;
-                }
-                else
-                {
-                    Console.WriteLine(b);
-                    Console.WriteLine();
-                    Console.WriteLine("✔ Biển số xe giống nhau.");
-                    cardLogs.SendTime = GetSendtime(cardLogs.DateTimeStart.Value, cardLogs.DateTimeEnd.Value);
-                    Console.WriteLine();
-                    Console.WriteLine(b);
                     Console.WriteLine("- Thời gian gửi: " + cardLogs.SendTime);
                     cardLogs.IntoMoney = Pay(cardLogs.DateTimeStart.Value, cardLogs.DateTimeEnd.Value);
                     Console.WriteLine("- Số tiền là: {0} VNĐ", cardLogs.IntoMoney);
@@ -333,19 +311,19 @@ namespace PL_Console
         public double Pay(DateTime start, DateTime end)
         {
             double intoMoney = 0;
-            if (start <= DateTime.Parse("06:00:00 PM") && start >= DateTime.Parse("06:00:00 AM"))
+            if (start <= DateTime.Parse("06:00 PM") && start >= DateTime.Parse("06:00 AM"))
             {
                 intoMoney = intoMoney + 10000;
             }
-            else if (start <= DateTime.Parse("06:00:00 AM") && start >= DateTime.Parse("06:00:00 PM"))
+            else if (start <= DateTime.Parse("06:00 AM") && start >= DateTime.Parse("06:00 PM"))
             {
                 intoMoney = intoMoney + 20000;
             }
-            else if (end >= DateTime.Parse("06:00:00 AM") && end <= DateTime.Parse("06:00:00 PM"))
+            else if (end >= DateTime.Parse("06:00 AM") && end <= DateTime.Parse("06:00 PM"))
             {
                 intoMoney = intoMoney + 10000;
             }
-            else if (end <= DateTime.Parse("06:00:00 AM") && end >= DateTime.Parse("06:00:00 pM"))
+            else if (end <= DateTime.Parse("06:00 AM") && end >= DateTime.Parse("06:00 pM"))
             {
                 intoMoney = intoMoney + 20000;
             }

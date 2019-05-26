@@ -22,6 +22,8 @@ namespace DAL
             {
                 cus = GetCustomerInfo(reader);
             }
+            // reader.Close();
+            // reader.Dispose();
             DBHelper.CloseConnection();
             return cus;
         }
@@ -40,6 +42,8 @@ namespace DAL
             {
                 cus = GetCustomerInfo(reader);
             }
+            // reader.Close();
+            // reader.Dispose();
             DBHelper.CloseConnection();
             return cus;
 
@@ -47,6 +51,10 @@ namespace DAL
         private Customer GetCustomerInfo(MySqlDataReader reader)
         {
             Customer cus = new Customer();
+            if (reader.IsDBNull(reader.GetOrdinal("cus_id")))
+            {
+                return null;
+            }
             cus.Cus_id = reader.GetString("cus_id");
             cus.Cus_name = reader.GetString("cus_fullname");
             cus.Cus_address = reader.GetString("cus_address");

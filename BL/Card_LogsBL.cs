@@ -10,16 +10,15 @@ namespace BL
         private Card_LogsDAL card_LogsDAL = new Card_LogsDAL();
         public bool CreateCardLogs(Card_Logs card_Logs)
         {
-
             return card_LogsDAL.CreateCardLogs(card_Logs);
         }
         public bool DeleteCardLogsByID(string id)
         {
             return card_LogsDAL.DeleteCardLogsByID(id);
         }
-        public Card_Logs GetCardLogsByLisencePlateAndCardID(string LicensePlate, string cardid)
+        public Card_Logs GetCardLogsbyCardID(string cardid)
         {
-            return card_LogsDAL.GetCardLogsByLicensePlateAndCardID(LicensePlate, cardid);
+            return card_LogsDAL.GetCardLogsByCardID(cardid);
         }
         public bool UpdateCardLogsByLicensePlateAndCardID(Card_Logs cardLogs, string licensePlate, string cardid, string dateTimeStart)
         {

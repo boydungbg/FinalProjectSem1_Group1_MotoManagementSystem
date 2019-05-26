@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Persistence;
 using Xunit;
 
@@ -34,8 +35,22 @@ namespace BL.Xunit
         public void GetCardLogsByLinceseAndCardIDTest1()
         {
             Card_LogsBL cardLogsBL = new Card_LogsBL();
-            Card_Logs card_Logs = cardLogsBL.GetCardLogsByLisencePlateAndCardID("11X9-9912", "CM01");
+            Card_Logs card_Logs = cardLogsBL.GetCardLogsbyCardID("CM99");
             Assert.Null(card_Logs);
+        }
+        [Fact]
+        public void GetListCardLogsTest1()
+        {
+            Card_LogsBL cardLogsDAL = new Card_LogsBL();
+            List<Card_Logs> listCardLogs = cardLogsDAL.GetListCardLogs("2019-05-26", "2019-05-27");
+            Assert.NotEmpty(listCardLogs);
+        }
+        [Fact]
+        public void GetListCardLogsTest2()
+        {
+            Card_LogsBL cardLogsDAL = new Card_LogsBL();
+            List<Card_Logs> listCardLogs = cardLogsDAL.GetListCardLogs("2000-05-26", "2000-05-27");
+            Assert.Empty(listCardLogs);
         }
     }
 }

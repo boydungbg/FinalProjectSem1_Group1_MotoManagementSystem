@@ -28,9 +28,9 @@ namespace DAL.Xunit
             CardDAL cardDAL = new CardDAL();
             DateTime start_day = new DateTime(2019, 05, 17);
             DateTime end_day = new DateTime(2019, 06, 17);
-            Card card = new Card("CM21", "89B5-8888", "Thẻ tháng", null, null, null, null);
+            Card card = new Card("CM01", "89B5-8888", "Thẻ tháng", null, null, null, null);
             Customer cus = new Customer("101029011", "Lê Chí Dũng", "Bắc Giang", "89B5-8888");
-            Card_Detail card_Detail = new Card_Detail("CM21", "101029011", start_day, end_day);
+            Card_Detail card_Detail = new Card_Detail("CM01", "101029011", start_day, end_day);
             Assert.False(cardDAL.CreateCard(null, cus, card_Detail));
             cardDAL = new CardDAL();
             card = new Card(null, "89B5-9988", null, 1, null, null, null);

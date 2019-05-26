@@ -106,7 +106,9 @@ group by c.card_id;*/
             cd.end_day,cd.date_created,c.card_status from Card c
             inner join Card_detail cd on c.card_id = cd.card_id
             where c.card_id like 'CM%';*/
-select *from Card_logs;
+select *from Card_logs where cl_dateTimeStart LIKE'2019-05-26 00:00:00' AND'2019-06-26 00:00:00';
+select * from Card_logs;
+
 
 /*Update  Card_logs  SET cl_dateTimeEnd =current_timestamp()  , cl_sendTime ='asd',cl_intoMoney = 0
                         where card_id = 'CM01'  and  cl_licensePlate = '75-G1-2222' and cl_dateTimeStart = '2019-05-20 00:00:00';*/

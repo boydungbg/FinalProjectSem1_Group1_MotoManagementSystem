@@ -1738,11 +1738,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\luvso\\Desktop\\FinalProjectSem1_Group1_MotoParkingManagementSystem\\PL_console\\PL_Console.csproj",
+      "projectUniqueName": "C:\\Users\\luvso\\Desktop\\FinalProjectSem1_Group1_MotoParkingManagementSystem\\PL_Console\\PL_Console.csproj",
       "projectName": "PL_Console",
-      "projectPath": "C:\\Users\\luvso\\Desktop\\FinalProjectSem1_Group1_MotoParkingManagementSystem\\PL_console\\PL_Console.csproj",
+      "projectPath": "C:\\Users\\luvso\\Desktop\\FinalProjectSem1_Group1_MotoParkingManagementSystem\\PL_Console\\PL_Console.csproj",
       "packagesPath": "C:\\Users\\luvso\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\luvso\\Desktop\\FinalProjectSem1_Group1_MotoParkingManagementSystem\\PL_console\\obj\\",
+      "outputPath": "C:\\Users\\luvso\\Desktop\\FinalProjectSem1_Group1_MotoParkingManagementSystem\\PL_Console\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -1762,8 +1762,8 @@
             "C:\\Users\\luvso\\Desktop\\FinalProjectSem1_Group1_MotoParkingManagementSystem\\BL\\BL.csproj": {
               "projectPath": "C:\\Users\\luvso\\Desktop\\FinalProjectSem1_Group1_MotoParkingManagementSystem\\BL\\BL.csproj"
             },
-            "c:\\Users\\luvso\\Desktop\\FinalProjectSem1_Group1_MotoParkingManagementSystem\\Persistence\\Persistence.csproj": {
-              "projectPath": "c:\\Users\\luvso\\Desktop\\FinalProjectSem1_Group1_MotoParkingManagementSystem\\Persistence\\Persistence.csproj"
+            "C:\\Users\\luvso\\Desktop\\FinalProjectSem1_Group1_MotoParkingManagementSystem\\Persistence\\Persistence.csproj": {
+              "projectPath": "C:\\Users\\luvso\\Desktop\\FinalProjectSem1_Group1_MotoParkingManagementSystem\\Persistence\\Persistence.csproj"
             }
           }
         }

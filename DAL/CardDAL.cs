@@ -19,9 +19,9 @@ namespace DAL
             List<String> queries = new List<string>();
             //Lock table 
             query = @"lock tables Customer write, Card write, Card_detail write;";
-            // DBHelper.OpenConnection();
+            DBHelper.OpenConnection();
             DBHelper.ExecNonQuery(query);
-            // DBHelper.CloseConnection();
+            DBHelper.CloseConnection();
             // Insert Customer
             queries.Add(@"insert into Customer(cus_id,cus_fullname,cus_address,license_plate)
                 values   ('" + cus.Cus_id + "','" + cus.Cus_name + "','" + cus.Cus_address + "','" + cus.Cus_licensePlate + "');");
@@ -44,9 +44,9 @@ namespace DAL
                 return false;
             }
             query = @"Update Card SET license_plate = '" + card.LicensePlate + "', card_status = '" + card.Card_Status + "' where  card_id = '" + cardid + "'; ";
-            // DBHelper.OpenConnection();
+            DBHelper.OpenConnection();
             DBHelper.ExecNonQuery(query);
-            // DBHelper.CloseConnection();
+            DBHelper.CloseConnection();
             return true;
         }
         public bool DeleteCardByID(string cardid, string cusid)
@@ -55,14 +55,14 @@ namespace DAL
             {
                 return false;
             }
-            // DBHelper.OpenConnection();
+            DBHelper.OpenConnection();
             query = @"Delete from Card_detail where card_id = '" + cardid + "' and cus_id = '" + cusid + "';";
             DBHelper.ExecNonQuery(query);
             query = @"Delete from Customer where cus_id = '" + cusid + "';";
             DBHelper.ExecNonQuery(query);
             query = @"Delete from Card where card_id = '" + cardid + "';";
             DBHelper.ExecNonQuery(query);
-            // DBHelper.CloseConnection();
+            DBHelper.CloseConnection();
             return true;
         }
         public Card GetCardByID(string cardid)
@@ -79,6 +79,8 @@ namespace DAL
             {
                 card = GetCardInfo(reader);
             }
+            // reader.Close();
+            // reader.Dispose();
             DBHelper.CloseConnection();
             return card;
         }
@@ -96,6 +98,8 @@ namespace DAL
             {
                 card = GetCardInfo(reader);
             }
+            // reader.Close();
+            // reader.Dispose();
             DBHelper.CloseConnection();
             return card;
         }
@@ -123,6 +127,8 @@ namespace DAL
             {
                 card.Add(GetCardInfo(reader));
             }
+            // reader.Close();
+            // reader.Dispose();
             DBHelper.CloseConnection();
             return card;
         }
@@ -142,6 +148,8 @@ namespace DAL
                 card = new Card();
                 card.Card_id = reader.GetString("max(card_id)");
             }
+            // reader.Close();
+            // reader.Dispose();
             DBHelper.CloseConnection();
             return card;
         }

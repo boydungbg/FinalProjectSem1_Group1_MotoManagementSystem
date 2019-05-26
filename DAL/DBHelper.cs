@@ -51,7 +51,7 @@ namespace DAL
         }
         public static void CloseConnection()
         {
-            if (connection != null)
+            if (connection != null && connection.State == System.Data.ConnectionState.Open)
             {
                 connection.Close();
             }
@@ -59,16 +59,14 @@ namespace DAL
         public static MySqlDataReader ExecQuery(string query)
         {
             MySqlCommand command = new MySqlCommand(query, connection);
-            command.CommandText = query;
             return command.ExecuteReader();
         }
         public static void ExecNonQuery(string query)
         {
-            OpenConnection();
             MySqlCommand command = connection.CreateCommand();
             command.CommandText = query;
             command.ExecuteNonQuery();
-            CloseConnection();
+
         }
         public static bool ExecTransaction(List<string> queries)
         {
@@ -100,7 +98,6 @@ namespace DAL
                 command.ExecuteNonQuery();
                 CloseConnection();
             }
-
             return result;
         }
 
