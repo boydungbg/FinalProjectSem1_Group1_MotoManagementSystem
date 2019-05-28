@@ -18,7 +18,6 @@ namespace Persistence
             this.Cus_id = cus_id;
             this.Start_day = start_day;
             this.End_day = end_day;
-            
         }
     }
 }

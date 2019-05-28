@@ -9,60 +9,56 @@ namespace DAL
     {
         private MySqlDataReader reader;
         private string query;
+        private MySqlConnection connection;
+        public Card_LogsDAL()
+        {
+            if (connection == null)
+            {
+                connection = DBHelper.OpenConnection();
+            }
+            if (connection.State == System.Data.ConnectionState.Closed)
+            {
+                connection.Open();
+            }
+        }
         public bool CreateCardLogs(Card_Logs card_Logs)
         {
-            if (card_Logs == null)
-            {
-                return false;
-            }
+            MySqlCommand command = new MySqlCommand("", connection);
             query = @"insert into Card_Logs(card_id,acc_name,cl_licensePlate,cl_dateTimeStart) values
                 ('" + card_Logs.Card_id + "','" + card_Logs.User_name + "','" + card_Logs.LisensePlate + "','" + card_Logs.DateTimeStart?.ToString("yyyy-MM-dd HH:mm:ss") + "')";
-            DBHelper.OpenConnection();
-            DBHelper.ExecNonQuery(query);
-            DBHelper.CloseConnection();
+            command.CommandText = query;
+            command.ExecuteNonQuery();
+            connection.Close();
             return true;
         }
         public bool UpdateCardLogsByLicensePlateAndCardID(Card_Logs cardLogs, string licensePlate, string cardid, string dateTimeStart)
         {
-            if (licensePlate == null || cardid == null || dateTimeStart == null || cardLogs == null)
-            {
-                return false;
-            }
+            MySqlCommand command = new MySqlCommand("", connection);
             query = @"Update  Card_logs  SET cl_dateTimeEnd = '" + cardLogs.DateTimeEnd?.ToString("yyyy-MM-dd HH:mm:ss") + "'  , cl_sendTime = '" + cardLogs.SendTime + "',cl_intoMoney = " + cardLogs.IntoMoney + " where card_id = '" + cardid + "'  and cl_licensePlate = '" + licensePlate + "' and cl_dateTimeStart = '" + dateTimeStart + "'; ";
-            DBHelper.OpenConnection();
-            DBHelper.ExecNonQuery(query);
-            DBHelper.CloseConnection();
+            command.CommandText = query;
+            command.ExecuteNonQuery();
+            connection.Close();
             return true;
         }
         public bool DeleteCardLogsByID(string id)
         {
-            if (id == null)
-            {
-                return false;
-            }
+            MySqlCommand command = new MySqlCommand("", connection);
             query = @"Delete from Card_Logs where card_id ='" + id + "'; ";
-            DBHelper.OpenConnection();
-            DBHelper.ExecNonQuery(query);
-            DBHelper.CloseConnection();
+            command.CommandText = query;
+            command.ExecuteNonQuery();
+            connection.Close();
             return true;
         }
-        public Card_Logs GetCardLogsByCardID(string cardid)
+        public Card_Logs GetCardLogsByCardIDAndLicensePlate(string cardid, string licensePlate)
         {
-            if (cardid == null)
-            {
-                return null;
-            }
-            query = @"select card_id,cl_licensePlate,max(cl_dateTimeStart) as cl_dateTimeStart,cl_dateTimeEnd,cl_sendTime,cl_intoMoney from Card_Logs where card_id ='" + cardid + "';";
-            DBHelper.OpenConnection();
+            query = @"select card_id,cl_licensePlate,max(cl_dateTimeStart) as cl_dateTimeStart,cl_dateTimeEnd,cl_sendTime,cl_intoMoney from Card_Logs where card_id ='" + cardid + "' and cl_licensePlate='" + licensePlate + "';";
+            reader = DBHelper.ExecQuery(query, connection);
             Card_Logs cardLogs = null;
-            reader = DBHelper.ExecQuery(query);
             if (reader.Read())
             {
                 cardLogs = GetCardLogsInfo(reader);
             }
-            // reader.Close();
-            // reader.Dispose();
-            DBHelper.CloseConnection();
+            connection.Close();
             return cardLogs;
         }
         private Card_Logs GetCardLogsInfo(MySqlDataReader reader)
@@ -91,19 +87,14 @@ namespace DAL
         }
         public List<Card_Logs> GetListCardLogs(string from, string to)
         {
-            if (from == null || to == null)
-            { return null; }
             query = @"select * from Card_logs where cl_dateTimeStart between '" + from + "' AND '" + to + "';";
-            DBHelper.OpenConnection();
-            reader = DBHelper.ExecQuery(query);
+            reader = DBHelper.ExecQuery(query, connection);
             List<Card_Logs> cardLogs = new List<Card_Logs>();
             while (reader.Read())
             {
                 cardLogs.Add(GetCardLogsInfo(reader));
             }
-            // reader.Close();
-            // reader.Dispose();
-            DBHelper.CloseConnection();
+            connection.Close();
             return cardLogs;
         }
     }

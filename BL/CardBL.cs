@@ -6,9 +6,17 @@ namespace BL
 {
     public class CardBL
     {
-        private CardDAL cardDAL = new CardDAL();
+        private CardDAL cardDAL;
+        public CardBL()
+        {
+            cardDAL = new CardDAL();
+        }
         public bool CreateCard(Card card, Customer cus, Card_Detail card_Detail)
         {
+            if (card == null || cus == null || card_Detail == null)
+            {
+                return false;
+            }
             return cardDAL.CreateCard(card, cus, card_Detail);
         }
         public Card GetCardByID(string id)

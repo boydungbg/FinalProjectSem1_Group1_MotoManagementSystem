@@ -18,6 +18,7 @@ namespace BL.Xunit
         [Theory]
         [InlineData("121252789")]
         [InlineData(null)]
+        [InlineData("@#$@#")]
         public void GetCustomerByIDTest2(string cusid)
         {
             CustomerBL CusBL = new CustomerBL();
@@ -36,6 +37,7 @@ namespace BL.Xunit
         }
         [Theory]
         [InlineData("88A1-1234")]
+        [InlineData("!@#!#@$")]
         [InlineData(null)]
         public void GetCustomerByLincese_plateTest2(string licensePlate)
         {

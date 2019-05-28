@@ -7,25 +7,30 @@ namespace DAL
 {
     public class UserDAL
     {
+        private MySqlConnection connection;
         private MySqlDataReader reader;
         private string query;
+        public UserDAL()
+        {
+            if (connection == null)
+            {
+                connection = DBHelper.OpenConnection();
+            }
+            if (connection.State == System.Data.ConnectionState.Closed)
+            {
+                connection.Open();
+            }
+        }
         public User GetUserByUsernameAndPassWord(string username, string password)
         {
-            if ((username == null) || (password == null))
-            {
-                return null;
-            }
             query = @"select * from Accounts where acc_name = '" + username + "' and acc_pass = '" + password + "' ;";
-            DBHelper.OpenConnection();
-            reader = DBHelper.ExecQuery(query);
+            reader = DBHelper.ExecQuery(query, connection);
             User user = null;
             if (reader.Read())
             {
                 user = GetUserInfo(reader);
             }
-            // reader.Close();
-            // reader.Dispose();
-            DBHelper.CloseConnection();
+            connection.Close();
             return user;
         }
         private User GetUserInfo(MySqlDataReader reader)
@@ -36,7 +41,5 @@ namespace DAL
             user.User_level = reader.GetInt32("acc_level");
             return user;
         }
-
-
     }
 }

@@ -17,7 +17,7 @@ namespace DAL.Xunit
         }
         [Theory]
         [InlineData("CM99")]
-        [InlineData(null)]
+        [InlineData("!@#!@$@")]
         public void GetCard_detailTest2(string card_id)
         {
             Card_detailDAL cardDetailDAL = new Card_detailDAL();

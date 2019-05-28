@@ -30,7 +30,6 @@ namespace PL_Console
                 Card_Logs cardLogs = null;
                 foreach (var item in ListCards)
                 {
-                    cardLogs = manager.GetCardLogsByCardID(item.Card_id);
                     if (item.Card_Status == 0)
                     {
                         status = "Không hoạt động";
@@ -38,6 +37,7 @@ namespace PL_Console
                     }
                     if (item.Card_Status == 1)
                     {
+                        cardLogs = manager.GetCardLogsByCardIDAndLicensePlate(item.Card_id,item.LicensePlate);
                         status = "Hoạt động";
                         if (cardLogs != null)
                         {
@@ -193,7 +193,7 @@ namespace PL_Console
             Console.WriteLine(b);
             Console.WriteLine("- Vé xe: " + card.Card_id);
             Console.WriteLine("- Loại thẻ: " + card.Card_type);
-            cardLogs = manager.GetCardLogsByCardID(card.Card_id);
+            cardLogs = manager.GetCardLogsByCardIDAndLicensePlate(card.Card_id,card.LicensePlate);
             Customer cus = manager.GetCustomerByLincese_plate(card.LicensePlate);
             Card_Detail cardDetail = manager.GetCardDetailByID(card.Card_id);
             cardLogs.IntoMoney = 0;
@@ -313,19 +313,19 @@ namespace PL_Console
             double intoMoney = 0;
             if (start <= DateTime.Parse("06:00 PM") && start >= DateTime.Parse("06:00 AM"))
             {
-                intoMoney = intoMoney + 10000;
+                intoMoney += intoMoney + 10000;
             }
             else if (start <= DateTime.Parse("06:00 AM") && start >= DateTime.Parse("06:00 PM"))
             {
-                intoMoney = intoMoney + 20000;
+                intoMoney += intoMoney + 20000;
             }
             else if (end >= DateTime.Parse("06:00 AM") && end <= DateTime.Parse("06:00 PM"))
             {
-                intoMoney = intoMoney + 10000;
+                intoMoney += intoMoney + 10000;
             }
-            else if (end <= DateTime.Parse("06:00 AM") && end >= DateTime.Parse("06:00 pM"))
+            else if (end <= DateTime.Parse("06:00 AM") && end >= DateTime.Parse("06:00 PM"))
             {
-                intoMoney = intoMoney + 20000;
+                intoMoney += intoMoney + 20000;
             }
             return intoMoney;
         }

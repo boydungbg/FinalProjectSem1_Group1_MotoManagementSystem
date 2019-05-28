@@ -11,20 +11,15 @@ namespace BL.Xunit
         public void CreateCardTest1()
         {
             CardBL cardBL = new CardBL();
-            string card_id = "CM21";
-            string cus_id = "101029011";
-            string cus_name = "Lê Chí Dũng";
-            string cus_address = "Bắc Giang";
-            string cus_licensePlate = "89-B5-8888";
             DateTime start_day = new DateTime(2019, 05, 17);
             DateTime end_day = new DateTime(2019, 06, 17);
             string cardType = "Thẻ tháng";
-            Card_Detail card_Detail = new Card_Detail(card_id, cus_id, start_day, end_day);
-            Card card = new Card(card_id, cus_licensePlate, cardType, null, null, null, null);
-            Customer cus = new Customer(cus_id, cus_name, cus_address, cus_licensePlate);
+            Card_Detail card_Detail = new Card_Detail("CM21", "101029011", start_day, end_day);
+            Card card = new Card("CM21", "89-B5-8888", "Thẻ tháng", null, null, null, null);
+            Customer cus = new Customer("101029011", "Lê Chí Dũng", "Bắc Giang", "89-B5-8888");
             Assert.True(cardBL.CreateCard(card, cus, card_Detail));
             cardBL = new CardBL();
-            card = new Card(card_id, "89-B5-9988", cardType, 1, null, null, null);
+            card = new Card("CM21", "89-B5-9988", cardType, 1, null, null, null);
             Assert.True(cardBL.UpdateCardByID(card, "CM21"));
             cardBL = new CardBL();
             Assert.True(cardBL.DeleteCardByID("CM21", "101029011"));
@@ -33,22 +28,18 @@ namespace BL.Xunit
         public void CreateCardTest2()
         {
             CardBL cardBL = new CardBL();
-            string card_id = "CM01";
-            string cus_id = "123456789";
-            string cus_name = "Lê Chí Dũng";
-            string cus_address = "Bắc Giang";
-            string cus_licensePlate = "89B5-8888";
             DateTime start_day = new DateTime(2019, 05, 17);
             DateTime end_day = new DateTime(2019, 06, 17);
             string cardType = "Thẻ tháng";
-            Card_Detail card_Detail = new Card_Detail(card_id, cus_id, start_day, end_day);
-            Card card = new Card(card_id, cus_licensePlate, cardType, null, null, null, null);
-            Customer cus = new Customer(cus_id, cus_name, cus_address, cus_licensePlate);
-            Assert.False(cardBL.CreateCard(card, cus, card_Detail));
-            card = new Card(card_id, "89B5-9988", cardType, 1, null, null, null);
+            Card_Detail card_Detail = new Card_Detail("CM21", "101029011", start_day, end_day);
+            Card card = new Card("CM21", "89-B5-8888", "Thẻ tháng", null, null, null, null);
+            Customer cus = new Customer("101029011", "Lê Chí Dũng", "Bắc Giang", "89-B5-8888");
+            Assert.False(cardBL.CreateCard(null, cus, card_Detail));
+            cardBL = new CardBL();
+            card = new Card("CM21", "89-B5-9988", cardType, 1, null, null, null);
             Assert.False(cardBL.UpdateCardByID(null, "CM21"));
             cardBL = new CardBL();
-            Assert.False(cardBL.DeleteCardByID("CM99", null));
+            Assert.False(cardBL.DeleteCardByID(null, "101029011"));
         }
         [Theory]
         [InlineData("CM01")]
@@ -62,7 +53,7 @@ namespace BL.Xunit
         }
         [Theory]
         [InlineData("CM30")]
-        [InlineData("CM40")]
+        [InlineData(null)]
         public void GetCardByIDTest2(string cardid)
         {
             CardBL cardBL = new CardBL();
@@ -88,6 +79,7 @@ namespace BL.Xunit
         }
         [Theory]
         [InlineData("44B1-5544")]
+        [InlineData("//$@#$@")]
         [InlineData(null)]
         public void GetCardByLicensePlateTest2(string licensePlate)
         {

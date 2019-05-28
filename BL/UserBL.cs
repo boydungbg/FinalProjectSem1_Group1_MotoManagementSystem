@@ -8,7 +8,11 @@ namespace BL
     public class UserBL
     {
 
-        private UserDAL userdal = new UserDAL();
+        private UserDAL userdal;
+        public UserBL()
+        {
+            userdal = new UserDAL();
+        }
         public User Login(string username, string password)
         {
             if ((username == null) || (password == null))
@@ -26,3 +30,4 @@ namespace BL
         }
     }
 }
+

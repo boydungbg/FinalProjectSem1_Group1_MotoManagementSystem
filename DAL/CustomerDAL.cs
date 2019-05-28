@@ -5,46 +5,42 @@ namespace DAL
 {
     public class CustomerDAL
     {
+        private MySqlConnection connection;
         private MySqlDataReader reader;
         private string query;
+        public CustomerDAL()
+        {
+            if (connection == null)
+            {
+                connection = DBHelper.OpenConnection();
+            }
+            if (connection.State == System.Data.ConnectionState.Closed)
+            {
+                connection.Open();
+            }
+        }
         public Customer GetCustomerByID(string customerid)
         {
-            if (customerid == null)
-            {
-                return null;
-            }
             query = @"select * from Customer where cus_id = '" + customerid + "' ;";
-            DBHelper.OpenConnection();
-            // reader = DBHelper.ExecQuery(query);
+            reader = DBHelper.ExecQuery(query, connection);
             Customer cus = null;
-            reader = DBHelper.ExecQuery(query);
             if (reader.Read())
             {
                 cus = GetCustomerInfo(reader);
             }
-            // reader.Close();
-            // reader.Dispose();
-            DBHelper.CloseConnection();
+            connection.Close();
             return cus;
         }
         public Customer GetCustomerByLincese_plate(string Lincese_plate)
         {
-            if (Lincese_plate == null)
-            {
-                return null;
-            }
             query = @"select * from Customer where license_plate = '" + Lincese_plate + "' ;";
-            DBHelper.OpenConnection();
-            // reader = DBHelper.ExecQuery(query);
+            reader = DBHelper.ExecQuery(query, connection);
             Customer cus = null;
-            reader = DBHelper.ExecQuery(query);
             if (reader.Read())
             {
                 cus = GetCustomerInfo(reader);
             }
-            // reader.Close();
-            // reader.Dispose();
-            DBHelper.CloseConnection();
+            connection.Close();
             return cus;
 
         }

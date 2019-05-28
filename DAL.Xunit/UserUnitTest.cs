@@ -17,12 +17,10 @@ namespace DAL.Xunit
             Assert.NotNull(user);
             Assert.Equal(username, user.User_name);
         }
-        
+
         [Theory]
         [InlineData("manager_02", "123456789")]
-        [InlineData("manager_02", "1231123")]
-        [InlineData("21312", null)]
-        [InlineData(null, "4234123")]
+        [InlineData("'#!@#!@'", "'><?<>'")]
         public void LoginTest2(string username, string password)
         {
             UserDAL userDAL = new UserDAL();

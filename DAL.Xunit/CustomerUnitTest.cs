@@ -27,7 +27,7 @@ namespace DAL.Xunit
         }
         [Theory]
         [InlineData("75G1-2222")]
-        [InlineData("88A1-8888")]
+        [InlineData("22E1-2222")]
         public void GetCustomerByLincese_plateTest1(string licensePlate)
         {
             CustomerDAL CusDAL = new CustomerDAL();
@@ -37,7 +37,7 @@ namespace DAL.Xunit
         }
         [Theory]
         [InlineData("88A1-1234")]
-        [InlineData(null)]
+        [InlineData("!!@#!@#!@")]
         public void GetCustomerByLincese_plateTest2(string licensePlate)
         {
             CustomerDAL CusDAL = new CustomerDAL();

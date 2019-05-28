@@ -139,7 +139,7 @@ namespace PL_console
         }
         public Customer GetCustomerByLincese_plate(string licensePlate)
         {
-            Customer newcus = new Customer();
+            Customer newcus = null;
             try
             {
                 CustomerBL cusBL = new CustomerBL();
@@ -357,7 +357,6 @@ namespace PL_console
                 table.Write(Format.Alternative);
                 Console.WriteLine("Nhấn Enter để quay lại.");
                 Console.ReadKey();
-                menu.MenuManager();
             }
         }
         public Card_Detail GetCardDetailByID(string cardid)
@@ -382,13 +381,13 @@ namespace PL_console
             }
             return cd;
         }
-        public Card_Logs GetCardLogsByCardID(string cardid)
+        public Card_Logs GetCardLogsByCardIDAndLicensePlate(string cardid, string licensePlate)
         {
             Card_Logs cardLogs = null;
             try
             {
                 Card_LogsBL cardLogsBL = new Card_LogsBL();
-                cardLogs = cardLogsBL.GetCardLogsbyCardID(cardid);
+                cardLogs = cardLogsBL.GetCardLogsByCardIDAndLicensePlate(cardid, licensePlate);
             }
             catch (System.NullReferenceException)
             {
@@ -621,7 +620,6 @@ namespace PL_console
                     table.AddRow(STT, item.LisensePlate, item.DateTimeStart, datimeEnd, item.Card_id, card.Card_type, status, intoMoney);
                 }
             }
-            // Console.WriteLine(STT);
             if (STT <= 0)
             {
                 Console.WriteLine("Không có dữ liệu nào về xe ra xe vào! Nhấn Enter để quay lại.");
@@ -632,7 +630,7 @@ namespace PL_console
                 Console.Clear();
                 Console.WriteLine();
                 Console.WriteLine();
-                Console.WriteLine("                   Từ ngày: {0}                                  Đến ngày: {1}", from, to);
+                Console.WriteLine("                   Từ ngày: {0}                                 Đến ngày: {1}", from, to);
                 Console.WriteLine();
                 Console.WriteLine("                   Thổng số tiền: {0} VND                            Số lượt:  {1}", totalmoney, Inturn);
                 Console.WriteLine();

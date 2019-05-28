@@ -5,7 +5,11 @@ namespace BL
 {
     public class CustomerBL
     {
-        private CustomerDAL customerDAL = new CustomerDAL();
+        private CustomerDAL customerDAL;
+        public CustomerBL()
+        {
+            customerDAL = new CustomerDAL();
+        }
         public Customer GetCustomerByID(string cusid)
         {
             if (cusid == null)
@@ -14,7 +18,7 @@ namespace BL
             }
             return customerDAL.GetCustomerByID(cusid);
         }
-         public Customer GetCustomerByLincese_plate(string lincese_plate)
+        public Customer GetCustomerByLincese_plate(string lincese_plate)
         {
             if (lincese_plate == null)
             {

@@ -9,98 +9,121 @@ namespace DAL
     {
         private MySqlDataReader reader;
         private string query;
+        private MySqlConnection connection;
+        public CardDAL()
+        {
+            if (connection == null)
+            {
+                connection = DBHelper.OpenConnection();
+            }
+            if (connection.State == System.Data.ConnectionState.Closed)
+            {
+                connection.Open();
+            }
+        }
         public bool CreateCard(Card card, Customer cus, Card_Detail card_Detail)
         {
             bool result = false;
-            if (card == null || cus == null || card_Detail == null)
-            {
-                return result;
-            }
-            List<String> queries = new List<string>();
+            MySqlCommand command = new MySqlCommand("", connection);
             //Lock table 
-            query = @"lock tables Customer write, Card write, Card_detail write;";
-            DBHelper.OpenConnection();
-            DBHelper.ExecNonQuery(query);
-            DBHelper.CloseConnection();
-            // Insert Customer
-            queries.Add(@"insert into Customer(cus_id,cus_fullname,cus_address,license_plate)
-                values   ('" + cus.Cus_id + "','" + cus.Cus_name + "','" + cus.Cus_address + "','" + cus.Cus_licensePlate + "');");
-            //Insert card
-            queries.Add(@"insert into Card(card_id,card_type,license_plate) 
-                values  ('" + card.Card_id + "','" + card.Card_type + "','" + cus.Cus_licensePlate + "');");
-            // Insert Card_detail
-            queries.Add(@"insert into Card_detail (card_id,cus_id,start_day,end_day)
-                        values ('" + card.Card_id + "','" + cus.Cus_id + "','" + card_Detail.Start_day?.ToString("yyyy-MM-dd HH:mm:ss") + "','" + card_Detail.End_day?.ToString("yyyy-MM-dd HH:mm:ss")
-                        + "');");
+            command.CommandText = @"lock tables Customer write, Card write, Card_detail write;";
+            command.ExecuteNonQuery();
             //Transaction
-            result = DBHelper.ExecTransaction(queries);
+            MySqlTransaction transaction = connection.BeginTransaction();
+            command.Transaction = transaction;
+            try
+            {
+                //Insert card
+                command.CommandText = @"insert into Card(card_id,card_type,license_plate) 
+                values  (@cardid,@cardType,@LicensePlate);";
+                command.Parameters.AddWithValue("@cardid", card.Card_id);
+                command.Parameters.AddWithValue("@cardType", card.Card_type);
+                command.Parameters.AddWithValue("@LicensePlate", cus.Cus_licensePlate);
+                command.ExecuteNonQuery();
+                // Insert Customer
+                command.CommandText = @"insert into Customer(cus_id,cus_fullname,cus_address,license_plate)
+                values   (@cus_id,@cus_name,@cus_address,@license_Plate);";
+                command.Parameters.AddWithValue("@cus_id", cus.Cus_id);
+                command.Parameters.AddWithValue("@cus_name", cus.Cus_name);
+                command.Parameters.AddWithValue("@cus_address", cus.Cus_address);
+                command.Parameters.AddWithValue("@license_Plate", cus.Cus_licensePlate);
+                command.ExecuteNonQuery();
+                // Insert Card_detail
+                command.CommandText = @"insert into Card_detail (card_id,cus_id,start_day,end_day)
+                        values (@card_id_card_detail,@cus_id_card_detail,@start_day,@end_day);";
+                command.Parameters.AddWithValue("@card_id_card_detail", card.Card_id);
+                command.Parameters.AddWithValue("@cus_id_card_detail", cus.Cus_id);
+                command.Parameters.AddWithValue("@start_day", card_Detail.Start_day);
+                command.Parameters.AddWithValue("@end_day", card_Detail.End_day);
+                command.ExecuteNonQuery();
+                transaction.Commit();
+                result = true;
+            }
+            catch (System.Exception e)
+            {
+                string m = e.Message;
+                Console.WriteLine(m);
+                transaction.Rollback();
+            }
+            finally
+            {
+                // Unlock Tables
+                command.CommandText = "unlock tables";
+                command.ExecuteNonQuery();
+                connection.Close();
+            }
             return result;
         }
         public bool UpdateCardByID(Card card, string cardid)
         {
-
-            if (card == null || cardid == null)
-            {
-                return false;
-            }
+            MySqlCommand command = new MySqlCommand("", connection);
             query = @"Update Card SET license_plate = '" + card.LicensePlate + "', card_status = '" + card.Card_Status + "' where  card_id = '" + cardid + "'; ";
-            DBHelper.OpenConnection();
-            DBHelper.ExecNonQuery(query);
-            DBHelper.CloseConnection();
+            command.CommandText = query;
+            command.ExecuteNonQuery();
+            connection.Close();
             return true;
         }
         public bool DeleteCardByID(string cardid, string cusid)
         {
-            if (cardid == null || cusid == null)
-            {
-                return false;
-            }
-            DBHelper.OpenConnection();
-            query = @"Delete from Card_detail where card_id = '" + cardid + "' and cus_id = '" + cusid + "';";
-            DBHelper.ExecNonQuery(query);
-            query = @"Delete from Customer where cus_id = '" + cusid + "';";
-            DBHelper.ExecNonQuery(query);
-            query = @"Delete from Card where card_id = '" + cardid + "';";
-            DBHelper.ExecNonQuery(query);
-            DBHelper.CloseConnection();
+            MySqlCommand command = new MySqlCommand("", connection);
+            query = @"Delete from Card_detail where card_id = @card_id_card_detail and cus_id = @cus_id_card_detail;";
+            command.Parameters.AddWithValue("@card_id_card_detail", cardid);
+            command.Parameters.AddWithValue("@cus_id_card_detail", cusid);
+            command.CommandText = query;
+            command.ExecuteNonQuery();
+            query = @"Delete from Customer where cus_id = @cusid;";
+            command.Parameters.AddWithValue("@cusid", cusid);
+            command.CommandText = query;
+            command.ExecuteNonQuery();
+            query = @"Delete from Card where card_id = @cardid;";
+            command.Parameters.AddWithValue("@cardid", cardid);
+            command.CommandText = query;
+            command.ExecuteNonQuery();
+            connection.Close();
             return true;
         }
         public Card GetCardByID(string cardid)
         {
-            if (cardid == null)
-            {
-                return null;
-            }
             query = @"select * from Card where card_id = '" + cardid + "' ;";
-            DBHelper.OpenConnection();
-            reader = DBHelper.ExecQuery(query);
+            reader = DBHelper.ExecQuery(query, connection);
             Card card = null;
             if (reader.Read())
             {
                 card = GetCardInfo(reader);
             }
-            // reader.Close();
-            // reader.Dispose();
-            DBHelper.CloseConnection();
+            connection.Close();
             return card;
         }
         public Card GetCardByLicensePlate(string licensePlate)
         {
-            if (licensePlate == null)
-            {
-                return null;
-            }
             query = @"select * from Card where license_plate = '" + licensePlate + "' ;";
-            DBHelper.OpenConnection();
-            reader = DBHelper.ExecQuery(query);
+            reader = DBHelper.ExecQuery(query, connection);
             Card card = null;
             if (reader.Read())
             {
                 card = GetCardInfo(reader);
             }
-            // reader.Close();
-            // reader.Dispose();
-            DBHelper.CloseConnection();
+            connection.Close();
             return card;
         }
         private Card GetCardInfo(MySqlDataReader reader)
@@ -120,37 +143,30 @@ namespace DAL
         public List<Card> GetlistCard()
         {
             query = @"select * from Card;";
-            DBHelper.OpenConnection();
-            reader = DBHelper.ExecQuery(query);
+            reader = DBHelper.ExecQuery(query, connection);
             List<Card> card = new List<Card>();
             while (reader.Read())
             {
                 card.Add(GetCardInfo(reader));
             }
-            // reader.Close();
-            // reader.Dispose();
-            DBHelper.CloseConnection();
+            connection.Close();
             return card;
         }
         public Card GetCardByWord()
         {
             query = @"SELECT max(card_id) from Card where card_id like 'CM%' ;";
-            DBHelper.OpenConnection();
-            reader = DBHelper.ExecQuery(query);
+            reader = DBHelper.ExecQuery(query, connection);
             Card card = null;
             if (reader.Read())
             {
                 if (reader.IsDBNull(reader.GetOrdinal("max(card_id)")))
                 {
                     return null;
-
                 }
                 card = new Card();
                 card.Card_id = reader.GetString("max(card_id)");
             }
-            // reader.Close();
-            // reader.Dispose();
-            DBHelper.CloseConnection();
+            connection.Close();
             return card;
         }
     }

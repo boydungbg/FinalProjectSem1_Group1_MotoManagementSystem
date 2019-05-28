@@ -7,23 +7,28 @@ namespace DAL
     {
         private MySqlDataReader reader;
         private string query;
+        private MySqlConnection connection;
+        public Card_detailDAL()
+        {
+            if (connection == null)
+            {
+                connection = DBHelper.OpenConnection();
+            }
+            if (connection.State == System.Data.ConnectionState.Closed)
+            {
+                connection.Open();
+            }
+        }
         public Card_Detail GetCard_DetailByID(string card_id)
         {
-            if (card_id == null)
-            {
-                return null;
-            }
             query = @"Select card_id,cus_id,start_day,max(end_day) from Card_detail where card_id = '" + card_id + "' ;";
-            DBHelper.OpenConnection();
+            reader = DBHelper.ExecQuery(query, connection);
             Card_Detail card_Detail = null;
-            reader = DBHelper.ExecQuery(query);
             if (reader.Read())
             {
                 card_Detail = GetCard_detailInfo(reader);
             }
-            // reader.Close();
-            // reader.Dispose();
-            DBHelper.CloseConnection();
+            connection.Close();
             return card_Detail;
         }
         private Card_Detail GetCard_detailInfo(MySqlDataReader reader)
