@@ -37,7 +37,7 @@ namespace PL_Console
                     }
                     if (item.Card_Status == 1)
                     {
-                        cardLogs = manager.GetCardLogsByCardIDAndLicensePlate(item.Card_id,item.LicensePlate);
+                        cardLogs = manager.GetCardLogsByCardIDAndLicensePlate(item.Card_id, item.LicensePlate);
                         status = "Hoạt động";
                         if (cardLogs != null)
                         {
@@ -99,6 +99,17 @@ namespace PL_Console
             Console.WriteLine("- Chủ xe: " + name);
             Console.WriteLine("- Địa chỉ: " + address);
             Console.WriteLine("- Hết hạn: " + timeCard);
+            if (cardDetail != null)
+            {
+                if ((cardDetail.End_day.Value - DateTime.Now).Days <= 5)
+                {
+                    Console.WriteLine("↪ NOTICE: THẺ CỦA BẠN CÒN {0} NGÀY SẼ HẾT HẠN ☹", (cardDetail.End_day.Value - DateTime.Now).Days);
+                }
+                if (cardDetail.End_day < DateTime.Now)
+                {
+                    Console.WriteLine("↪ NOTICE: THẺ CỦA BẠN ĐÃ HẾT HẠN ☹");
+                }
+            }
             Console.Write("- Nhập biển số xe (VD:88-X8-8888): ");
             do
             {
@@ -193,7 +204,7 @@ namespace PL_Console
             Console.WriteLine(b);
             Console.WriteLine("- Vé xe: " + card.Card_id);
             Console.WriteLine("- Loại thẻ: " + card.Card_type);
-            cardLogs = manager.GetCardLogsByCardIDAndLicensePlate(card.Card_id,card.LicensePlate);
+            cardLogs = manager.GetCardLogsByCardIDAndLicensePlate(card.Card_id, card.LicensePlate);
             Customer cus = manager.GetCustomerByLincese_plate(card.LicensePlate);
             Card_Detail cardDetail = manager.GetCardDetailByID(card.Card_id);
             cardLogs.IntoMoney = 0;
@@ -216,6 +227,17 @@ namespace PL_Console
             Console.WriteLine("- Biển số xe: " + cardLogs.LisensePlate);
             Console.WriteLine("- Giờ vào: " + cardLogs.DateTimeStart);
             Console.WriteLine("- Giờ ra: " + cardLogs.DateTimeEnd);
+            if (cardDetail != null)
+            {
+                if ((cardDetail.End_day.Value - DateTime.Now).Days <= 5)
+                {
+                    Console.WriteLine("↪ NOTICE: THẺ CỦA BẠN CÒN {0} NGÀY SẼ HẾT HẠN ☹", (cardDetail.End_day.Value - DateTime.Now).Days);
+                }
+                if (cardDetail.End_day < DateTime.Now)
+                {
+                    Console.WriteLine("↪ NOTICE: THẺ CỦA BẠN ĐÃ HẾT HẠN ☹");
+                }
+            }
             Console.WriteLine(b);
             Console.Write("- Nhập biển số xe (VD:88-X8-8888): ");
             do
@@ -243,6 +265,10 @@ namespace PL_Console
                 if (card.Card_type == "Thẻ tháng")
                 {
                     Console.WriteLine("- Thời gian gửi: " + cardLogs.SendTime);
+                    if (cardDetail.End_day <= DateTime.Now)
+                    {
+                        cardLogs.IntoMoney = Pay(cardLogs.DateTimeStart.Value, cardLogs.DateTimeEnd.Value);
+                    }
                     Console.WriteLine("- Số tiền là: {0} VNĐ", cardLogs.IntoMoney);
                 }
                 if (card.Card_type == "Thẻ ngày")
@@ -311,21 +337,44 @@ namespace PL_Console
         public double Pay(DateTime start, DateTime end)
         {
             double intoMoney = 0;
-            if (start <= DateTime.Parse("06:00 PM") && start >= DateTime.Parse("06:00 AM"))
+            if ((end - start).Days >= 1)
             {
-                intoMoney += intoMoney + 10000;
+                intoMoney = (end - start).Days * 30000;
             }
-            else if (start <= DateTime.Parse("06:00 AM") && start >= DateTime.Parse("06:00 PM"))
+            else
             {
-                intoMoney += intoMoney + 20000;
-            }
-            else if (end >= DateTime.Parse("06:00 AM") && end <= DateTime.Parse("06:00 PM"))
-            {
-                intoMoney += intoMoney + 10000;
-            }
-            else if (end <= DateTime.Parse("06:00 AM") && end >= DateTime.Parse("06:00 PM"))
-            {
-                intoMoney += intoMoney + 20000;
+                if (start >= DateTime.Parse("06:00 AM") && start <= DateTime.Parse("11:59 AM"))
+                {
+                    intoMoney = intoMoney + 10000;
+                }
+                else if (start < DateTime.Parse("06:00 AM") && start >= DateTime.Parse("12:01 AM"))
+                {
+                    intoMoney = intoMoney + 20000;
+                }
+                else if (end >= DateTime.Parse("06:00 AM") && end < DateTime.Parse("11:59 AM"))
+                {
+                    intoMoney = intoMoney + 10000;
+                }
+                else if (end < DateTime.Parse("06:00 AM") && end >= DateTime.Parse("12:01 AM"))
+                {
+                    intoMoney = intoMoney + 20000;
+                }
+                else if (start < DateTime.Parse("06:00 PM") && start >= DateTime.Parse("12:01 PM"))
+                {
+                    intoMoney = intoMoney + 10000;
+                }
+                else if (start >= DateTime.Parse("06:00 PM") && start <= DateTime.Parse("12:01 AM"))
+                {
+                    intoMoney = intoMoney + 20000;
+                }
+                else if (end < DateTime.Parse("06:00 PM") && end >= DateTime.Parse("12:01 PM"))
+                {
+                    intoMoney = intoMoney + 10000;
+                }
+                else if (end >= DateTime.Parse("06:00 PM") && end <= DateTime.Parse("12:01 AM"))
+                {
+                    intoMoney = intoMoney + 20000;
+                }
             }
             return intoMoney;
         }

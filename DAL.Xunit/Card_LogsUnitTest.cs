@@ -16,8 +16,6 @@ namespace DAL.Xunit
             cardLogs = new Card_Logs(null, null, null, null, DateTime.Now, "08:00", 0);
             cardLogsDAL = new Card_LogsDAL();
             Assert.True(cardLogsDAL.UpdateCardLogsByLicensePlateAndCardID(cardLogs, "75G1-2222", "CM06", "2019-05-26 00:00:00"));
-            cardLogsDAL = new Card_LogsDAL();
-            Assert.True(cardLogsDAL.DeleteCardLogsByID("CM06"));
         }
         [Fact]
         public void GetCardLogsByCardIDAndLicensePlateTest1()

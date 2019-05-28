@@ -545,7 +545,7 @@ namespace PL_console
             Console.WriteLine(b);
             Console.WriteLine(" Thống kê");
             Console.WriteLine(b);
-            Console.Write("Từ ngày(VD:24/12/2000): ");
+            Console.Write("Từ ngày (VD:24/12/2000): ");
             do
             {
                 from = Console.ReadLine();
@@ -569,7 +569,7 @@ namespace PL_console
                     from = null;
                 }
             } while (from == null);
-            Console.Write("Đến ngày(VD:24/12/2000): ");
+            Console.Write("Đến ngày (VD:24/12/2019): ");
             do
             {
                 to = Console.ReadLine();
@@ -581,7 +581,7 @@ namespace PL_console
                 }
                 try
                 {
-                    if (Convert.ToDateTime(to) <= Convert.ToDateTime(from))
+                    if (Convert.ToDateTime(to) < Convert.ToDateTime(from))
                     {
                         Console.Write("Thời gian nhập vào phải lớn hơn thời gian bắt đầu. Nhập lại: ");
                         to = null;
@@ -593,7 +593,7 @@ namespace PL_console
                     to = null;
                 }
             } while (to == null);
-            List<Card_Logs> cardLogs = GetListCardLogs(Convert.ToDateTime(from).ToString("yyyy-MM-dd"), Convert.ToDateTime(to).ToString("yyyy-MM-dd"));
+            List<Card_Logs> cardLogs = GetListCardLogs(Convert.ToDateTime(from).ToString("yyyy-MM-dd 00:00:00"), Convert.ToDateTime(to).ToString("yyyy-MM-dd 23:59:59"));
             var table = new ConsoleTable("STT", "Biển số xe", "Thời gian vào", "Thời gian ra", "Mã thẻ", "Loại thẻ", "Trạng thái", "Giá tiền");
             int STT = 0;
             Card card = null;

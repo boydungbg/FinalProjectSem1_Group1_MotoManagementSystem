@@ -14,7 +14,7 @@ namespace PL_Console
             char choose;
             do
             {
-                // Console.Clear();
+                Console.Clear();
                 string[] menuItem = { "Đăng nhập", "Thoát chương trình" };
                 choose = Menu(menuItem, 2, "HỆ THỐNG QUẢN LÝ BÃI GỬI XE MÁY", "#Chọn: ");
                 switch (choose)
@@ -203,30 +203,6 @@ namespace PL_Console
                 }
             } while (choose != '4');
         }
-        // public void MenuStatictis()
-        // {
-        //     char choose;
-        //     do
-        //     {
-        //         Console.Clear();
-        //         string[] menuItem = { "Thống kê theo ngày", "Thống kê theo tháng", "Quay lại" };
-        //         choose = Menu(menuItem, 3, "Thống kê", "#Chọn: ");
-        //         switch (choose)
-        //         {
-        //             case '1':
-
-        //                 break;
-        //             case '2':
-        //                 Console.WriteLine("Thống kê");
-        //                 break;
-        //             case '3':
-        //                 MenuManager();
-        //                 break;
-        //             default:
-        //                 break;
-        //         }
-        //     } while (choose != '3');
-        // }
         public void MenuSecurity(User user)
         {
             char choose;

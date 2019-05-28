@@ -40,15 +40,6 @@ namespace DAL
             connection.Close();
             return true;
         }
-        public bool DeleteCardLogsByID(string id)
-        {
-            MySqlCommand command = new MySqlCommand("", connection);
-            query = @"Delete from Card_Logs where card_id ='" + id + "'; ";
-            command.CommandText = query;
-            command.ExecuteNonQuery();
-            connection.Close();
-            return true;
-        }
         public Card_Logs GetCardLogsByCardIDAndLicensePlate(string cardid, string licensePlate)
         {
             query = @"select card_id,cl_licensePlate,max(cl_dateTimeStart) as cl_dateTimeStart,cl_dateTimeEnd,cl_sendTime,cl_intoMoney from Card_Logs where card_id ='" + cardid + "' and cl_licensePlate='" + licensePlate + "';";

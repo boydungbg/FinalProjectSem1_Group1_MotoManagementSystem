@@ -20,14 +20,6 @@ namespace BL
             }
             return card_LogsDAL.CreateCardLogs(card_Logs);
         }
-        public bool DeleteCardLogsByID(string id)
-        {
-            if (id == null)
-            {
-                return false;
-            }
-            return card_LogsDAL.DeleteCardLogsByID(id);
-        }
         public Card_Logs GetCardLogsByCardIDAndLicensePlate(string cardid, string licensePlate)
         {
             if (cardid == null || licensePlate == null)
