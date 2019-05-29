@@ -348,7 +348,7 @@ namespace PL_Console
                     // Console.WriteLine("a");
                     intoMoney = intoMoney + 10000;
                 }
-                else if (start < DateTime.Parse("06:00 AM") && start >= DateTime.Parse("00:01 AM"))
+                else if (start < DateTime.Parse("06:00 AM") && start >= DateTime.Parse("12:01 AM"))
                 {
                     // Console.WriteLine("b");
                     intoMoney = intoMoney + 20000;
@@ -358,7 +358,7 @@ namespace PL_Console
                     // Console.WriteLine("c");
                     intoMoney = intoMoney + 10000;
                 }
-                else if (end < DateTime.Parse("06:00 AM") && end >= DateTime.Parse("00:01 AM"))
+                else if (end < DateTime.Parse("06:00 AM") && end >= DateTime.Parse("12:01 AM"))
                 {
                     // Console.WriteLine("d");
                     intoMoney = intoMoney + 20000;

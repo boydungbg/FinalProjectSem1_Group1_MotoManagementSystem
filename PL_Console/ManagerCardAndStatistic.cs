@@ -559,7 +559,7 @@ namespace PL_console
                 {
                     if (Convert.ToDateTime(from) > DateTime.Now || Convert.ToDateTime(from) < new DateTime(2018, 1, 1))
                     {
-                        Console.Write("Thời gian nhập vào phải nhỏ hơn thời gian hiện tại và phải lớn hơn năm 2018. Nhập lại: ");
+                        Console.Write("Thời gian nhập vào phải sau thời gian hiện tại và phải trước năm 2018. Nhập lại: ");
                         from = null;
                     }
                 }
@@ -583,7 +583,7 @@ namespace PL_console
                 {
                     if (Convert.ToDateTime(to) < Convert.ToDateTime(from))
                     {
-                        Console.Write("Thời gian nhập vào phải lớn hơn thời gian bắt đầu. Nhập lại: ");
+                        Console.Write("Thời gian nhập vào phải trước thời gian bắt đầu. Nhập lại: ");
                         to = null;
                     }
                 }
