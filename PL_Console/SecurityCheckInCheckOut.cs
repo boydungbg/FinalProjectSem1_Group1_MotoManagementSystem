@@ -344,35 +344,43 @@ namespace PL_Console
             else
             {
                 if (start >= DateTime.Parse("06:00 AM") && start <= DateTime.Parse("11:59 AM"))
-                {                  
+                {
+                    // Console.WriteLine("a");
                     intoMoney = intoMoney + 10000;
                 }
-                if (start < DateTime.Parse("06:00 AM") && start >= DateTime.Parse("12:01 AM"))
+                else if (start < DateTime.Parse("06:00 AM") && start >= DateTime.Parse("00:01 AM"))
                 {
+                    // Console.WriteLine("b");
                     intoMoney = intoMoney + 20000;
                 }
-                if (end >= DateTime.Parse("06:00 AM") && end < DateTime.Parse("11:59 AM"))
+                else if (end >= DateTime.Parse("06:00 AM") && end < DateTime.Parse("11:59 AM"))
                 {
+                    // Console.WriteLine("c");
                     intoMoney = intoMoney + 10000;
                 }
-                if (end < DateTime.Parse("06:00 AM") && end >= DateTime.Parse("12:01 AM"))
+                else if (end < DateTime.Parse("06:00 AM") && end >= DateTime.Parse("00:01 AM"))
                 {
+                    // Console.WriteLine("d");
                     intoMoney = intoMoney + 20000;
                 }
                 if (start < DateTime.Parse("06:00 PM") && start >= DateTime.Parse("12:01 PM"))
                 {
+                    // Console.WriteLine("e");
                     intoMoney = intoMoney + 10000;
                 }
-                if (start >= DateTime.Parse("06:00 PM") && start <= DateTime.Parse("11:59 PM"))
+                else if (start >= DateTime.Parse("06:00 PM") && start <= DateTime.Parse("11:59 PM"))
                 {
+                    // Console.WriteLine("f");
                     intoMoney = intoMoney + 20000;
                 }
-                if (end < DateTime.Parse("06:00 PM") && end >= DateTime.Parse("12:01 PM"))
+                else if (end < DateTime.Parse("06:00 PM") && end >= DateTime.Parse("12:01 PM"))
                 {
+                    // Console.WriteLine("g");
                     intoMoney = intoMoney + 10000;
                 }
-                if (end >= DateTime.Parse("06:00 PM") && end <= DateTime.Parse("11:59 AM"))
+                else if (end >= DateTime.Parse("06:00 PM") && end <= DateTime.Parse("11:59 PM"))
                 {
+                    // Console.WriteLine("h");
                     intoMoney = intoMoney + 20000;
                 }
             }
