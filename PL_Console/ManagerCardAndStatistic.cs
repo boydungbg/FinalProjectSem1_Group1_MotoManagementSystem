@@ -46,7 +46,7 @@ namespace PL_console
             Console.Write("- Nhập tên khách hàng (VD:LE CHI DUNG): ");
             do
             {
-                cus.Cus_name = Console.ReadLine();
+                cus.Cus_name = Console.ReadLine().ToUpper();
                 if (validate(3, cus.Cus_name) == false)
                 {
                     Console.Write("↻ Tên khách hàng hợp lệ (VD:LE CHI DUNG). Nhập lại: ");
@@ -56,7 +56,7 @@ namespace PL_console
             Console.Write("- Nhập địa chỉ (VD:BAC GIANG): ");
             do
             {
-                cus.Cus_address = Console.ReadLine();
+                cus.Cus_address = Console.ReadLine().ToUpper();
                 if (validate(3, cus.Cus_address) == false)
                 {
                     Console.Write("↻ Địa chỉ không hợp lệ (VD:BAC GIANG). Nhập lại: ");
@@ -66,7 +66,7 @@ namespace PL_console
             Console.Write("- Nhập biển số xe(VD:88X8-8888): ");
             do
             {
-                cus.Cus_licensePlate = Console.ReadLine();
+                cus.Cus_licensePlate = Console.ReadLine().ToUpper();
                 if (validate(4, cus.Cus_licensePlate) == false)
                 {
                     Console.Write("↻ Biển số xe không hợp lệ (VD:88X8-8888). Nhập lại: ");
@@ -551,21 +551,21 @@ namespace PL_console
                 from = Console.ReadLine();
                 if (validate(5, from) == false)
                 {
-                    Console.Write("Thời gian nhập vào không hợp lệ. Nhập lại: ");
+                    Console.Write("Thời gian nhập vào không hợp lệ (VD:24/12/2000). Nhập lại: ");
                     from = null;
                     continue;
                 }
                 try
                 {
-                    if (Convert.ToDateTime(from) > DateTime.Now || Convert.ToDateTime(from) < new DateTime(2015, 1, 1))
+                    if (Convert.ToDateTime(from) > DateTime.Now || Convert.ToDateTime(from) < new DateTime(2018, 1, 1))
                     {
-                        Console.Write("Thời gian nhập vào phải nhỏ hơn thời gian hiện tại và phải lớn hơn năm 2015. Nhập lại: ");
+                        Console.Write("Thời gian nhập vào phải nhỏ hơn thời gian hiện tại và phải lớn hơn năm 2018. Nhập lại: ");
                         from = null;
                     }
                 }
                 catch (System.Exception)
                 {
-                    Console.Write("Thời gian nhập vào không hợp lệ. Nhập lại: ");
+                    Console.Write("Thời gian nhập vào không hợp lệ (VD:24/12/2000). Nhập lại: ");
                     from = null;
                 }
             } while (from == null);
@@ -575,7 +575,7 @@ namespace PL_console
                 to = Console.ReadLine();
                 if (validate(5, from) == false)
                 {
-                    Console.Write("Thời gian không hợp lệ. Nhập lại: ");
+                    Console.Write("Thời gian không hợp lệ (VD:24/12/2019). Nhập lại: ");
                     to = null;
                     continue;
                 }
@@ -589,7 +589,7 @@ namespace PL_console
                 }
                 catch (System.Exception)
                 {
-                    Console.Write("Thời gian không hợp lệ. Nhập lại: ");
+                    Console.Write("Thời gian không hợp lệ (VD:24/12/2019). Nhập lại: ");
                     to = null;
                 }
             } while (to == null);
