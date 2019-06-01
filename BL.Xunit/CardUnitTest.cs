@@ -61,7 +61,7 @@ namespace BL.Xunit
             Assert.Null(card);
         }
         [Fact]
-        public void ShowlistCardTest1()
+        public void GetlistCardTest1()
         {
             CardBL cardBL = new CardBL();
             List<Card> card = cardBL.GetlistCard();

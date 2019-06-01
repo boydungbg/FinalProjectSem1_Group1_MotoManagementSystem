@@ -8,7 +8,7 @@ namespace DAL.Xunit
     public class Card_LogsUnitTest
     {
         [Fact]
-        public void CreateCardLogsTest1()
+        public void CreateCardLogsAndUpdateTest1()
         {
             Card_LogsDAL cardLogsDAL = new Card_LogsDAL();
             Card_Logs cardLogs = new Card_Logs("CM06", "security_01", "75G1-2222", new DateTime(2019, 05, 20), null, null, null);
@@ -21,14 +21,14 @@ namespace DAL.Xunit
         public void GetCardLogsByCardIDAndLicensePlateTest1()
         {
             Card_LogsDAL cardLogsDAL = new Card_LogsDAL();
-            Card_Logs cardLogs = cardLogsDAL.GetCardLogsByCardIDAndLicensePlate("CM99","75G1-4422");
+            Card_Logs cardLogs = cardLogsDAL.GetCardLogsByCardIDAndLicensePlate("CM99", "75G1-4422");
             Assert.Null(cardLogs);
         }
         [Fact]
         public void GetListCardLogsTest1()
         {
             Card_LogsDAL cardLogsDAL = new Card_LogsDAL();
-            List<Card_Logs> listCardLogs = cardLogsDAL.GetListCardLogs("2019-05-26", "2019-05-27");
+            List<Card_Logs> listCardLogs = cardLogsDAL.GetListCardLogs("2019-05-26", "2019-05-31");
             Assert.NotNull(listCardLogs);
         }
         [Fact]

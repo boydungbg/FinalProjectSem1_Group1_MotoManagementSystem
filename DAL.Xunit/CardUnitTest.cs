@@ -7,7 +7,7 @@ namespace DAL.Xunit
     public class CardUnitTest
     {
         [Fact]
-        public void CreateCardTest1()
+        public void CreateCardAndUpdateTest1()
         {
             DateTime start_day = new DateTime(2019, 5, 17);
             DateTime end_day = new DateTime(2019, 6, 17);
@@ -42,7 +42,7 @@ namespace DAL.Xunit
             Assert.Null(card);
         }
         [Fact]
-        public void ShowlistCardTest1()
+        public void GetlistCardTest1()
         {
             CardDAL cardDAL = new CardDAL();
             List<Card> card = cardDAL.GetlistCard();
