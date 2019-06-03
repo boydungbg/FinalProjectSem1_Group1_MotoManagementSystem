@@ -3,7 +3,7 @@ namespace Persistence
 {
     public class Card_Detail
     {
-        public string Card_id { get; set; }
+        public int Card_id { get; set; }
         public string Cus_id { get; set; }
         public DateTime? Start_day { get; set; }
         public DateTime? End_day { get; set; }
@@ -12,7 +12,7 @@ namespace Persistence
         {
 
         }
-        public Card_Detail(string card_id, string cus_id, DateTime start_day, DateTime end_day)
+        public Card_Detail(int card_id, string cus_id, DateTime start_day, DateTime end_day)
         {
             this.Card_id = card_id;
             this.Cus_id = cus_id;

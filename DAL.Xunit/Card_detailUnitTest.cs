@@ -6,9 +6,9 @@ namespace DAL.Xunit
     public class Card_detailUnitTest
     {
         [Theory]
-        [InlineData("CM01")]
-        [InlineData("CM02")]
-        public void GetCard_detailTest1(string card_id)
+        [InlineData(10011)]
+        [InlineData(10012)]
+        public void GetCard_detailTest1(int card_id)
         {
             Card_detailDAL cardDetailDAL = new Card_detailDAL();
             Card_Detail card_detail = cardDetailDAL.GetCard_DetailByID(card_id);
@@ -16,9 +16,9 @@ namespace DAL.Xunit
             Assert.Equal(card_id, card_detail.Card_id);
         }
         [Theory]
-        [InlineData("CM99")]
-        [InlineData("!@#!@$@")]
-        public void GetCard_detailTest2(string card_id)
+        [InlineData(10099)]
+        [InlineData(10)]
+        public void GetCard_detailTest2(int card_id)
         {
             Card_detailDAL cardDetailDAL = new Card_detailDAL();
             Card_Detail card_detail = cardDetailDAL.GetCard_DetailByID(card_id);

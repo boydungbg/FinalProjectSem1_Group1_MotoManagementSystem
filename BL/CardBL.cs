@@ -19,17 +19,17 @@ namespace BL
             }
             return cardDAL.CreateCard(card, cus, card_Detail);
         }
-        public Card GetCardByID(string id)
+        public Card GetCardByID(int id)
         {
-            if (id == null)
+            if (id == 0)
             {
                 return null;
             }
             return cardDAL.GetCardByID(id);
         }
-        public bool DeleteCardByID(string cardid, string cusid)
+        public bool DeleteCardByID(int cardid, string cusid)
         {
-            if (cardid == null || cusid == null)
+            if (cardid == 0 || cusid == null)
             {
                 return false;
             }
@@ -43,9 +43,9 @@ namespace BL
             }
             return cardDAL.GetCardByLicensePlate(licensePlate);
         }
-        public bool UpdateCardByID(Card card, string id)
+        public bool UpdateCardByID(Card card, int id)
         {
-            if (card == null || id == null)
+            if (card == null || id == 0)
             {
                 return false;
             }
@@ -55,9 +55,9 @@ namespace BL
         {
             return cardDAL.GetlistCard();
         }
-        public Card GetCardByWord()
+        public Card GetCardID()
         {
-            return cardDAL.GetCardByWord();
+            return cardDAL.GetCardID();
         }
     }
 }

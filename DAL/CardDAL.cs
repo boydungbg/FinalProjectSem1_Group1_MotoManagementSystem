@@ -74,16 +74,16 @@ namespace DAL
             }
             return result;
         }
-        public bool UpdateCardByID(Card card, string cardid)
+        public bool UpdateCardByID(Card card, int cardid)
         {
             MySqlCommand command = new MySqlCommand("", connection);
-            query = @"Update Card SET license_plate = '" + card.LicensePlate + "', card_status = '" + card.Card_Status + "' where  card_id = '" + cardid + "'; ";
+            query = @"Update Card SET license_plate = '" + card.LicensePlate + "', card_status = '" + card.Card_Status + "' where  card_id = " + cardid + "; ";
             command.CommandText = query;
             command.ExecuteNonQuery();
             connection.Close();
             return true;
         }
-        public bool DeleteCardByID(string cardid, string cusid)
+        public bool DeleteCardByID(int cardid, string cusid)
         {
             MySqlCommand command = new MySqlCommand("", connection);
             query = @"Delete from Card_detail where card_id = @card_id_card_detail and cus_id = @cus_id_card_detail;";
@@ -102,9 +102,9 @@ namespace DAL
             connection.Close();
             return true;
         }
-        public Card GetCardByID(string cardid)
+        public Card GetCardByID(int cardid)
         {
-            query = @"select * from Card where card_id = '" + cardid + "' ;";
+            query = @"select * from Card where card_id = " + cardid + " ;";
             reader = DBHelper.ExecQuery(query, connection);
             Card card = null;
             if (reader.Read())
@@ -133,7 +133,7 @@ namespace DAL
             {
                 return null;
             }
-            card.Card_id = reader.GetString("card_id");
+            card.Card_id = reader.GetInt32("card_id");
             card.LicensePlate = reader.GetString("license_plate");
             card.Card_type = reader.GetString("card_type");
             card.Card_Status = reader.GetInt32("card_status");
@@ -152,9 +152,9 @@ namespace DAL
             connection.Close();
             return card;
         }
-        public Card GetCardByWord()
+        public Card GetCardID()
         {
-            query = @"SELECT max(card_id) from Card where card_id like 'CM%' ;";
+            query = @"SELECT max(card_id) from Card ;";
             reader = DBHelper.ExecQuery(query, connection);
             Card card = null;
             if (reader.Read())
@@ -164,7 +164,7 @@ namespace DAL
                     return null;
                 }
                 card = new Card();
-                card.Card_id = reader.GetString("max(card_id)");
+                card.Card_id = reader.GetInt32("max(card_id)");
             }
             connection.Close();
             return card;

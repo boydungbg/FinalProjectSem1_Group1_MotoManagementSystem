@@ -31,18 +31,18 @@ namespace DAL
             connection.Close();
             return true;
         }
-        public bool UpdateCardLogsByLicensePlateAndCardID(Card_Logs cardLogs, string licensePlate, string cardid, string dateTimeStart)
+        public bool UpdateCardLogsByLicensePlateAndCardID(Card_Logs cardLogs, string licensePlate, int cardid, string dateTimeStart)
         {
             MySqlCommand command = new MySqlCommand("", connection);
-            query = @"Update  Card_logs  SET cl_dateTimeEnd = '" + cardLogs.DateTimeEnd?.ToString("yyyy-MM-dd HH:mm:ss") + "'  , cl_sendTime = '" + cardLogs.SendTime + "',cl_intoMoney = " + cardLogs.IntoMoney + " where card_id = '" + cardid + "'  and cl_licensePlate = '" + licensePlate + "' and cl_dateTimeStart = '" + dateTimeStart + "'; ";
+            query = @"Update  Card_logs  SET cl_dateTimeEnd = '" + cardLogs.DateTimeEnd?.ToString("yyyy-MM-dd HH:mm:ss") + "'  , cl_sendTime = '" + cardLogs.SendTime + "',cl_intoMoney = " + cardLogs.IntoMoney + " where card_id = " + cardid + "  and cl_licensePlate = '" + licensePlate + "' and cl_dateTimeStart = '" + dateTimeStart + "'; ";
             command.CommandText = query;
             command.ExecuteNonQuery();
             connection.Close();
             return true;
         }
-        public Card_Logs GetCardLogsByCardIDAndLicensePlate(string cardid, string licensePlate)
+        public Card_Logs GetCardLogsByCardIDAndLicensePlate(int cardid, string licensePlate)
         {
-            query = @"select card_id,cl_licensePlate,max(cl_dateTimeStart) as cl_dateTimeStart,cl_dateTimeEnd,cl_sendTime,cl_intoMoney from Card_Logs where card_id ='" + cardid + "' and cl_licensePlate='" + licensePlate + "';";
+            query = @"select card_id,cl_licensePlate,max(cl_dateTimeStart) as cl_dateTimeStart,cl_dateTimeEnd,cl_sendTime,cl_intoMoney from Card_Logs where card_id =" + cardid + " and cl_licensePlate='" + licensePlate + "';";
             reader = DBHelper.ExecQuery(query, connection);
             Card_Logs cardLogs = null;
             if (reader.Read())
@@ -59,7 +59,7 @@ namespace DAL
             {
                 return null;
             }
-            cardLogs.Card_id = reader.GetString("card_id");
+            cardLogs.Card_id = reader.GetInt32("card_id");
             cardLogs.LisensePlate = reader.GetString("cl_licensePlate");
             cardLogs.DateTimeStart = reader.GetDateTime("cl_dateTimeStart");
             if (reader.IsDBNull(reader.GetOrdinal("cl_dateTimeEnd")) && reader.IsDBNull(reader.GetOrdinal("cl_sendTime")) && reader.IsDBNull(reader.GetOrdinal("cl_intoMoney")))

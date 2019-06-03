@@ -20,17 +20,17 @@ namespace BL
             }
             return card_LogsDAL.CreateCardLogs(card_Logs);
         }
-        public Card_Logs GetCardLogsByCardIDAndLicensePlate(string cardid, string licensePlate)
+        public Card_Logs GetCardLogsByCardIDAndLicensePlate(int cardid, string licensePlate)
         {
-            if (cardid == null || licensePlate == null)
+            if (cardid == 0 || licensePlate == null)
             {
                 return null;
             }
             return card_LogsDAL.GetCardLogsByCardIDAndLicensePlate(cardid, licensePlate);
         }
-        public bool UpdateCardLogsByLicensePlateAndCardID(Card_Logs cardLogs, string licensePlate, string cardid, string dateTimeStart)
+        public bool UpdateCardLogsByLicensePlateAndCardID(Card_Logs cardLogs, string licensePlate, int cardid, string dateTimeStart)
         {
-            if (cardLogs == null || licensePlate == null || cardid == null || dateTimeStart == null)
+            if (cardLogs == null || licensePlate == null || cardid == 0 || dateTimeStart == null)
             {
                 return false;
             }

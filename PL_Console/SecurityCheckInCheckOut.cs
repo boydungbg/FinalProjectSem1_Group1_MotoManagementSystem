@@ -37,7 +37,7 @@ namespace PL_Console
                     }
                     if (item.Card_Status == 1)
                     {
-                        cardLogs = manager.GetCardLogsByCardIDAndLicensePlate(item.Card_id, item.LicensePlate, user);
+                        cardLogs = manager.GetCardLogsByCardIDAndLicensePlate(item.Card_id.Value, item.LicensePlate, user);
                         status = "Hoạt động";
                         if (cardLogs != null)
                         {
@@ -54,17 +54,20 @@ namespace PL_Console
         }
         public Card EnterCardID(User user)
         {
-            string card_id;
-            Console.Write("- Nhập mã thẻ (VD:CM01): ");
+            int card_id;
+            Console.Write("- Nhập mã thẻ (VD:10010): ");
             do
             {
-                card_id = Console.ReadLine();
-                if (manager.validate(1, card_id) == false)
+                try
                 {
-                    Console.Write("↻ Mã thẻ không hợp lệ (VD:CM01). Nhập lại: ");
-                    card_id = null;
+                    card_id = Int32.Parse(Console.ReadLine());
                 }
-            } while (card_id == null);
+                catch (System.Exception)
+                {
+                    Console.Write("↻ Mã thẻ không hợp lệ (VD:10010). Nhập lại: ");
+                    card_id = 0;
+                }
+            } while (card_id == 0);
             Card card = manager.GetCardByID(card_id, user);
             if (card == null)
             {
@@ -101,7 +104,7 @@ namespace PL_Console
             Console.WriteLine("- Hết hạn: " + timeCard);
             if (cardDetail != null)
             {
-                if ((cardDetail.End_day.Value - DateTime.Now).Days <= 5)
+                if ((cardDetail.End_day.Value - DateTime.Now).Days <= 5 && (cardDetail.End_day.Value - DateTime.Now).Days >= 0)
                 {
                     Console.WriteLine("↪ NOTICE: THẺ CỦA BẠN CÒN {0} NGÀY SẼ HẾT HẠN ☹", (cardDetail.End_day.Value - DateTime.Now).Days);
                 }
@@ -169,7 +172,7 @@ namespace PL_Console
                 if (licensePlate != null && card != null)
                 {
                     Card newCard = new Card(card.Card_id, licensePlate, null, card.Card_Status, null, null, null);
-                    Card_Logs cl = new Card_Logs(newCard.Card_id, user.User_name, licensePlate, DateTime.Now, null, null, null);
+                    Card_Logs cl = new Card_Logs(newCard.Card_id.Value, user.User_name, licensePlate, DateTime.Now, null, null, null);
                     manager.UpdateCardByID(newCard, user);
                     manager.CreateCardLogs(cl, user);
                     Console.WriteLine(b);
@@ -204,7 +207,7 @@ namespace PL_Console
             Console.WriteLine(b);
             Console.WriteLine("- Vé xe: " + card.Card_id);
             Console.WriteLine("- Loại thẻ: " + card.Card_type);
-            cardLogs = manager.GetCardLogsByCardIDAndLicensePlate(card.Card_id, card.LicensePlate, user);
+            cardLogs = manager.GetCardLogsByCardIDAndLicensePlate(card.Card_id.Value, card.LicensePlate, user);
             Customer cus = manager.GetCustomerByLincese_plate(card.LicensePlate, user);
             Card_Detail cardDetail = manager.GetCardDetailByID(card.Card_id, user);
             cardLogs.IntoMoney = 0;
@@ -229,7 +232,7 @@ namespace PL_Console
             Console.WriteLine("- Giờ ra: " + cardLogs.DateTimeEnd);
             if (cardDetail != null)
             {
-                if ((cardDetail.End_day.Value - DateTime.Now).Days <= 5)
+                if ((cardDetail.End_day.Value - DateTime.Now).Days <= 5 && (cardDetail.End_day.Value - DateTime.Now).Days >= 0)
                 {
                     Console.WriteLine("↪ NOTICE: THẺ CỦA BẠN CÒN {0} NGÀY SẼ HẾT HẠN ☹", (cardDetail.End_day.Value - DateTime.Now).Days);
                 }
@@ -303,13 +306,13 @@ namespace PL_Console
                     }
                     else
                     {
-                        cardLogs = EnterLicensePlateCheckOut(card,user);
+                        cardLogs = EnterLicensePlateCheckOut(card, user);
                     }
                 }
                 if (cardLogs != null && card != null)
                 {
                     Card newCard = new Card(card.Card_id, card.LicensePlate, null, card.Card_Status, null, null, null);
-                    Card_Logs cl = new Card_Logs(newCard.Card_id, null, cardLogs.LisensePlate, cardLogs.DateTimeStart, cardLogs.DateTimeEnd, cardLogs.SendTime, cardLogs.IntoMoney);
+                    Card_Logs cl = new Card_Logs(newCard.Card_id.Value, null, cardLogs.LisensePlate, cardLogs.DateTimeStart, cardLogs.DateTimeEnd, cardLogs.SendTime, cardLogs.IntoMoney);
                     manager.UpdateCardByID(newCard, user);
                     manager.UpdateCardLogs(cl, user);
                     Console.WriteLine(b);

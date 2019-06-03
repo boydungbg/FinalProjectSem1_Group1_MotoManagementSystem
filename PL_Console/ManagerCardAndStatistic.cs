@@ -157,14 +157,14 @@ namespace PL_console
             }
             return newCus;
         }
-        public string AutoIncrementID(User user)
+        public int AutoIncrementID(User user)
         {
-            string card_id = "";
+            int card_id = 0;
             Card newCard = null;
             try
             {
                 CardBL cardBL = new CardBL();
-                newCard = cardBL.GetCardByWord();
+                newCard = cardBL.GetCardID();
             }
             catch (Exception ex)
             {
@@ -172,21 +172,11 @@ namespace PL_console
             }
             if (newCard == null)
             {
-                card_id = "CM01";
+                card_id = 10000;
             }
             else
             {
-                int a = Int32.Parse(newCard.Card_id.Substring(2));
-                if (a < 9)
-                {
-                    a = a + 1;
-                    card_id = Convert.ToString("CM0" + a);
-                }
-                if (a >= 9)
-                {
-                    a = a + 1;
-                    card_id = Convert.ToString("CM" + a);
-                }
+                card_id = newCard.Card_id.Value + 1;
             }
             return card_id;
         }
@@ -195,19 +185,6 @@ namespace PL_console
             if (input == "" || input == null)
             {
                 return false;
-            }
-            if (check == 1)
-            {
-                Regex regex = new Regex("[C][MD][0-9]{2}");
-                MatchCollection matchCollectionstr = regex.Matches(input);
-                if (matchCollectionstr.Count == 0)
-                {
-                    return false;
-                }
-                if (input.Length <= 3 || input.Length >= 5)
-                {
-                    return false;
-                }
             }
             if (check == 2)
             {
@@ -332,13 +309,13 @@ namespace PL_console
                 Console.ReadKey();
             }
         }
-        public Card_Detail GetCardDetailByID(string cardid, User user)
+        public Card_Detail GetCardDetailByID(int? cardid, User user)
         {
             Card_Detail cd = null;
             try
             {
                 Card_detailBL cdBL = new Card_detailBL();
-                cd = cdBL.GetCard_DetailbyID(cardid);
+                cd = cdBL.GetCard_DetailbyID(cardid.Value);
             }
             catch (Exception ex)
             {
@@ -346,7 +323,7 @@ namespace PL_console
             }
             return cd;
         }
-        public Card_Logs GetCardLogsByCardIDAndLicensePlate(string cardid, string licensePlate, User user)
+        public Card_Logs GetCardLogsByCardIDAndLicensePlate(int cardid, string licensePlate, User user)
         {
             Card_Logs cardLogs = null;
             try
@@ -360,7 +337,7 @@ namespace PL_console
             }
             return cardLogs;
         }
-        public Card GetCardByID(string cardid, User user)
+        public Card GetCardByID(int cardid, User user)
         {
             Card card = null;
             try
@@ -393,7 +370,7 @@ namespace PL_console
             try
             {
                 CardBL cardBL = new CardBL();
-                cardBL.UpdateCardByID((card), card.Card_id);
+                cardBL.UpdateCardByID((card), card.Card_id.Value);
             }
             catch (Exception ex)
             {
@@ -506,10 +483,12 @@ namespace PL_console
             var table = new ConsoleTable("STT", "Biển số xe", "Thời gian vào", "Thời gian ra", "Mã thẻ", "Loại thẻ", "Trạng thái", "Giá tiền");
             int STT = 0;
             Card card = null;
+            Card_Detail card_Detail = null;
             foreach (var item in cardLogs)
             {
                 card = GetCardByID(item.Card_id, user);
-                if (card.Card_type == "Thẻ ngày")
+                card_Detail = GetCardDetailByID(item.Card_id, user);
+                if (card.Card_type == "Thẻ ngày" || card_Detail.End_day < DateTime.Now)
                 {
                     STT = STT + 1;
                     if (item.DateTimeEnd == new DateTime(0))

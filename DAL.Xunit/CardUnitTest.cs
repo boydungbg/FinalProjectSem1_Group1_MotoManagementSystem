@@ -11,21 +11,21 @@ namespace DAL.Xunit
         {
             DateTime start_day = new DateTime(2019, 5, 17);
             DateTime end_day = new DateTime(2019, 6, 17);
-            Card card = new Card("CM21", "89B5-8888", "Thẻ tháng", null, null, null, null);
+            Card card = new Card(10099, "89B5-8888", "Thẻ tháng", null, null, null, null);
             Customer cus = new Customer("101029011", "Lê Chí Dũng", "Bắc Giang", "89B5-8888");
-            Card_Detail card_Detail = new Card_Detail("CM21", "101029011", start_day, end_day);
+            Card_Detail card_Detail = new Card_Detail(10099, "101029011", start_day, end_day);
             CardDAL cardDAL = new CardDAL();
             Assert.True(cardDAL.CreateCard(card, cus, card_Detail));
             card = new Card(null, "89B5-9988", null, 1, null, null, null);
             cardDAL = new CardDAL();
-            Assert.True(cardDAL.UpdateCardByID(card, "CM21"));
+            Assert.True(cardDAL.UpdateCardByID(card, 10099));
             cardDAL = new CardDAL();
-            Assert.True(cardDAL.DeleteCardByID("CM21", "101029011"));
+            Assert.True(cardDAL.DeleteCardByID(10099, "101029011"));
         }
         [Theory]
-        [InlineData("CM01")]
-        [InlineData("CM02")]
-        public void GetCardByIDTest1(string card_id)
+        [InlineData(10011)]
+        [InlineData(10012)]
+        public void GetCardByIDTest1(int card_id)
         {
             CardDAL cardDAL = new CardDAL();
             Card card = cardDAL.GetCardByID(card_id);
@@ -33,9 +33,9 @@ namespace DAL.Xunit
             Assert.Equal(card_id, card.Card_id);
         }
         [Theory]
-        [InlineData("CM40")]
-        [InlineData("!@#!@$")]
-        public void GetCardByIDTest2(string card_id)
+        [InlineData(10099)]
+        [InlineData(12231)]
+        public void GetCardByIDTest2(int card_id)
         {
             CardDAL cardDAL = new CardDAL();
             Card card = cardDAL.GetCardByID(card_id);
@@ -68,10 +68,10 @@ namespace DAL.Xunit
             Assert.Null(card);
         }
         [Fact]
-        public void GetCardByWordTest1()
+        public void GetCardIDTest1()
         {
             CardDAL cardDAL = new CardDAL();
-            Card card = cardDAL.GetCardByWord();
+            Card card = cardDAL.GetCardID();
             Assert.NotNull(card);
         }
     }

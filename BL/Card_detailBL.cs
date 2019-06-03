@@ -10,9 +10,9 @@ namespace BL
         {
             cardDetailDAL = new Card_detailDAL();
         }
-        public Card_Detail GetCard_DetailbyID(string id)
+        public Card_Detail GetCard_DetailbyID(int id)
         {
-            if (id == null)
+            if (id == 0)
             {
                 return null;
             }

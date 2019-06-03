@@ -19,9 +19,9 @@ namespace DAL
                 connection.Open();
             }
         }
-        public Card_Detail GetCard_DetailByID(string card_id)
+        public Card_Detail GetCard_DetailByID(int card_id)
         {
-            query = @"Select card_id,cus_id,start_day,max(end_day) from Card_detail where card_id = '" + card_id + "' ;";
+            query = @"Select card_id,cus_id,start_day,max(end_day) from Card_detail where card_id = " + card_id + " ;";
             reader = DBHelper.ExecQuery(query, connection);
             Card_Detail card_Detail = null;
             if (reader.Read())
@@ -38,7 +38,7 @@ namespace DAL
             {
                 return null;
             }
-            card_Detail.Card_id = reader.GetString("card_id");
+            card_Detail.Card_id = reader.GetInt32("card_id");
             card_Detail.Cus_id = reader.GetString("cus_id");
             card_Detail.Start_day = reader.GetDateTime("start_day");
             card_Detail.End_day = reader.GetDateTime("max(end_day)");
