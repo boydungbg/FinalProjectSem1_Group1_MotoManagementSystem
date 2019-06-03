@@ -1,0 +1,15 @@
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\BL\bin\Release\netstandard2.0\win10-x64\ConnectionString.txt
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\BL\bin\Release\netstandard2.0\win10-x64\BL.deps.json
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\BL\bin\Release\netstandard2.0\win10-x64\BL.dll
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\BL\bin\Release\netstandard2.0\win10-x64\BL.pdb
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\BL\bin\Release\netstandard2.0\win10-x64\DAL.dll
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\BL\bin\Release\netstandard2.0\win10-x64\Persistence.dll
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\BL\bin\Release\netstandard2.0\win10-x64\Persistence.pdb
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\BL\bin\Release\netstandard2.0\win10-x64\DAL.pdb
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\BL\obj\Release\netstandard2.0\win10-x64\BL.csprojAssemblyReference.cache
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\BL\obj\Release\netstandard2.0\win10-x64\BL.csproj.CoreCompileInputs.cache
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\BL\obj\Release\netstandard2.0\win10-x64\BL.AssemblyInfoInputs.cache
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\BL\obj\Release\netstandard2.0\win10-x64\BL.AssemblyInfo.cs
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\BL\obj\Release\netstandard2.0\win10-x64\BL.csproj.CopyComplete
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\BL\obj\Release\netstandard2.0\win10-x64\BL.dll
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\BL\obj\Release\netstandard2.0\win10-x64\BL.pdb

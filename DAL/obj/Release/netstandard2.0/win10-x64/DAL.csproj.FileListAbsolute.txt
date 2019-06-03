@@ -1,0 +1,13 @@
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL\bin\Release\netstandard2.0\win10-x64\ConnectionString.txt
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL\bin\Release\netstandard2.0\win10-x64\DAL.deps.json
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL\bin\Release\netstandard2.0\win10-x64\DAL.dll
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL\bin\Release\netstandard2.0\win10-x64\DAL.pdb
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL\bin\Release\netstandard2.0\win10-x64\Persistence.dll
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL\bin\Release\netstandard2.0\win10-x64\Persistence.pdb
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL\obj\Release\netstandard2.0\win10-x64\DAL.csprojAssemblyReference.cache
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL\obj\Release\netstandard2.0\win10-x64\DAL.csproj.CoreCompileInputs.cache
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL\obj\Release\netstandard2.0\win10-x64\DAL.AssemblyInfoInputs.cache
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL\obj\Release\netstandard2.0\win10-x64\DAL.AssemblyInfo.cs
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL\obj\Release\netstandard2.0\win10-x64\DAL.csproj.CopyComplete
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL\obj\Release\netstandard2.0\win10-x64\DAL.dll
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL\obj\Release\netstandard2.0\win10-x64\DAL.pdb

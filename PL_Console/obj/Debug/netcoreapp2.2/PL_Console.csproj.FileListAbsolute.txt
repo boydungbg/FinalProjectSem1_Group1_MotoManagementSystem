@@ -1,76 +1,19 @@
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\PL_Console\bin\Debug\netcoreapp2.2\PL_Console.deps.json
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\PL_Console\bin\Debug\netcoreapp2.2\PL_Console.runtimeconfig.json
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\PL_Console\bin\Debug\netcoreapp2.2\PL_Console.runtimeconfig.dev.json
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\PL_Console\bin\Debug\netcoreapp2.2\PL_Console.dll
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\PL_Console\bin\Debug\netcoreapp2.2\PL_Console.pdb
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\PL_Console\bin\Debug\netcoreapp2.2\BL.dll
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\PL_Console\bin\Debug\netcoreapp2.2\DAL.dll
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\PL_Console\bin\Debug\netcoreapp2.2\Persistence.dll
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\PL_Console\bin\Debug\netcoreapp2.2\BL.pdb
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\PL_Console\bin\Debug\netcoreapp2.2\Persistence.pdb
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\PL_Console\bin\Debug\netcoreapp2.2\DAL.pdb
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\PL_Console\obj\Debug\netcoreapp2.2\PL_Console.csprojAssemblyReference.cache
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\PL_Console\obj\Debug\netcoreapp2.2\PL_Console.csproj.CoreCompileInputs.cache
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\PL_Console\obj\Debug\netcoreapp2.2\PL_Console.AssemblyInfoInputs.cache
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\PL_Console\obj\Debug\netcoreapp2.2\PL_Console.AssemblyInfo.cs
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\PL_Console\obj\Debug\netcoreapp2.2\PL_Console.csproj.CopyComplete
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\PL_Console\obj\Debug\netcoreapp2.2\PL_Console.dll
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\PL_Console\obj\Debug\netcoreapp2.2\PL_Console.pdb
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoManagementSystem\PL_Console\bin\Debug\netcoreapp2.2\ConnectionString.txt
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_console\bin\Debug\netcoreapp2.2\ConnectionString.txt
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_console\bin\Debug\netcoreapp2.2\PL_Console.deps.json
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_console\bin\Debug\netcoreapp2.2\PL_Console.runtimeconfig.json
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_console\bin\Debug\netcoreapp2.2\PL_Console.runtimeconfig.dev.json
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_console\bin\Debug\netcoreapp2.2\PL_Console.dll
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_console\bin\Debug\netcoreapp2.2\PL_Console.pdb
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_console\bin\Debug\netcoreapp2.2\BL.dll
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_console\bin\Debug\netcoreapp2.2\DAL.dll
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_console\bin\Debug\netcoreapp2.2\Persistence.dll
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_console\bin\Debug\netcoreapp2.2\BL.pdb
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_console\bin\Debug\netcoreapp2.2\Persistence.pdb
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_console\bin\Debug\netcoreapp2.2\DAL.pdb
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_console\obj\Debug\netcoreapp2.2\PL_Console.csprojAssemblyReference.cache
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_console\obj\Debug\netcoreapp2.2\PL_Console.csproj.CoreCompileInputs.cache
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_console\obj\Debug\netcoreapp2.2\PL_Console.AssemblyInfoInputs.cache
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_console\obj\Debug\netcoreapp2.2\PL_Console.AssemblyInfo.cs
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_console\obj\Debug\netcoreapp2.2\PL_Console.csproj.CopyComplete
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_console\obj\Debug\netcoreapp2.2\PL_Console.dll
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_console\obj\Debug\netcoreapp2.2\PL_Console.pdb
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem-1\PL_Console\bin\Debug\netcoreapp2.2\ConnectionString.txt
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem-1\PL_Console\bin\Debug\netcoreapp2.2\PL_Console.deps.json
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem-1\PL_Console\bin\Debug\netcoreapp2.2\PL_Console.runtimeconfig.json
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem-1\PL_Console\bin\Debug\netcoreapp2.2\PL_Console.runtimeconfig.dev.json
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem-1\PL_Console\bin\Debug\netcoreapp2.2\PL_Console.dll
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem-1\PL_Console\bin\Debug\netcoreapp2.2\PL_Console.pdb
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem-1\PL_Console\bin\Debug\netcoreapp2.2\BL.dll
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem-1\PL_Console\bin\Debug\netcoreapp2.2\DAL.dll
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem-1\PL_Console\bin\Debug\netcoreapp2.2\Persistence.dll
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem-1\PL_Console\bin\Debug\netcoreapp2.2\BL.pdb
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem-1\PL_Console\bin\Debug\netcoreapp2.2\Persistence.pdb
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem-1\PL_Console\bin\Debug\netcoreapp2.2\DAL.pdb
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem-1\PL_Console\obj\Debug\netcoreapp2.2\PL_Console.csprojAssemblyReference.cache
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem-1\PL_Console\obj\Debug\netcoreapp2.2\PL_Console.csproj.CoreCompileInputs.cache
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem-1\PL_Console\obj\Debug\netcoreapp2.2\PL_Console.AssemblyInfoInputs.cache
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem-1\PL_Console\obj\Debug\netcoreapp2.2\PL_Console.AssemblyInfo.cs
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem-1\PL_Console\obj\Debug\netcoreapp2.2\PL_Console.csproj.CopyComplete
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem-1\PL_Console\obj\Debug\netcoreapp2.2\PL_Console.dll
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem-1\PL_Console\obj\Debug\netcoreapp2.2\PL_Console.pdb
-C:\Users\luvso\Desktop\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_console\bin\Debug\netcoreapp2.2\ConnectionString.txt
-C:\Users\luvso\Desktop\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_console\bin\Debug\netcoreapp2.2\PL_Console.deps.json
-C:\Users\luvso\Desktop\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_console\bin\Debug\netcoreapp2.2\PL_Console.runtimeconfig.json
-C:\Users\luvso\Desktop\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_console\bin\Debug\netcoreapp2.2\PL_Console.runtimeconfig.dev.json
-C:\Users\luvso\Desktop\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_console\bin\Debug\netcoreapp2.2\PL_Console.dll
-C:\Users\luvso\Desktop\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_console\bin\Debug\netcoreapp2.2\PL_Console.pdb
-C:\Users\luvso\Desktop\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_console\bin\Debug\netcoreapp2.2\BL.dll
-C:\Users\luvso\Desktop\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_console\bin\Debug\netcoreapp2.2\DAL.dll
-C:\Users\luvso\Desktop\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_console\bin\Debug\netcoreapp2.2\Persistence.dll
-C:\Users\luvso\Desktop\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_console\bin\Debug\netcoreapp2.2\BL.pdb
-C:\Users\luvso\Desktop\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_console\bin\Debug\netcoreapp2.2\Persistence.pdb
-C:\Users\luvso\Desktop\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_console\bin\Debug\netcoreapp2.2\DAL.pdb
-C:\Users\luvso\Desktop\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_console\obj\Debug\netcoreapp2.2\PL_Console.csprojAssemblyReference.cache
-C:\Users\luvso\Desktop\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_console\obj\Debug\netcoreapp2.2\PL_Console.csproj.CoreCompileInputs.cache
-C:\Users\luvso\Desktop\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_console\obj\Debug\netcoreapp2.2\PL_Console.AssemblyInfoInputs.cache
-C:\Users\luvso\Desktop\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_console\obj\Debug\netcoreapp2.2\PL_Console.AssemblyInfo.cs
-C:\Users\luvso\Desktop\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_console\obj\Debug\netcoreapp2.2\PL_Console.csproj.CopyComplete
-C:\Users\luvso\Desktop\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_console\obj\Debug\netcoreapp2.2\PL_Console.dll
-C:\Users\luvso\Desktop\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_console\obj\Debug\netcoreapp2.2\PL_Console.pdb
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_Console\bin\Debug\netcoreapp2.2\ConnectionString.txt
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_Console\bin\Debug\netcoreapp2.2\PL_Console.deps.json
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_Console\bin\Debug\netcoreapp2.2\PL_Console.runtimeconfig.json
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_Console\bin\Debug\netcoreapp2.2\PL_Console.runtimeconfig.dev.json
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_Console\bin\Debug\netcoreapp2.2\PL_Console.dll
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_Console\bin\Debug\netcoreapp2.2\PL_Console.pdb
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_Console\bin\Debug\netcoreapp2.2\BL.dll
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_Console\bin\Debug\netcoreapp2.2\DAL.dll
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_Console\bin\Debug\netcoreapp2.2\Persistence.dll
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_Console\bin\Debug\netcoreapp2.2\BL.pdb
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_Console\bin\Debug\netcoreapp2.2\Persistence.pdb
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_Console\bin\Debug\netcoreapp2.2\DAL.pdb
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_Console\obj\Debug\netcoreapp2.2\PL_Console.csprojAssemblyReference.cache
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_Console\obj\Debug\netcoreapp2.2\PL_Console.csproj.CoreCompileInputs.cache
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_Console\obj\Debug\netcoreapp2.2\PL_Console.AssemblyInfoInputs.cache
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_Console\obj\Debug\netcoreapp2.2\PL_Console.AssemblyInfo.cs
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_Console\obj\Debug\netcoreapp2.2\PL_Console.csproj.CopyComplete
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_Console\obj\Debug\netcoreapp2.2\PL_Console.dll
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_Console\obj\Debug\netcoreapp2.2\PL_Console.pdb
