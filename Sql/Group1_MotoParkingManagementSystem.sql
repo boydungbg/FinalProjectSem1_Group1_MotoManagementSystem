@@ -16,34 +16,34 @@ values ('123456789','Đào Văn Đức','Thái Bình','75G1-2222'),
 ('123567436','Boydung','Bắc Giang','88A1-8888');
 select * from Customer;
 create table if not exists Card(
-card_id varchar(10) primary key,
+card_id int primary key auto_increment ,
 card_type nvarchar(50) not null,
 license_plate varchar(20) not null,
 card_status tinyint not null default 0 ,
 date_created datetime not null default current_timestamp
 ); 
-insert into Card(card_id,card_type,license_plate)
-values('CD01','Thẻ ngày','No License Plate'),
-('CD02','Thẻ ngày','No License Plate'),
-('CD03','Thẻ ngày','No License Plate'),
-('CD04','Thẻ ngày','No License Plate'),
-('CD05','Thẻ ngày','No License Plate'),
-('CD06','Thẻ ngày','No License Plate'),
-('CD07','Thẻ ngày','No License Plate'),
-('CD08','Thẻ ngày','No License Plate'),
-('CD09','Thẻ ngày','No License Plate'),
-('CD10','Thẻ ngày','No License Plate');
-
-insert into Card(card_id,card_type,license_plate)
-values('CM01','Thẻ tháng','75G1-2222'),
-('CM02','Thẻ tháng','33G1-3333'),
-('CM03','Thẻ tháng','22E1-2222'),
-('CM04','Thẻ tháng','44S1-4422'),
-('CM05','Thẻ tháng','88G1-8888'),
-('CM06','Thẻ tháng','88A1-8888');
+ALTER TABLE Card AUTO_INCREMENT = 10000;
+insert into Card(card_type,license_plate)
+values('Thẻ ngày','No License Plate'),
+('Thẻ ngày','No License Plate'),
+('Thẻ ngày','No License Plate'),
+('Thẻ ngày','No License Plate'),
+('Thẻ ngày','No License Plate'),
+('Thẻ ngày','No License Plate'),
+('Thẻ ngày','No License Plate'),
+('Thẻ ngày','No License Plate'),
+('Thẻ ngày','No License Plate'),
+('Thẻ ngày','No License Plate');
+insert into Card(card_type,license_plate)
+values('Thẻ tháng','75G1-2222'),
+('Thẻ tháng','33G1-3333'),
+('Thẻ tháng','22E1-2222'),
+('Thẻ tháng','44S1-4422'),
+('Thẻ tháng','88G1-8888'),
+('Thẻ tháng','88A1-8888');
 select * from Card;
 create table if not exists Card_detail(
-card_id varchar(10)  not null,
+card_id int not null,
 cus_id varchar(20)  not null,
 constraint pk_carddetail primary key (card_id,cus_id),
 constraint fk_CardDetail_Card foreign key (card_id) references Card(card_id),
@@ -52,12 +52,12 @@ start_day datetime not null,
 end_day datetime not null
 );
 insert into Card_detail (card_id,cus_id,start_day,end_day)
-values('CM01','123456789','2019-05-24','2019-06-24'),
-('CM02','123456709','2019-05-24','2019-06-24'),
-('CM03','122332387','2019-05-24','2019-06-24'),
-('CM04','123445785','2019-05-24','2019-06-24'),
-('CM05','122446775','2019-05-24','2019-06-24'),
-('CM06','123567436','2019-04-24','2019-05-30');
+values(10010,'123456789','2019-05-24','2019-06-24'),
+(10011,'123456709','2019-05-24','2019-06-24'),
+(10012,'122332387','2019-05-24','2019-06-24'),
+(10013,'123445785','2019-05-24','2019-06-24'),
+(10014,'122446775','2019-05-24','2019-06-24'),
+(10015,'123567436','2019-04-24','2019-05-30');
 select * from Card_detail;
 create table if not exists Accounts(
 acc_name varchar(50) primary key,
@@ -73,7 +73,7 @@ values('manager_01','24122000','Lê Chí Dũng','boydungbg@gmail.com',0),
 select * from Accounts;
 create table if not exists Card_Logs(
 cl_id int primary key auto_increment,
-card_id varchar(10)  not null,
+card_id int  not null,
 constraint fk_CardLogs_Card foreign key (card_id) references Card(card_id),
 acc_name varchar(50)  not null,
 constraint fk_CardLogs_Account foreign key (acc_name) references Accounts(acc_name),

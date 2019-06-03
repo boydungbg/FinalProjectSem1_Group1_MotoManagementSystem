@@ -483,12 +483,10 @@ namespace PL_console
             var table = new ConsoleTable("STT", "Biển số xe", "Thời gian vào", "Thời gian ra", "Mã thẻ", "Loại thẻ", "Trạng thái", "Giá tiền");
             int STT = 0;
             Card card = null;
-            Card_Detail card_Detail = null;
             foreach (var item in cardLogs)
             {
                 card = GetCardByID(item.Card_id, user);
-                card_Detail = GetCardDetailByID(item.Card_id, user);
-                if (card.Card_type == "Thẻ ngày" || card_Detail.End_day < DateTime.Now)
+                if (card.Card_type == "Thẻ ngày" || item.IntoMoney > 0)
                 {
                     STT = STT + 1;
                     if (item.DateTimeEnd == new DateTime(0))
@@ -518,11 +516,11 @@ namespace PL_console
                 Console.Clear();
                 Console.WriteLine();
                 Console.WriteLine();
-                Console.WriteLine("                   Từ ngày: {0}                                 Đến ngày: {1}", from, to);
+                Console.WriteLine("                   Từ ngày: {0}                                  Đến ngày: {1}", from, to);
                 Console.WriteLine();
                 Console.WriteLine("                   Thổng số tiền: {0} VND                            Số lượt:  {1}", totalmoney, Inturn);
                 Console.WriteLine();
-                Console.WriteLine("                   Số tiền chỉ dành cho các xe dùng thẻ ngày.");
+                Console.WriteLine("                   Số tiền chỉ dành cho các xe dùng thẻ ngày và thẻ tháng đã hết hạn.");
                 Console.WriteLine();
                 Console.WriteLine();
                 table.Write(Format.Alternative);
