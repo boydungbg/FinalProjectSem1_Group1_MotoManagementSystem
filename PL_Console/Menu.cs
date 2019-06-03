@@ -81,11 +81,13 @@ namespace PL_Console
                     UserBL userbl = new UserBL();
                     user = userbl.Login(accname, accpass);
                 }
-                catch (System.Exception)
+                catch (System.Exception ex)
                 {
+                    Translate tran = new Translate();
                     Console.WriteLine();
                     Console.WriteLine(b);
-                    Console.Write("Mất kết nối, bạn có muốn đăng nhập lại không? (Y/N)");
+                    Console.WriteLine(tran.Translator(Convert.ToString(ex.Message)));
+                    Console.Write("Lỗi!!! Bạn có muốn đăng nhập lại không? (Y/N)");
                     choice = yesNo();
                     if (choice == 'Y')
                     {
@@ -130,7 +132,7 @@ namespace PL_Console
             }
             if (user.User_level == 0)
             {
-                MenuManager();
+                MenuManager(user);
             }
             if (user.User_level == 1)
             {
@@ -173,7 +175,7 @@ namespace PL_Console
             }
             return true;
         }
-        public void MenuManager()
+        public void MenuManager(User user)
         {
             char choose;
             do
@@ -185,14 +187,14 @@ namespace PL_Console
                 switch (choose)
                 {
                     case '1':
-                        manager.CreateCard();
+                        manager.CreateCard(user);
                         break;
                     case '2':
-                        manager.DisplayListCardsMonth();
+                        manager.DisplayListCardsMonth(user);
                         break;
                     case '3':
                         // MenuStatictis();
-                        manager.Statistical();
+                        manager.Statistical(user);
                         break;
                     case '4':
                         MenuChoice();

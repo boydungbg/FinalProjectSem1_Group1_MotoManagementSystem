@@ -19,3 +19,4 @@ E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSyst
 E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\BL.Xunit\obj\Release\netcoreapp2.2\win10-x64\BL.Xunit.csproj.CopyComplete
 E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\BL.Xunit\obj\Release\netcoreapp2.2\win10-x64\BL.Xunit.dll
 E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\BL.Xunit\obj\Release\netcoreapp2.2\win10-x64\BL.Xunit.pdb
+E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\BL.Xunit\obj\Release\netcoreapp2.2\win10-x64\BL.Xunit.csprojAssemblyReference.cache

@@ -12,19 +12,19 @@ namespace PL_console
     {
         private Menus menu = new Menus();
         string b = "══════════════════════════════════════════════════════════════";
-        public Card SetInfoCard()
+        public Card SetInfoCard(User user)
         {
             Card card = new Card();
             Console.Clear();
             Console.WriteLine(b);
             Console.WriteLine(" Tạo thẻ tháng.");
             Console.WriteLine(b);
-            card.Card_id = GetCardByWord();
+            card.Card_id = AutoIncrementID(user);
             Console.WriteLine("- Mã thẻ: " + card.Card_id);
             card.Card_type = "Thẻ tháng";
             return card;
         }
-        public Customer SetInfoCustomer()
+        public Customer SetInfoCustomer(User user)
         {
             Customer cus = new Customer();
             Console.Write("- Nhập số chứng minh thư nhân dân hoặc thẻ căn cước (VD:123456789): ");
@@ -36,7 +36,7 @@ namespace PL_console
                     Console.Write("↻ Số chứng minh thư hoặc thẻ căn cước khồn hợp lệ (VD:123456789). Nhập lại: ");
                     cus.Cus_id = null;
                 }
-                if (GetCustomerByID(cus.Cus_id) != null)
+                if (GetCustomerByID(cus.Cus_id, user) != null)
                 {
                     Console.Write("↻ Số chứng minh thư nhân dân hoặc thẻ căn cước đã tồn tại. Nhập lại: ");
                     cus.Cus_id = null;
@@ -71,7 +71,7 @@ namespace PL_console
                     Console.Write("↻ Biển số xe không hợp lệ (VD:88X8-8888). Nhập lại: ");
                     cus.Cus_licensePlate = null;
                 }
-                if (GetCustomerByLincese_plate(cus.Cus_licensePlate) != null)
+                if (GetCustomerByLincese_plate(cus.Cus_licensePlate, user) != null)
                 {
                     Console.Write("↻ Biển số xe đã tồn tại. Nhập lại: ");
                     cus.Cus_licensePlate = null;
@@ -79,18 +79,18 @@ namespace PL_console
             } while (cus.Cus_licensePlate == null);
             return cus;
         }
-        public void CreateCard()
+        public void CreateCard(User user)
         {
             bool check = false;
             char yesNo;
             do
             {
-                Card card = SetInfoCard();
-                Customer cus = SetInfoCustomer();
+                Card card = SetInfoCard(user);
+                Customer cus = SetInfoCustomer(user);
                 Card_Detail cd = new Card_Detail();
                 cd.Start_day = DateTime.Now;
                 cd.End_day = new DateTime(DateTime.Now.Year, DateTime.Now.Month + 1, DateTime.Now.Day);
-                check = CreateCard(card, cus, cd);
+                check = CreateCard(card, cus, cd, user);
                 if (check == false)
                 {
                     Console.WriteLine(b);
@@ -110,33 +110,25 @@ namespace PL_console
                 yesNo = menu.yesNo();
                 if (yesNo == 'N')
                 {
-                    menu.MenuManager();
+                    menu.MenuManager(user);
                 }
             } while (yesNo != 'N'); ;
 
         }
-        public bool CreateCard(Card card, Customer cus, Card_Detail cd)
+        public bool CreateCard(Card card, Customer cus, Card_Detail cd, User user)
         {
             try
             {
                 CardBL cardBL = new CardBL();
                 cardBL.CreateCard(card, cus, cd);
             }
-            catch (System.NullReferenceException)
+            catch (Exception ex)
             {
-                Console.WriteLine("MẤT KẾT NỐI, MỜI BẠN ĐĂNG NHẬP LẠI !!!");
-                Console.ReadKey();
-                menu.MenuLogin();
-            }
-            catch (MySql.Data.MySqlClient.MySqlException)
-            {
-                Console.WriteLine("MẤT KẾT NỐI, MỜI BẠN ĐĂNG NHẬP LẠI !!!");
-                Console.ReadKey();
-                menu.MenuLogin();
+                CheckUser(user, ex);
             }
             return true;
         }
-        public Customer GetCustomerByLincese_plate(string licensePlate)
+        public Customer GetCustomerByLincese_plate(string licensePlate, User user)
         {
             Customer newcus = null;
             try
@@ -144,21 +136,13 @@ namespace PL_console
                 CustomerBL cusBL = new CustomerBL();
                 newcus = cusBL.GetCustomerByLincese_plate(licensePlate);
             }
-            catch (System.NullReferenceException)
+            catch (Exception ex)
             {
-                Console.WriteLine("MẤT KẾT NỐI, MỜI BẠN ĐĂNG NHẬP LẠI !!!");
-                Console.ReadKey();
-                menu.MenuLogin();
-            }
-            catch (MySql.Data.MySqlClient.MySqlException)
-            {
-                Console.WriteLine("MẤT KẾT NỐI, MỜI BẠN ĐĂNG NHẬP LẠI !!!");
-                Console.ReadKey();
-                menu.MenuLogin();
+                CheckUser(user, ex);
             }
             return newcus;
         }
-        public Customer GetCustomerByID(string customer_id)
+        public Customer GetCustomerByID(string customer_id, User user)
         {
             Customer newCus = null;
             try
@@ -166,21 +150,14 @@ namespace PL_console
                 CustomerBL cusBL = new CustomerBL();
                 newCus = cusBL.GetCustomerByID(customer_id);
             }
-            catch (System.NullReferenceException)
+            catch (Exception ex)
             {
-                Console.WriteLine("MẤT KẾT NỐI, MỜI BẠN ĐĂNG NHẬP LẠI !!!");
-                Console.ReadKey();
-                menu.MenuLogin();
-            }
-            catch (MySql.Data.MySqlClient.MySqlException)
-            {
-                Console.WriteLine("MẤT KẾT NỐI, MỜI BẠN ĐĂNG NHẬP LẠI !!!");
-                Console.ReadKey();
-                menu.MenuLogin();
+                CheckUser(user, ex);
+
             }
             return newCus;
         }
-        public string GetCardByWord()
+        public string AutoIncrementID(User user)
         {
             string card_id = "";
             Card newCard = null;
@@ -189,17 +166,9 @@ namespace PL_console
                 CardBL cardBL = new CardBL();
                 newCard = cardBL.GetCardByWord();
             }
-            catch (System.NullReferenceException)
+            catch (Exception ex)
             {
-                Console.WriteLine("MẤT KẾT NỐI, MỜI BẠN ĐĂNG NHẬP LẠI !!!");
-                Console.ReadKey();
-                menu.MenuLogin();
-            }
-            catch (MySql.Data.MySqlClient.MySqlException)
-            {
-                Console.WriteLine("MẤT KẾT NỐI, MỜI BẠN ĐĂNG NHẬP LẠI !!!");
-                Console.ReadKey();
-                menu.MenuLogin();
+                CheckUser(user, ex);
             }
             if (newCard == null)
             {
@@ -266,7 +235,7 @@ namespace PL_console
                     return false;
                 }
             }
-            if(check == 6)
+            if (check == 6)
             {
                 Regex regex = new Regex("[A-Z0-9 -]*\\S$");
                 MatchCollection matchCollectionstr = regex.Matches(input);
@@ -303,7 +272,7 @@ namespace PL_console
             }
             return true;
         }
-        public List<Card> GetListCards()
+        public List<Card> GetListCards(User user)
         {
             List<Card> listCards = null;
             try
@@ -311,23 +280,15 @@ namespace PL_console
                 CardBL cardBL = new CardBL();
                 listCards = cardBL.GetlistCard();
             }
-            catch (System.NullReferenceException)
+            catch (Exception ex)
             {
-                Console.WriteLine("MẤT KẾT NỐI, MỜI BẠN ĐĂNG NHẬP LẠI !!!");
-                Console.ReadKey();
-                menu.MenuLogin();
-            }
-            catch (MySql.Data.MySqlClient.MySqlException)
-            {
-                Console.WriteLine("MẤT KẾT NỐI, MỜI BẠN ĐĂNG NHẬP LẠI !!!");
-                Console.ReadKey();
-                menu.MenuLogin();
+                CheckUser(user, ex);
             }
             return listCards;
         }
-        public void DisplayListCardsMonth()
+        public void DisplayListCardsMonth(User user)
         {
-            List<Card> listCards = GetListCards();
+            List<Card> listCards = GetListCards(user);
             string status = "";
             int Count = 0;
             Console.Clear();
@@ -335,7 +296,7 @@ namespace PL_console
             {
                 Console.WriteLine("Không có dữ liệu của thẻ!!! Nhấn Enter để quay lại.");
                 Console.ReadKey();
-                menu.MenuManager();
+                menu.MenuManager(user);
             }
             else
             {
@@ -344,8 +305,8 @@ namespace PL_console
                 {
                     if (item.Card_type == "Thẻ tháng")
                     {
-                        Customer cus = GetCustomerByLincese_plate(item.LicensePlate);
-                        Card_Detail cd = GetCardDetailByID(item.Card_id);
+                        Customer cus = GetCustomerByLincese_plate(item.LicensePlate, user);
+                        Card_Detail cd = GetCardDetailByID(item.Card_id, user);
                         if (cd.End_day > DateTime.Now)
                         {
                             status = "Chưa hết hạn";
@@ -364,14 +325,14 @@ namespace PL_console
                     Console.Clear();
                     Console.WriteLine("Không có dữ liệu của thẻ tháng!!! Nhấn Enter để quay lại.");
                     Console.ReadKey();
-                    menu.MenuManager();
+                    menu.MenuManager(user);
                 }
                 table.Write(Format.Alternative);
                 Console.WriteLine("Nhấn Enter để quay lại.");
                 Console.ReadKey();
             }
         }
-        public Card_Detail GetCardDetailByID(string cardid)
+        public Card_Detail GetCardDetailByID(string cardid, User user)
         {
             Card_Detail cd = null;
             try
@@ -379,21 +340,13 @@ namespace PL_console
                 Card_detailBL cdBL = new Card_detailBL();
                 cd = cdBL.GetCard_DetailbyID(cardid);
             }
-            catch (System.NullReferenceException)
+            catch (Exception ex)
             {
-                Console.WriteLine("MẤT KẾT NỐI, MỜI BẠN ĐĂNG NHẬP LẠI !!!");
-                Console.ReadKey();
-                menu.MenuLogin();
-            }
-            catch (MySql.Data.MySqlClient.MySqlException)
-            {
-                Console.WriteLine("MẤT KẾT NỐI, MỜI BẠN ĐĂNG NHẬP LẠI !!!");
-                Console.ReadKey();
-                menu.MenuLogin();
+                CheckUser(user, ex);
             }
             return cd;
         }
-        public Card_Logs GetCardLogsByCardIDAndLicensePlate(string cardid, string licensePlate)
+        public Card_Logs GetCardLogsByCardIDAndLicensePlate(string cardid, string licensePlate, User user)
         {
             Card_Logs cardLogs = null;
             try
@@ -401,21 +354,13 @@ namespace PL_console
                 Card_LogsBL cardLogsBL = new Card_LogsBL();
                 cardLogs = cardLogsBL.GetCardLogsByCardIDAndLicensePlate(cardid, licensePlate);
             }
-            catch (System.NullReferenceException)
+            catch (Exception ex)
             {
-                Console.WriteLine("MẤT KẾT NỐI, MỜI BẠN ĐĂNG NHẬP LẠI !!!");
-                Console.ReadKey();
-                menu.MenuLogin();
-            }
-            catch (MySql.Data.MySqlClient.MySqlException)
-            {
-                Console.WriteLine("MẤT KẾT NỐI, MỜI BẠN ĐĂNG NHẬP LẠI !!!");
-                Console.ReadKey();
-                menu.MenuLogin();
+                CheckUser(user, ex);
             }
             return cardLogs;
         }
-        public Card GetCardByID(string cardid)
+        public Card GetCardByID(string cardid, User user)
         {
             Card card = null;
             try
@@ -423,21 +368,13 @@ namespace PL_console
                 CardBL cardBL = new CardBL();
                 card = cardBL.GetCardByID(cardid);
             }
-            catch (System.NullReferenceException)
+            catch (Exception ex)
             {
-                Console.WriteLine("MẤT KẾT NỐI, MỜI BẠN ĐĂNG NHẬP LẠI !!!");
-                Console.ReadKey();
-                menu.MenuLogin();
-            }
-            catch (MySql.Data.MySqlClient.MySqlException)
-            {
-                Console.WriteLine("MẤT KẾT NỐI, MỜI BẠN ĐĂNG NHẬP LẠI !!!");
-                Console.ReadKey();
-                menu.MenuLogin();
+                CheckUser(user, ex);
             }
             return card;
         }
-        public Card GetCardByLicensePlate(string licensePlate)
+        public Card GetCardByLicensePlate(string licensePlate, User user)
         {
             Card newCard = null;
             try
@@ -445,84 +382,52 @@ namespace PL_console
                 CardBL cardBL = new CardBL();
                 newCard = cardBL.GetCardByLicensePlate(licensePlate);
             }
-            catch (System.NullReferenceException)
+            catch (Exception ex)
             {
-                Console.WriteLine("MẤT KẾT NỐI, MỜI BẠN ĐĂNG NHẬP LẠI !!!");
-                Console.ReadKey();
-                menu.MenuLogin();
-            }
-            catch (MySql.Data.MySqlClient.MySqlException)
-            {
-                Console.WriteLine("MẤT KẾT NỐI, MỜI BẠN ĐĂNG NHẬP LẠI !!!");
-                Console.ReadKey();
-                menu.MenuLogin();
+                CheckUser(user, ex);
             }
             return newCard;
         }
-        public bool UpdateCardByID(Card card)
+        public bool UpdateCardByID(Card card, User user)
         {
             try
             {
                 CardBL cardBL = new CardBL();
                 cardBL.UpdateCardByID((card), card.Card_id);
             }
-            catch (System.NullReferenceException)
+            catch (Exception ex)
             {
-                Console.WriteLine("MẤT KẾT NỐI, MỜI BẠN ĐĂNG NHẬP LẠI !!!");
-                Console.ReadKey();
-                menu.MenuLogin();
-            }
-            catch (MySql.Data.MySqlClient.MySqlException)
-            {
-                Console.WriteLine("MẤT KẾT NỐI, MỜI BẠN ĐĂNG NHẬP LẠI !!!");
-                Console.ReadKey();
-                menu.MenuLogin();
+                CheckUser(user, ex);
             }
             return true;
         }
-        public bool CreateCardLogs(Card_Logs cardlogs)
+        public bool CreateCardLogs(Card_Logs cardlogs, User user)
         {
             try
             {
                 Card_LogsBL cardLogsBL = new Card_LogsBL();
                 cardLogsBL.CreateCardLogs(cardlogs);
             }
-            catch (System.NullReferenceException)
+            catch (Exception ex)
             {
-                Console.WriteLine("MẤT KẾT NỐI, MỜI BẠN ĐĂNG NHẬP LẠI !!!");
-                Console.ReadKey();
-                menu.MenuLogin();
-            }
-            catch (MySql.Data.MySqlClient.MySqlException)
-            {
-                Console.WriteLine("MẤT KẾT NỐI, MỜI BẠN ĐĂNG NHẬP LẠI !!!");
-                Console.ReadKey();
-                menu.MenuLogin();
+                CheckUser(user, ex);
             }
             return true;
         }
-        public bool UpdateCardLogs(Card_Logs cardlogs)
+        public bool UpdateCardLogs(Card_Logs cardlogs, User user)
         {
             try
             {
                 Card_LogsBL cardLogsBL = new Card_LogsBL();
                 cardLogsBL.UpdateCardLogsByLicensePlateAndCardID(cardlogs, cardlogs.LisensePlate, cardlogs.Card_id, cardlogs.DateTimeStart?.ToString("yyyy-MM-dd HH:mm:ss"));
             }
-            catch (System.NullReferenceException)
+            catch (Exception ex)
             {
-                Console.WriteLine("MẤT KẾT NỐI, MỜI BẠN ĐĂNG NHẬP LẠI !!!");
-                Console.ReadKey();
-                menu.MenuLogin();
-            }
-            catch (MySql.Data.MySqlClient.MySqlException)
-            {
-                Console.WriteLine("MẤT KẾT NỐI, MỜI BẠN ĐĂNG NHẬP LẠI !!!");
-                Console.ReadKey();
-                menu.MenuLogin();
+                CheckUser(user, ex);
             }
             return true;
         }
-        public List<Card_Logs> GetListCardLogs(string from, string to)
+        public List<Card_Logs> GetListCardLogs(string from, string to, User user)
         {
             List<Card_Logs> cardLogs = null;
             try
@@ -530,21 +435,13 @@ namespace PL_console
                 Card_LogsBL cardLogsBL = new Card_LogsBL();
                 cardLogs = cardLogsBL.GetListCardLogs(from, to);
             }
-            catch (System.NullReferenceException)
+            catch (Exception ex)
             {
-                Console.WriteLine("MẤT KẾT NỐI, MỜI BẠN ĐĂNG NHẬP LẠI !!!");
-                Console.ReadKey();
-                menu.MenuLogin();
-            }
-            catch (MySql.Data.MySqlClient.MySqlException)
-            {
-                Console.WriteLine("MẤT KẾT NỐI, MỜI BẠN ĐĂNG NHẬP LẠI !!!");
-                Console.ReadKey();
-                menu.MenuLogin();
+                CheckUser(user, ex);
             }
             return cardLogs;
         }
-        public void Statistical()
+        public void Statistical(User user)
         {
             string datimeEnd = "";
             string status = "";
@@ -605,13 +502,13 @@ namespace PL_console
                     to = null;
                 }
             } while (to == null);
-            List<Card_Logs> cardLogs = GetListCardLogs(Convert.ToDateTime(from).ToString("yyyy-MM-dd 00:00:00"), Convert.ToDateTime(to).ToString("yyyy-MM-dd 23:59:59"));
+            List<Card_Logs> cardLogs = GetListCardLogs(Convert.ToDateTime(from).ToString("yyyy-MM-dd 00:00:00"), Convert.ToDateTime(to).ToString("yyyy-MM-dd 23:59:59"), user);
             var table = new ConsoleTable("STT", "Biển số xe", "Thời gian vào", "Thời gian ra", "Mã thẻ", "Loại thẻ", "Trạng thái", "Giá tiền");
             int STT = 0;
             Card card = null;
             foreach (var item in cardLogs)
             {
-                card = GetCardByID(item.Card_id);
+                card = GetCardByID(item.Card_id, user);
                 if (card.Card_type == "Thẻ ngày")
                 {
                     STT = STT + 1;
@@ -653,6 +550,23 @@ namespace PL_console
                 Console.Write("Nhấn Enter để quay lại.");
                 Console.ReadKey();
                 Console.WriteLine();
+            }
+        }
+        public void CheckUser(User user, Exception ex)
+        {
+
+            Translate tran = new Translate();
+            Console.WriteLine();
+            Console.WriteLine(tran.Translator(Convert.ToString(ex.Message)));
+            Console.WriteLine("LỖI!!! MỜI BẠN THỬ LẠI !!!");
+            Console.ReadKey();
+            if (user.User_level == 0)
+            {
+                menu.MenuManager(user);
+            }
+            if (user.User_level == 1)
+            {
+                menu.CheckInCheckOut(user);
             }
         }
     }

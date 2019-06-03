@@ -12,7 +12,7 @@ namespace PL_Console
         private Menus menu = new Menus();
         public void DisplayListCards(User user)
         {
-            List<Card> ListCards = manager.GetListCards();
+            List<Card> ListCards = manager.GetListCards(user);
             if (ListCards.Capacity == 0)
             {
                 Console.Clear();
@@ -37,7 +37,7 @@ namespace PL_Console
                     }
                     if (item.Card_Status == 1)
                     {
-                        cardLogs = manager.GetCardLogsByCardIDAndLicensePlate(item.Card_id, item.LicensePlate);
+                        cardLogs = manager.GetCardLogsByCardIDAndLicensePlate(item.Card_id, item.LicensePlate, user);
                         status = "Hoạt động";
                         if (cardLogs != null)
                         {
@@ -52,7 +52,7 @@ namespace PL_Console
                 Console.WriteLine();
             }
         }
-        public Card EnterCardID()
+        public Card EnterCardID(User user)
         {
             string card_id;
             Console.Write("- Nhập mã thẻ (VD:CM01): ");
@@ -65,7 +65,7 @@ namespace PL_Console
                     card_id = null;
                 }
             } while (card_id == null);
-            Card card = manager.GetCardByID(card_id);
+            Card card = manager.GetCardByID(card_id, user);
             if (card == null)
             {
                 Console.WriteLine("↻ Thẻ không tồn tại.");
@@ -73,7 +73,7 @@ namespace PL_Console
             }
             return card;
         }
-        public string EnterLicensePlateCheckIn(Card card)
+        public string EnterLicensePlateCheckIn(Card card, User user)
         {
             string licensePlate = "";
             string timeCard = "";
@@ -82,8 +82,8 @@ namespace PL_Console
             Console.WriteLine(b);
             Console.WriteLine("- Vé xe: " + card.Card_id);
             Console.WriteLine("- Loại thẻ: " + card.Card_type);
-            Customer cus = manager.GetCustomerByLincese_plate(card.LicensePlate);
-            Card_Detail cardDetail = manager.GetCardDetailByID(card.Card_id);
+            Customer cus = manager.GetCustomerByLincese_plate(card.LicensePlate, user);
+            Card_Detail cardDetail = manager.GetCardDetailByID(card.Card_id, user);
             if (cus == null)
             {
                 name = "Không có";
@@ -123,7 +123,7 @@ namespace PL_Console
             if (card.Card_type == "Thẻ ngày")
             {
                 Card newcard = null;
-                newcard = manager.GetCardByLicensePlate(licensePlate);
+                newcard = manager.GetCardByLicensePlate(licensePlate, user);
                 if (newcard != null)
                 {
                     Console.WriteLine("↻ Biển số xe trùng với một khách hàng khác.");
@@ -153,7 +153,7 @@ namespace PL_Console
                 Console.WriteLine(b);
                 Console.WriteLine(" Kiểm tra xe vào.");
                 Console.WriteLine(b);
-                Card card = EnterCardID();
+                Card card = EnterCardID(user);
                 if (card != null)
                 {
                     if (card.Card_Status == 1)
@@ -163,15 +163,15 @@ namespace PL_Console
                     }
                     else
                     {
-                        licensePlate = EnterLicensePlateCheckIn(card);
+                        licensePlate = EnterLicensePlateCheckIn(card, user);
                     }
                 }
                 if (licensePlate != null && card != null)
                 {
                     Card newCard = new Card(card.Card_id, licensePlate, null, card.Card_Status, null, null, null);
                     Card_Logs cl = new Card_Logs(newCard.Card_id, user.User_name, licensePlate, DateTime.Now, null, null, null);
-                    manager.UpdateCardByID(newCard);
-                    manager.CreateCardLogs(cl);
+                    manager.UpdateCardByID(newCard, user);
+                    manager.CreateCardLogs(cl, user);
                     Console.WriteLine(b);
                     Console.WriteLine();
                     Console.WriteLine("✔ Đọc thẻ thành công.");
@@ -194,7 +194,7 @@ namespace PL_Console
                 }
             } while (yesNo != 'N');
         }
-        public Card_Logs EnterLicensePlateCheckOut(Card card)
+        public Card_Logs EnterLicensePlateCheckOut(Card card, User user)
         {
             Card_Logs cardLogs;
             string timeCard = "";
@@ -204,9 +204,9 @@ namespace PL_Console
             Console.WriteLine(b);
             Console.WriteLine("- Vé xe: " + card.Card_id);
             Console.WriteLine("- Loại thẻ: " + card.Card_type);
-            cardLogs = manager.GetCardLogsByCardIDAndLicensePlate(card.Card_id, card.LicensePlate);
-            Customer cus = manager.GetCustomerByLincese_plate(card.LicensePlate);
-            Card_Detail cardDetail = manager.GetCardDetailByID(card.Card_id);
+            cardLogs = manager.GetCardLogsByCardIDAndLicensePlate(card.Card_id, card.LicensePlate, user);
+            Customer cus = manager.GetCustomerByLincese_plate(card.LicensePlate, user);
+            Card_Detail cardDetail = manager.GetCardDetailByID(card.Card_id, user);
             cardLogs.IntoMoney = 0;
             cardLogs.DateTimeEnd = DateTime.Now;
             if (cus == null)
@@ -293,7 +293,7 @@ namespace PL_Console
                 Console.WriteLine(b);
                 Console.WriteLine(" Kiểm tra xe ra.");
                 Console.WriteLine(b);
-                Card card = EnterCardID();
+                Card card = EnterCardID(user);
                 if (card != null)
                 {
                     if (card.Card_Status == 0)
@@ -303,15 +303,15 @@ namespace PL_Console
                     }
                     else
                     {
-                        cardLogs = EnterLicensePlateCheckOut(card);
+                        cardLogs = EnterLicensePlateCheckOut(card,user);
                     }
                 }
                 if (cardLogs != null && card != null)
                 {
                     Card newCard = new Card(card.Card_id, card.LicensePlate, null, card.Card_Status, null, null, null);
                     Card_Logs cl = new Card_Logs(newCard.Card_id, null, cardLogs.LisensePlate, cardLogs.DateTimeStart, cardLogs.DateTimeEnd, cardLogs.SendTime, cardLogs.IntoMoney);
-                    manager.UpdateCardByID(newCard);
-                    manager.UpdateCardLogs(cl);
+                    manager.UpdateCardByID(newCard, user);
+                    manager.UpdateCardLogs(cl, user);
                     Console.WriteLine(b);
                     Console.WriteLine();
                     Console.WriteLine("✔ Đọc thẻ thành công.");
