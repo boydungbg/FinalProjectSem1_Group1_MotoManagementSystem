@@ -15,7 +15,6 @@ namespace PL_console
         public Card SetInfoCard()
         {
             Card card = new Card();
-
             Console.Clear();
             Console.WriteLine(b);
             Console.WriteLine(" Tạo thẻ tháng.");
@@ -57,7 +56,7 @@ namespace PL_console
             do
             {
                 cus.Cus_address = Console.ReadLine().ToUpper();
-                if (validate(3, cus.Cus_address) == false)
+                if (validate(6, cus.Cus_address) == false)
                 {
                     Console.Write("↻ Địa chỉ không hợp lệ (VD:BAC GIANG). Nhập lại: ");
                     cus.Cus_address = null;
@@ -91,7 +90,7 @@ namespace PL_console
                 Card_Detail cd = new Card_Detail();
                 cd.Start_day = DateTime.Now;
                 cd.End_day = new DateTime(DateTime.Now.Year, DateTime.Now.Month + 1, DateTime.Now.Day);
-                check = CheckCreateCard(card, cus, cd);
+                check = CreateCard(card, cus, cd);
                 if (check == false)
                 {
                     Console.WriteLine(b);
@@ -116,7 +115,7 @@ namespace PL_console
             } while (yesNo != 'N'); ;
 
         }
-        public bool CheckCreateCard(Card card, Customer cus, Card_Detail cd)
+        public bool CreateCard(Card card, Customer cus, Card_Detail cd)
         {
             try
             {
@@ -262,6 +261,19 @@ namespace PL_console
                 {
                     return false;
                 }
+                if (input.Length <= 8 || input.Length >= 30)
+                {
+                    return false;
+                }
+            }
+            if(check == 6)
+            {
+                Regex regex = new Regex("[A-Z0-9 -]*\\S$");
+                MatchCollection matchCollectionstr = regex.Matches(input);
+                if (matchCollectionstr.Count == 0)
+                {
+                    return false;
+                }
                 if (input.Length <= 8 || input.Length >= 60)
                 {
                     return false;
@@ -282,7 +294,7 @@ namespace PL_console
             }
             if (check == 5)
             {
-                Regex regex = new Regex("^([0-2][0-9]|(3)[0-1])(\\/)(((0)[0-9])|((1)[0-2]))(\\/)\\d{4}$");
+                Regex regex = new Regex("^(?:(?:31(\\/|-|\\.)(?:0?[13578]|1[02]))\\1|(?:(?:29|30)(\\/|-|\\.)(?:0?[1,3-9]|1[0-2])\\2))(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$|^(?:29(\\/|-|\\.)0?2\\3(?:(?:(?:1[6-9]|[2-9]\\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\\d|2[0-8])(\\/|-|\\.)(?:(?:0?[1-9])|(?:1[0-2]))\\4(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$");
                 MatchCollection matchCollectionstr = regex.Matches(input);
                 if (matchCollectionstr.Count == 0)
                 {

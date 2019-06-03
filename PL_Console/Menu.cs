@@ -63,7 +63,6 @@ namespace PL_Console
         public void MenuLogin()
         {
             User user = null;
-            UserBL userbl = new UserBL();
             string accname;
             string accpass;
             while (true)
@@ -79,6 +78,7 @@ namespace PL_Console
                 accpass = password();
                 try
                 {
+                    UserBL userbl = new UserBL();
                     user = userbl.Login(accname, accpass);
                 }
                 catch (System.Exception)
