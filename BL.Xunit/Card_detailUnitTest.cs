@@ -17,8 +17,8 @@ namespace BL.Xunit
             Assert.Equal(id, card_detail.Card_id);
         }
         [Theory]
-        [InlineData(10099)]
-        [InlineData(12)]
+        [InlineData(101111)]
+        [InlineData(0)]
         public void GetCard_detailByIDTest2(int id)
         {
             Card_detailBL card_detailBL = new Card_detailBL();
