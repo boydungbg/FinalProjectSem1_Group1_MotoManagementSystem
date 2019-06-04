@@ -1,0 +1,14 @@
+{
+  "ProjectFilePath": "d:\\PROGRAMER\\SEM1\\Project sem1\\FinalProjectSem1_Group1_MotoParkingManagementSystem\\BL.Xunit\\BL.Xunit.csproj",
+  "TargetFramework": "netcoreapp2.2",
+  "TagHelpers": [],
+  "Configuration": {
+    "ConfigurationName": "UnsupportedRazor",
+    "LanguageVersion": "1.0",
+    "Extensions": [
+      {
+        "ExtensionName": "UnsupportedRazorExtension"
+      }
+    ]
+  }
+}

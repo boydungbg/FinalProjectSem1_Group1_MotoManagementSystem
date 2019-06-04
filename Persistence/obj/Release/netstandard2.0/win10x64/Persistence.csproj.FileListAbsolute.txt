@@ -1,8 +1,0 @@
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\Persistence\bin\Release\netstandard2.0\win10x64\Persistence.deps.json
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\Persistence\bin\Release\netstandard2.0\win10x64\Persistence.dll
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\Persistence\bin\Release\netstandard2.0\win10x64\Persistence.pdb
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\Persistence\obj\Release\netstandard2.0\win10x64\Persistence.csproj.CoreCompileInputs.cache
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\Persistence\obj\Release\netstandard2.0\win10x64\Persistence.AssemblyInfoInputs.cache
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\Persistence\obj\Release\netstandard2.0\win10x64\Persistence.AssemblyInfo.cs
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\Persistence\obj\Release\netstandard2.0\win10x64\Persistence.dll
-E:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\Persistence\obj\Release\netstandard2.0\win10x64\Persistence.pdb
