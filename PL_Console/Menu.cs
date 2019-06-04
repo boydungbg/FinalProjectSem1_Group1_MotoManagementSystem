@@ -83,10 +83,9 @@ namespace PL_Console
                 }
                 catch (System.Exception ex)
                 {
-                    Translate tran = new Translate();
                     Console.WriteLine();
                     Console.WriteLine(b);
-                    Console.WriteLine(tran.Translator(Convert.ToString(ex.Message)));
+                    Console.WriteLine(ex.Message);
                     Console.Write("Lỗi!!! Bạn có muốn đăng nhập lại không? (Y/N)");
                     choice = yesNo();
                     if (choice == 'Y')

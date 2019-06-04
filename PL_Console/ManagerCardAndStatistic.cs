@@ -532,9 +532,9 @@ namespace PL_console
         public void CheckUser(User user, Exception ex)
         {
 
-            Translate tran = new Translate();
+           
             Console.WriteLine();
-            Console.WriteLine(tran.Translator(Convert.ToString(ex.Message)));
+            Console.WriteLine(ex.Message);
             Console.WriteLine("LỖI!!! MỜI BẠN THỬ LẠI !!!");
             Console.ReadKey();
             if (user.User_level == 0)
