@@ -485,7 +485,6 @@ namespace PL_console
             Card card = null;
             foreach (var item in cardLogs)
             {
-                Inturn++;
                 card = GetCardByID(item.Card_id, user);
                 if (card.Card_type == "Thẻ ngày" || item.IntoMoney > 0)
                 {
@@ -502,6 +501,7 @@ namespace PL_console
                         status = "Đã lấy xe ";
                         intoMoney = Convert.ToString(item.IntoMoney) + "  VNĐ";
                         totalmoney = totalmoney + Convert.ToDouble(item.IntoMoney);
+                        Inturn++;
                     }
                     table.AddRow(STT, item.LisensePlate, item.DateTimeStart, datimeEnd, item.Card_id, card.Card_type, status, intoMoney);
                 }
