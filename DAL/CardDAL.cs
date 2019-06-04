@@ -77,7 +77,7 @@ namespace DAL
         public bool UpdateCardByID(Card card, int cardid)
         {
             MySqlCommand command = new MySqlCommand("", connection);
-            query = @"Update Card SET license_plate = '" + card.LicensePlate + "', card_status = '" + card.Card_Status + "' where  card_id = " + cardid + "; ";
+            query = @"Update Card SET license_plate = '" + card.LicensePlate + "', card_status = '" + card.Card_Status + "', card_type = '" + card.Card_type + "' where  card_id = " + cardid + "; ";
             command.CommandText = query;
             command.ExecuteNonQuery();
             connection.Close();

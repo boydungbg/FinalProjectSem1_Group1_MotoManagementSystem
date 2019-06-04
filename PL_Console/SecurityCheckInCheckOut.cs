@@ -85,9 +85,8 @@ namespace PL_Console
             Console.WriteLine(b);
             Console.WriteLine("- Vé xe: " + card.Card_id);
             Console.WriteLine("- Loại thẻ: " + card.Card_type);
-            Customer cus = manager.GetCustomerByLincese_plate(card.LicensePlate, user);
             Card_Detail cardDetail = manager.GetCardDetailByID(card.Card_id, user);
-            if (cus == null)
+            if (cardDetail == null)
             {
                 name = "Không có";
                 address = "Không có";
@@ -95,6 +94,7 @@ namespace PL_Console
             }
             if (cardDetail != null)
             {
+                Customer cus = manager.GetCustomerByID(cardDetail.Cus_id, user);
                 name = cus.Cus_name;
                 address = cus.Cus_address;
                 timeCard = "Từ " + Convert.ToString(cardDetail.Start_day) + " đến " + Convert.ToString(cardDetail.End_day);
@@ -111,6 +111,8 @@ namespace PL_Console
                 if (cardDetail.End_day < DateTime.Now)
                 {
                     Console.WriteLine("↪ NOTICE: THẺ CỦA BẠN ĐÃ HẾT HẠN ☹");
+                    card.Card_type = "Thẻ ngày";
+                    manager.UpdateCardByID(new Card(card.Card_id, "No License Plate", card.Card_type, 0, null, null, null), user);
                 }
             }
             Console.Write("- Nhập biển số xe (VD:88-X8-8888): ");
@@ -135,7 +137,9 @@ namespace PL_Console
             }
             if (card.Card_type == "Thẻ tháng")
             {
-                if (licensePlate != cus.Cus_licensePlate)
+                Customer newcus = null;
+                newcus = manager.GetCustomerByLincese_plate(card.LicensePlate, user);
+                if (licensePlate != newcus.Cus_licensePlate)
                 {
                     Console.WriteLine("↻ Biển số xe không trùng với biển số mà bạn đã đăng kí thẻ tháng. Vui lòng lấy thẻ ngày.");
                     licensePlate = null;
@@ -171,7 +175,7 @@ namespace PL_Console
                 }
                 if (licensePlate != null && card != null)
                 {
-                    Card newCard = new Card(card.Card_id, licensePlate, null, card.Card_Status, null, null, null);
+                    Card newCard = new Card(card.Card_id, licensePlate, card.Card_type, card.Card_Status, null, null, null);
                     Card_Logs cl = new Card_Logs(newCard.Card_id.Value, user.User_name, licensePlate, DateTime.Now, null, null, null);
                     manager.UpdateCardByID(newCard, user);
                     manager.CreateCardLogs(cl, user);
@@ -208,11 +212,10 @@ namespace PL_Console
             Console.WriteLine("- Vé xe: " + card.Card_id);
             Console.WriteLine("- Loại thẻ: " + card.Card_type);
             cardLogs = manager.GetCardLogsByCardIDAndLicensePlate(card.Card_id.Value, card.LicensePlate, user);
-            Customer cus = manager.GetCustomerByLincese_plate(card.LicensePlate, user);
             Card_Detail cardDetail = manager.GetCardDetailByID(card.Card_id, user);
             cardLogs.IntoMoney = 0;
             cardLogs.DateTimeEnd = DateTime.Now;
-            if (cus == null)
+            if (cardDetail == null)
             {
                 name = "Không có";
                 address = "Không có";
@@ -220,6 +223,7 @@ namespace PL_Console
             }
             if (cardDetail != null)
             {
+                Customer cus = manager.GetCustomerByID(cardDetail.Cus_id, user);
                 name = cus.Cus_name;
                 address = cus.Cus_address;
                 timeCard = "Từ " + Convert.ToString(cardDetail.Start_day) + " đến " + Convert.ToString(cardDetail.End_day);
@@ -268,10 +272,6 @@ namespace PL_Console
                 if (card.Card_type == "Thẻ tháng")
                 {
                     Console.WriteLine("- Thời gian gửi: " + cardLogs.SendTime);
-                    if (cardDetail.End_day <= DateTime.Now)
-                    {
-                        cardLogs.IntoMoney = Pay(cardLogs.DateTimeStart.Value, cardLogs.DateTimeEnd.Value);
-                    }
                     Console.WriteLine("- Số tiền là: {0} VNĐ", cardLogs.IntoMoney);
                 }
                 if (card.Card_type == "Thẻ ngày")
@@ -311,7 +311,7 @@ namespace PL_Console
                 }
                 if (cardLogs != null && card != null)
                 {
-                    Card newCard = new Card(card.Card_id, card.LicensePlate, null, card.Card_Status, null, null, null);
+                    Card newCard = new Card(card.Card_id, card.LicensePlate, card.Card_type, card.Card_Status, null, null, null);
                     Card_Logs cl = new Card_Logs(newCard.Card_id.Value, null, cardLogs.LisensePlate, cardLogs.DateTimeStart, cardLogs.DateTimeEnd, cardLogs.SendTime, cardLogs.IntoMoney);
                     manager.UpdateCardByID(newCard, user);
                     manager.UpdateCardLogs(cl, user);
