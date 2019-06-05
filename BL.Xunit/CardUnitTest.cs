@@ -52,7 +52,7 @@ namespace BL.Xunit
             Assert.Equal(cardid, card.Card_id);
         }
         [Theory]
-        [InlineData(10099)]
+        [InlineData(0)]
         [InlineData(123123)]
         public void GetCardByIDTest2(int cardid)
         {
