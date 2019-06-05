@@ -17,3 +17,22 @@ D:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSyst
 D:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_Console\obj\Debug\netcoreapp2.2\PL_Console.csproj.CopyComplete
 D:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_Console\obj\Debug\netcoreapp2.2\PL_Console.dll
 D:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_Console\obj\Debug\netcoreapp2.2\PL_Console.pdb
+D:\PROGRAMER\SEM1\LeChiDung-PF02 Project Sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_console\bin\Debug\netcoreapp2.2\ConnectionString.txt
+D:\PROGRAMER\SEM1\LeChiDung-PF02 Project Sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_console\bin\Debug\netcoreapp2.2\PL_Console.deps.json
+D:\PROGRAMER\SEM1\LeChiDung-PF02 Project Sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_console\bin\Debug\netcoreapp2.2\PL_Console.runtimeconfig.json
+D:\PROGRAMER\SEM1\LeChiDung-PF02 Project Sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_console\bin\Debug\netcoreapp2.2\PL_Console.runtimeconfig.dev.json
+D:\PROGRAMER\SEM1\LeChiDung-PF02 Project Sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_console\bin\Debug\netcoreapp2.2\PL_Console.dll
+D:\PROGRAMER\SEM1\LeChiDung-PF02 Project Sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_console\bin\Debug\netcoreapp2.2\PL_Console.pdb
+D:\PROGRAMER\SEM1\LeChiDung-PF02 Project Sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_console\bin\Debug\netcoreapp2.2\BL.dll
+D:\PROGRAMER\SEM1\LeChiDung-PF02 Project Sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_console\bin\Debug\netcoreapp2.2\DAL.dll
+D:\PROGRAMER\SEM1\LeChiDung-PF02 Project Sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_console\bin\Debug\netcoreapp2.2\Persistence.dll
+D:\PROGRAMER\SEM1\LeChiDung-PF02 Project Sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_console\bin\Debug\netcoreapp2.2\BL.pdb
+D:\PROGRAMER\SEM1\LeChiDung-PF02 Project Sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_console\bin\Debug\netcoreapp2.2\Persistence.pdb
+D:\PROGRAMER\SEM1\LeChiDung-PF02 Project Sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_console\bin\Debug\netcoreapp2.2\DAL.pdb
+D:\PROGRAMER\SEM1\LeChiDung-PF02 Project Sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_console\obj\Debug\netcoreapp2.2\PL_Console.csprojAssemblyReference.cache
+D:\PROGRAMER\SEM1\LeChiDung-PF02 Project Sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_console\obj\Debug\netcoreapp2.2\PL_Console.csproj.CoreCompileInputs.cache
+D:\PROGRAMER\SEM1\LeChiDung-PF02 Project Sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_console\obj\Debug\netcoreapp2.2\PL_Console.AssemblyInfoInputs.cache
+D:\PROGRAMER\SEM1\LeChiDung-PF02 Project Sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_console\obj\Debug\netcoreapp2.2\PL_Console.AssemblyInfo.cs
+D:\PROGRAMER\SEM1\LeChiDung-PF02 Project Sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_console\obj\Debug\netcoreapp2.2\PL_Console.csproj.CopyComplete
+D:\PROGRAMER\SEM1\LeChiDung-PF02 Project Sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_console\obj\Debug\netcoreapp2.2\PL_Console.dll
+D:\PROGRAMER\SEM1\LeChiDung-PF02 Project Sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\PL_console\obj\Debug\netcoreapp2.2\PL_Console.pdb

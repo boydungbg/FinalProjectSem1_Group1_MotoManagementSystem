@@ -18,3 +18,23 @@ D:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSyst
 D:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL.Xunit\obj\Debug\netcoreapp2.2\DAL.Xunit.csproj.CopyComplete
 D:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL.Xunit\obj\Debug\netcoreapp2.2\DAL.Xunit.dll
 D:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL.Xunit\obj\Debug\netcoreapp2.2\DAL.Xunit.pdb
+D:\PROGRAMER\SEM1\LeChiDung-PF02 Project Sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL.Xunit\bin\Debug\netcoreapp2.2\xunit.runner.visualstudio.dotnetcore.testadapter.dll
+D:\PROGRAMER\SEM1\LeChiDung-PF02 Project Sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL.Xunit\bin\Debug\netcoreapp2.2\xunit.runner.reporters.netcoreapp10.dll
+D:\PROGRAMER\SEM1\LeChiDung-PF02 Project Sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL.Xunit\bin\Debug\netcoreapp2.2\xunit.runner.utility.netcoreapp10.dll
+D:\PROGRAMER\SEM1\LeChiDung-PF02 Project Sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL.Xunit\bin\Debug\netcoreapp2.2\ConnectionString.txt
+D:\PROGRAMER\SEM1\LeChiDung-PF02 Project Sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL.Xunit\bin\Debug\netcoreapp2.2\DAL.Xunit.deps.json
+D:\PROGRAMER\SEM1\LeChiDung-PF02 Project Sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL.Xunit\bin\Debug\netcoreapp2.2\DAL.Xunit.runtimeconfig.json
+D:\PROGRAMER\SEM1\LeChiDung-PF02 Project Sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL.Xunit\bin\Debug\netcoreapp2.2\DAL.Xunit.runtimeconfig.dev.json
+D:\PROGRAMER\SEM1\LeChiDung-PF02 Project Sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL.Xunit\bin\Debug\netcoreapp2.2\DAL.Xunit.dll
+D:\PROGRAMER\SEM1\LeChiDung-PF02 Project Sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL.Xunit\bin\Debug\netcoreapp2.2\DAL.Xunit.pdb
+D:\PROGRAMER\SEM1\LeChiDung-PF02 Project Sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL.Xunit\bin\Debug\netcoreapp2.2\DAL.dll
+D:\PROGRAMER\SEM1\LeChiDung-PF02 Project Sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL.Xunit\bin\Debug\netcoreapp2.2\Persistence.dll
+D:\PROGRAMER\SEM1\LeChiDung-PF02 Project Sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL.Xunit\bin\Debug\netcoreapp2.2\DAL.pdb
+D:\PROGRAMER\SEM1\LeChiDung-PF02 Project Sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL.Xunit\bin\Debug\netcoreapp2.2\Persistence.pdb
+D:\PROGRAMER\SEM1\LeChiDung-PF02 Project Sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL.Xunit\obj\Debug\netcoreapp2.2\DAL.Xunit.csprojAssemblyReference.cache
+D:\PROGRAMER\SEM1\LeChiDung-PF02 Project Sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL.Xunit\obj\Debug\netcoreapp2.2\DAL.Xunit.csproj.CoreCompileInputs.cache
+D:\PROGRAMER\SEM1\LeChiDung-PF02 Project Sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL.Xunit\obj\Debug\netcoreapp2.2\DAL.Xunit.AssemblyInfoInputs.cache
+D:\PROGRAMER\SEM1\LeChiDung-PF02 Project Sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL.Xunit\obj\Debug\netcoreapp2.2\DAL.Xunit.AssemblyInfo.cs
+D:\PROGRAMER\SEM1\LeChiDung-PF02 Project Sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL.Xunit\obj\Debug\netcoreapp2.2\DAL.Xunit.csproj.CopyComplete
+D:\PROGRAMER\SEM1\LeChiDung-PF02 Project Sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL.Xunit\obj\Debug\netcoreapp2.2\DAL.Xunit.dll
+D:\PROGRAMER\SEM1\LeChiDung-PF02 Project Sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\DAL.Xunit\obj\Debug\netcoreapp2.2\DAL.Xunit.pdb

@@ -13,3 +13,18 @@ D:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSyst
 D:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\BL\obj\Release\netstandard2.0\win10-x64\BL.csproj.CopyComplete
 D:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\BL\obj\Release\netstandard2.0\win10-x64\BL.dll
 D:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\BL\obj\Release\netstandard2.0\win10-x64\BL.pdb
+D:\PROGRAMER\SEM1\LeChiDung-PF02 Project Sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\BL\bin\Release\netstandard2.0\win10-x64\ConnectionString.txt
+D:\PROGRAMER\SEM1\LeChiDung-PF02 Project Sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\BL\bin\Release\netstandard2.0\win10-x64\BL.deps.json
+D:\PROGRAMER\SEM1\LeChiDung-PF02 Project Sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\BL\bin\Release\netstandard2.0\win10-x64\BL.dll
+D:\PROGRAMER\SEM1\LeChiDung-PF02 Project Sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\BL\bin\Release\netstandard2.0\win10-x64\BL.pdb
+D:\PROGRAMER\SEM1\LeChiDung-PF02 Project Sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\BL\bin\Release\netstandard2.0\win10-x64\DAL.dll
+D:\PROGRAMER\SEM1\LeChiDung-PF02 Project Sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\BL\bin\Release\netstandard2.0\win10-x64\Persistence.dll
+D:\PROGRAMER\SEM1\LeChiDung-PF02 Project Sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\BL\bin\Release\netstandard2.0\win10-x64\Persistence.pdb
+D:\PROGRAMER\SEM1\LeChiDung-PF02 Project Sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\BL\bin\Release\netstandard2.0\win10-x64\DAL.pdb
+D:\PROGRAMER\SEM1\LeChiDung-PF02 Project Sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\BL\obj\Release\netstandard2.0\win10-x64\BL.csprojAssemblyReference.cache
+D:\PROGRAMER\SEM1\LeChiDung-PF02 Project Sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\BL\obj\Release\netstandard2.0\win10-x64\BL.csproj.CoreCompileInputs.cache
+D:\PROGRAMER\SEM1\LeChiDung-PF02 Project Sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\BL\obj\Release\netstandard2.0\win10-x64\BL.AssemblyInfoInputs.cache
+D:\PROGRAMER\SEM1\LeChiDung-PF02 Project Sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\BL\obj\Release\netstandard2.0\win10-x64\BL.AssemblyInfo.cs
+D:\PROGRAMER\SEM1\LeChiDung-PF02 Project Sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\BL\obj\Release\netstandard2.0\win10-x64\BL.csproj.CopyComplete
+D:\PROGRAMER\SEM1\LeChiDung-PF02 Project Sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\BL\obj\Release\netstandard2.0\win10-x64\BL.dll
+D:\PROGRAMER\SEM1\LeChiDung-PF02 Project Sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\BL\obj\Release\netstandard2.0\win10-x64\BL.pdb
