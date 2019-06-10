@@ -561,7 +561,7 @@ namespace PL_console
                 }
                 if (Convert.ToDateTime(from) > DateTime.Now || Convert.ToDateTime(from) < new DateTime(2019, 1, 1))
                 {
-                    Console.Write("=> Thời gian nhập vào phải sau thời gian hiện tại và phải trước năm 2018. Nhập lại: ");
+                    Console.Write("=> Thời gian nhập vào phải trước thời gian hiện tại và phải sau năm 2018. Nhập lại: ");
                     from = null;
                 }
             } while (from == null);
@@ -577,7 +577,7 @@ namespace PL_console
                 }
                 if (Convert.ToDateTime(to) < Convert.ToDateTime(from) || Convert.ToDateTime(to) > DateTime.Now)
                 {
-                    Console.Write("=> Thời gian nhập vào phải trước thời gian bắt đầu và sau hiện tại. Nhập lại: ");
+                    Console.Write("=> Thời gian nhập vào phải trước thời gian bắt đầu và trước hiện tại. Nhập lại: ");
                     to = null;
                 }
             } while (to == null);

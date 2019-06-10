@@ -45,7 +45,7 @@ namespace PL_Console
                 }
                 table.Write(Format.Alternative);
                 double pageNo = Math.Ceiling(Convert.ToDouble(manager.GetCardNo(user) / 10));
-                Console.WriteLine("                                              Trang: {0} / {1}", (page / 10) + 1, pageNo);
+                Console.WriteLine("                               Trang: {0} / {1}", (page / 10) + 1, pageNo);
                 if (pageNo > 1)
                 {
                     Console.WriteLine("Nhập mã (24122000) để tiếp tục");
