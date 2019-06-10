@@ -11,30 +11,30 @@ namespace BL.Xunit
         public void CreateCardLogsAndUpdateTest1()
         {
             Card_LogsBL cardLogsBL = new Card_LogsBL();
-            Card_Logs cardLogs = new Card_Logs(10011, "security_01", "33G1-3333", new DateTime(2019, 05, 20), null, null, null);
+            Card_Logs cardLogs = new Card_Logs(10011, "security_01", "33G1-3333", new DateTime(2019, 06, 05), null, null, null);
             Assert.True(cardLogsBL.CreateCardLogs(cardLogs));
-            cardLogs = new Card_Logs(10011, null, null, null, DateTime.Now, 1, 10000);
+            cardLogs = new Card_Logs(10011, null, null, null, DateTime.Now, 10000, 1);
             cardLogsBL = new Card_LogsBL();
-            Assert.True(cardLogsBL.UpdateCardLogsByLicensePlateAndCardID(cardLogs, "75G1-2222", 10011, "2019-05-26 00:00:00"));
+            Assert.True(cardLogsBL.UpdateCardLogsByLicensePlateAndCardID(cardLogs, "33G1-3333", 10011, "2019-06-05 00:00:00"));
         }
         [Fact]
         public void CreateCardLogsAndUpdateTest2()
         {
             Card_LogsBL cardLogsBL = new Card_LogsBL();
-            Card_Logs cardLogs = new Card_Logs(10015, "security_01", "88A1-8888", new DateTime(2019, 05, 20), null, null, null);
+            Card_Logs cardLogs = new Card_Logs(10015, "security_01", "88A1-8888", new DateTime(2019, 06, 05), null, null, null);
             Assert.True(cardLogsBL.CreateCardLogs(cardLogs));
-            cardLogs = new Card_Logs(10015, null, null, null, DateTime.Now, 1, 20000);
+            cardLogs = new Card_Logs(10015, null, null, null, DateTime.Now, 10000, 1);
             cardLogsBL = new Card_LogsBL();
-            Assert.True(cardLogsBL.UpdateCardLogsByLicensePlateAndCardID(cardLogs, "88A1-8888", 10015, "2019-05-26 00:00:00"));
+            Assert.True(cardLogsBL.UpdateCardLogsByLicensePlateAndCardID(cardLogs, "88A1-8888", 10015, "2019-06-05 00:00:00"));
         }
         [Fact]
         public void CreateCardLogsAndUpdateTest3()
         {
             Card_LogsBL cardLogsBL = new Card_LogsBL();
-            Card_Logs card_Logs = new Card_Logs(10012, "security_01", "75G1-2222", new DateTime(2019, 05, 20), null, null, null);
+            Card_Logs card_Logs = new Card_Logs(10012, "security_01", "75G1-2222", new DateTime(2019, 06, 05), null, null, null);
             Assert.False(cardLogsBL.CreateCardLogs(null));
             cardLogsBL = new Card_LogsBL();
-            card_Logs = new Card_Logs(10012, null, null, null, DateTime.Now, 1, null);
+            card_Logs = new Card_Logs(10012, null, null, null, DateTime.Now, 10000, 1);
             Assert.False(cardLogsBL.UpdateCardLogsByLicensePlateAndCardID(null, "75G1-2222", 10012, "2019-05-20 00:00:00"));
         }
         [Fact]
@@ -78,8 +78,8 @@ namespace BL.Xunit
             Assert.Null(card_logs);
         }
         [Theory]
-        [InlineData(0, "2019-06-10", "2019-06-20", "Thẻ ngày")]
-        [InlineData(0, "2019-06-10", "2019-06-20", "Thẻ tháng")]
+        [InlineData(0, "2019-06-01", "2019-06-20", "Thẻ ngày")]
+        [InlineData(0, "2019-06-01", "2019-06-20", "Thẻ tháng")]
         public void GetListCardLogsByPageTest1(int page, string from, string to, string type)
         {
             Card_LogsBL cardLogsBL = new Card_LogsBL();

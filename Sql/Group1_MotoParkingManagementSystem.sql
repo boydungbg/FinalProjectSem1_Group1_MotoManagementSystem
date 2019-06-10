@@ -72,13 +72,7 @@ cl_timeOut datetime,
 cl_money double not null default 0,
 cl_status tinyint not null default 0
 );
-select cl.cl_id,cl.card_id,cl.cl_licensePlate,cl.cl_timeIn,cl.cl_timeOut,cl.cl_status from Card_logs cl
-            inner join Card c on cl.card_id = c.card_id
-            where cl.cl_timeIn between '2019-6-6' and '2019-6-11' and card_type = "Thẻ ngày" or cl.cl_status = 1 limit 0,10;
-select * from Card_logs;
-select count(cl.cl_id) as cl_id from Card_logs cl inner join Card c on cl.card_id = c.card_id
-             where cl.cl_timeIn between '2019-6-6' and '2019-6-11' and c.card_type ='Thẻ ngày' or cl.cl_status = 1;
-drop procedure sp_card_logs_statistical;
+
 delimiter //
 create procedure sp_card_logs_statistical(IN pageNo int,IN fromTime nvarchar(50),IN outTime nvarchar(50),IN TypeCard nvarchar(50))
 begin 
