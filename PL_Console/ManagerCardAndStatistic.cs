@@ -22,6 +22,8 @@ namespace PL_console
             card.Card_id = AutoIncrementID(user);
             Console.WriteLine("- Mã thẻ: " + card.Card_id);
             card.Card_type = "Thẻ tháng";
+            card.Start_day = DateTime.Now;
+            card.End_day = new DateTime(DateTime.Now.Year, DateTime.Now.Month + 1, DateTime.Now.Day);
             return card;
         }
         public Customer SetInfoCustomer(User user)
@@ -31,14 +33,9 @@ namespace PL_console
             do
             {
                 cus.Cus_id = Console.ReadLine();
-                if (validate(2, cus.Cus_id) == false)
+                if (validate(2, cus.Cus_id, user) == false)
                 {
-                    Console.Write("↻ Số chứng minh thư hoặc thẻ căn cước khồn hợp lệ (VD:123456789). Nhập lại: ");
-                    cus.Cus_id = null;
-                }
-                if (GetCustomerByID(cus.Cus_id, user) != null)
-                {
-                    Console.Write("↻ Số chứng minh thư nhân dân hoặc thẻ căn cước đã tồn tại. Nhập lại: ");
+                    Console.Write("=> Số chứng minh thư hoặc thẻ căn cước khồn hợp lệ (VD:123456789). Nhập lại: ");
                     cus.Cus_id = null;
                 }
             } while (cus.Cus_id == null);
@@ -46,9 +43,9 @@ namespace PL_console
             do
             {
                 cus.Cus_name = Console.ReadLine().ToUpper();
-                if (validate(3, cus.Cus_name) == false)
+                if (validate(3, cus.Cus_name, user) == false)
                 {
-                    Console.Write("↻ Tên khách hàng hợp lệ (VD:LE CHI DUNG). Nhập lại: ");
+                    Console.Write("=> Tên khách hàng hợp lệ (VD:LE CHI DUNG). Nhập lại: ");
                     cus.Cus_name = null;
                 }
             } while (cus.Cus_name == null);
@@ -56,9 +53,9 @@ namespace PL_console
             do
             {
                 cus.Cus_address = Console.ReadLine().ToUpper();
-                if (validate(6, cus.Cus_address) == false)
+                if (validate(6, cus.Cus_address, user) == false)
                 {
-                    Console.Write("↻ Địa chỉ không hợp lệ (VD:BAC GIANG). Nhập lại: ");
+                    Console.Write("=> Địa chỉ không hợp lệ (VD:BAC GIANG). Nhập lại: ");
                     cus.Cus_address = null;
                 }
             } while (cus.Cus_address == null);
@@ -66,42 +63,54 @@ namespace PL_console
             do
             {
                 cus.Cus_licensePlate = Console.ReadLine().ToUpper();
-                if (validate(4, cus.Cus_licensePlate) == false)
+                if (validate(4, cus.Cus_licensePlate, user) == false)
                 {
-                    Console.Write("↻ Biển số xe không hợp lệ (VD:88X8-8888). Nhập lại: ");
+                    Console.Write("=> Biển số xe không hợp lệ (VD:88X8-8888). Nhập lại: ");
                     cus.Cus_licensePlate = null;
                 }
-                if (GetCustomerByLincese_plate(cus.Cus_licensePlate, user) != null)
-                {
-                    Console.Write("↻ Biển số xe đã tồn tại. Nhập lại: ");
-                    cus.Cus_licensePlate = null;
-                }
+
             } while (cus.Cus_licensePlate == null);
             return cus;
         }
         public void CreateCard(User user)
         {
-            bool check = false;
             char yesNo;
             do
             {
+                bool check = true;
                 Card card = SetInfoCard(user);
                 Customer cus = SetInfoCustomer(user);
-                Card_Detail cd = new Card_Detail();
-                cd.Start_day = DateTime.Now;
-                cd.End_day = new DateTime(DateTime.Now.Year, DateTime.Now.Month + 1, DateTime.Now.Day);
-                check = CreateCard(card, cus, cd, user);
-                if (check == false)
+                if (GetCustomerByID(cus.Cus_id, user) != null)
                 {
-                    Console.WriteLine(b);
-                    Console.WriteLine();
-                    Console.WriteLine(" Tạo thẻ không thành công.");
+                    Console.WriteLine("=> Số chứng minh thư nhân dân hoặc thẻ căn cước đã tồn tại. (-_-)");
+                    check = false;
+                }
+                if (GetCustomerByLincese_plate(cus.Cus_licensePlate, user) != null)
+                {
+                    Console.WriteLine("=> Biển số xe đã tồn tại. (-_-)");
+                    check = false;
+                }
+                if (AutoIncrementID(user) > card.Card_id)
+                {
+                    card.Card_id += 1;
+                }
+                if (check == true)
+                {
+                    check = CreateCard(card, cus, user);
                 }
                 if (check == true)
                 {
                     Console.WriteLine(b);
                     Console.WriteLine();
-                    Console.WriteLine("✔ Tạo thẻ thành công.");
+                    Console.WriteLine("<<<Tạo thẻ thành công.>>>");
+                }
+                if (check == false)
+                {
+                    card = null;
+                    cus = null;
+                    Console.WriteLine(b);
+                    Console.WriteLine();
+                    Console.WriteLine("<<<Tạo thẻ không thành công.>>>");
                 }
                 Console.WriteLine();
                 Console.WriteLine(b);
@@ -115,12 +124,12 @@ namespace PL_console
             } while (yesNo != 'N'); ;
 
         }
-        public bool CreateCard(Card card, Customer cus, Card_Detail cd, User user)
+        public bool CreateCard(Card card, Customer cus, User user)
         {
             try
             {
                 CardBL cardBL = new CardBL();
-                cardBL.CreateCard(card, cus, cd);
+                cardBL.CreateCard(card, cus);
             }
             catch (Exception ex)
             {
@@ -172,7 +181,7 @@ namespace PL_console
             }
             if (newCard == null)
             {
-                card_id = 10000;
+                card_id = 10001;
             }
             else
             {
@@ -180,11 +189,22 @@ namespace PL_console
             }
             return card_id;
         }
-        public bool validate(int check, string input)
+        public bool validate(int check, string input, User user)
         {
             if (input == "" || input == null)
             {
                 return false;
+            }
+            if (input == "EXIT" || input == "exit")
+            {
+                if (user.User_level == 0)
+                {
+                    menu.MenuManager(user);
+                }
+                if (user.User_level == 1)
+                {
+                    menu.MenuSecurity(user);
+                }
             }
             if (check == 2)
             {
@@ -249,13 +269,13 @@ namespace PL_console
             }
             return true;
         }
-        public List<Card> GetListCards(User user)
+        public List<Card> GetListCards(int page, User user)
         {
             List<Card> listCards = null;
             try
             {
                 CardBL cardBL = new CardBL();
-                listCards = cardBL.GetlistCard();
+                listCards = cardBL.GetlistCard(page);
             }
             catch (Exception ex)
             {
@@ -263,9 +283,51 @@ namespace PL_console
             }
             return listCards;
         }
-        public void DisplayListCardsMonth(User user)
+        public double GetCardNo(User user)
         {
-            List<Card> listCards = GetListCards(user);
+            double cardNo = 0;
+            try
+            {
+                CardBL cardBL = new CardBL();
+                cardNo = cardBL.GetCardNo();
+            }
+            catch (Exception ex)
+            {
+                CheckUser(user, ex);
+            }
+            return cardNo;
+        }
+        public List<Card> GetListCardMonth(int page, User user)
+        {
+            List<Card> listCards = null;
+            try
+            {
+                CardBL cardBL = new CardBL();
+                listCards = cardBL.GetlistCardMonth(page);
+            }
+            catch (Exception ex)
+            {
+                CheckUser(user, ex);
+            }
+            return listCards;
+        }
+        public double GetCardMonthNo(User user)
+        {
+            double cardNo = 0;
+            try
+            {
+                CardBL cardBL = new CardBL();
+                cardNo = cardBL.GetCardMonthNo();
+            }
+            catch (Exception ex)
+            {
+                CheckUser(user, ex);
+            }
+            return cardNo;
+        }
+        public void DisplayListCardsMonth(int page, User user)
+        {
+            List<Card> listCards = GetListCardMonth(page, user);
             string status = "";
             int Count = 0;
             Console.Clear();
@@ -283,12 +345,11 @@ namespace PL_console
                     if (item.Card_type == "Thẻ tháng")
                     {
                         Customer cus = GetCustomerByLincese_plate(item.LicensePlate, user);
-                        Card_Detail cd = GetCardDetailByID(item.Card_id, user);
-                        if (cd.End_day > DateTime.Now)
+                        if (item.Card_Status == 0)
                         {
                             status = "Chưa hết hạn";
                         }
-                        if (cd.End_day < DateTime.Now)
+                        if (item.Card_Status == 1)
                         {
                             status = "Hết hạn";
                         }
@@ -305,23 +366,41 @@ namespace PL_console
                     menu.MenuManager(user);
                 }
                 table.Write(Format.Alternative);
-                Console.WriteLine("Nhấn Enter để quay lại.");
-                Console.ReadKey();
+                double pageNo = Math.Ceiling(Convert.ToDouble(GetCardMonthNo(user) / 10));
+                Console.WriteLine("                                              Trang: {0} / {1}", (page / 10) + 1, pageNo);
+                if (pageNo > 1)
+                {
+                    Console.WriteLine("Nhập mã (24122000) để thoát");
+                    Console.Write("Nhập trang: ");
+                    do
+                    {
+                        try
+                        {
+                            page = Convert.ToInt32(Console.ReadLine());
+                            if (page == 24122000)
+                            {
+                                menu.MenuManager(user);
+                            }
+                            if (page > pageNo || page <= 0)
+                            {
+                                Console.Write("Số trang nhập quá lớn hoặc quá nhỏ. Nhập lại: ");
+                                page = 0;
+                            }
+                        }
+                        catch (System.Exception)
+                        {
+                            Console.Write("Số trang nhập không hợp lệ. Nhập lại: ");
+                            page = 0;
+                        }
+                    } while (page == 0);
+                    DisplayListCardsMonth(((page - 1) * 10), user);
+                }
+                else
+                {
+                    Console.WriteLine("Nhấn Enter để quay lại.");
+                    Console.ReadKey();
+                }
             }
-        }
-        public Card_Detail GetCardDetailByID(int? cardid, User user)
-        {
-            Card_Detail cd = null;
-            try
-            {
-                Card_detailBL cdBL = new Card_detailBL();
-                cd = cdBL.GetCard_DetailbyID(cardid.Value);
-            }
-            catch (Exception ex)
-            {
-                CheckUser(user, ex);
-            }
-            return cd;
         }
         public Card_Logs GetCardLogsByCardIDAndLicensePlate(int cardid, string licensePlate, User user)
         {
@@ -330,6 +409,34 @@ namespace PL_console
             {
                 Card_LogsBL cardLogsBL = new Card_LogsBL();
                 cardLogs = cardLogsBL.GetCardLogsByCardIDAndLicensePlate(cardid, licensePlate);
+            }
+            catch (Exception ex)
+            {
+                CheckUser(user, ex);
+            }
+            return cardLogs;
+        }
+        public Card_Logs GetCardLogsByID(int cardid, int status, User user)
+        {
+            Card_Logs cardLogs = null;
+            try
+            {
+                Card_LogsBL cardLogsBL = new Card_LogsBL();
+                cardLogs = cardLogsBL.GetCardLogsByID(cardid, status);
+            }
+            catch (Exception ex)
+            {
+                CheckUser(user, ex);
+            }
+            return cardLogs;
+        }
+        public Card_Logs GetCardLogsByLicensePlate(string licensePlate, User user)
+        {
+            Card_Logs cardLogs = null;
+            try
+            {
+                Card_LogsBL cardLogsBL = new Card_LogsBL();
+                cardLogs = cardLogsBL.GetCardLogsByLicensePlate(licensePlate);
             }
             catch (Exception ex)
             {
@@ -350,20 +457,6 @@ namespace PL_console
                 CheckUser(user, ex);
             }
             return card;
-        }
-        public Card GetCardByLicensePlate(string licensePlate, User user)
-        {
-            Card newCard = null;
-            try
-            {
-                CardBL cardBL = new CardBL();
-                newCard = cardBL.GetCardByLicensePlate(licensePlate);
-            }
-            catch (Exception ex)
-            {
-                CheckUser(user, ex);
-            }
-            return newCard;
         }
         public bool UpdateCardByID(Card card, User user)
         {
@@ -396,7 +489,7 @@ namespace PL_console
             try
             {
                 Card_LogsBL cardLogsBL = new Card_LogsBL();
-                cardLogsBL.UpdateCardLogsByLicensePlateAndCardID(cardlogs, cardlogs.LisensePlate, cardlogs.Card_id, cardlogs.DateTimeStart?.ToString("yyyy-MM-dd HH:mm:ss"));
+                cardLogsBL.UpdateCardLogsByLicensePlateAndCardID(cardlogs, cardlogs.LisensePlate, cardlogs.Card_id, cardlogs.TimeIn?.ToString("yyyy-MM-dd HH:mm:ss"));
             }
             catch (Exception ex)
             {
@@ -404,13 +497,13 @@ namespace PL_console
             }
             return true;
         }
-        public List<Card_Logs> GetListCardLogs(string from, string to, User user)
+        public List<Card_Logs> GetListCardLogsByPage(int page, string from, string to, string type, User user)
         {
             List<Card_Logs> cardLogs = null;
             try
             {
                 Card_LogsBL cardLogsBL = new Card_LogsBL();
-                cardLogs = cardLogsBL.GetListCardLogs(from, to);
+                cardLogs = cardLogsBL.GetListCardLogsByPage(page, from, to, type);
             }
             catch (Exception ex)
             {
@@ -418,40 +511,57 @@ namespace PL_console
             }
             return cardLogs;
         }
-        public void Statistical(User user)
+        public List<Card_Logs> GetListCardLogs(string from, string to, User user)
         {
-            string datimeEnd = "";
-            string status = "";
-            string intoMoney = "";
+            List<Card_Logs> cardLogs = null;
+            try
+            {
+                Card_LogsBL cardLogsBL = new Card_LogsBL();
+                cardLogs = cardLogsBL.GetListCardLogs(Convert.ToDateTime(from).ToString("yyyy-MM-dd 00:00:00"), Convert.ToDateTime(to).ToString("yyyy-MM-dd 23:59:59"));
+            }
+            catch (Exception ex)
+            {
+                CheckUser(user, ex);
+            }
+            return cardLogs;
+        }
+        public double GetCardLogNO(string from, string to, string type, User user)
+        {
+            double cardLogsNo = 0;
+            try
+            {
+                Card_LogsBL cardLogsBL = new Card_LogsBL();
+                cardLogsNo = cardLogsBL.GetCardLogNO(Convert.ToDateTime(from).ToString("yyyy-MM-dd 00:00:00"), Convert.ToDateTime(to).ToString("yyyy-MM-dd 23:59:59"), type);
+            }
+            catch (Exception ex)
+            {
+                CheckUser(user, ex);
+            }
+            return cardLogsNo;
+        }
+        public void Statistical(User user, int choose)
+        {
+
             string from;
             string to;
-            double totalmoney = 0;
-            int Inturn = 0;
             Console.Clear();
             Console.WriteLine(b);
-            Console.WriteLine(" Thống kê");
+            if (choose == 1) Console.WriteLine(" Thống kê xe ra vào thẻ ngày");
+            if (choose == 2) Console.WriteLine(" Thống kê xe ra vào thẻ tháng");
             Console.WriteLine(b);
             Console.Write("Từ ngày (VD:24/12/2000): ");
             do
             {
                 from = Console.ReadLine();
-                if (validate(5, from) == false)
+                if (validate(5, from, user) == false)
                 {
-                    Console.Write("Thời gian nhập vào không hợp lệ (VD:24/12/2000). Nhập lại: ");
+                    Console.Write("=> Thời gian nhập vào không hợp lệ (VD:24/12/2000). Nhập lại: ");
                     from = null;
                     continue;
                 }
-                try
+                if (Convert.ToDateTime(from) > DateTime.Now || Convert.ToDateTime(from) < new DateTime(2019, 1, 1))
                 {
-                    if (Convert.ToDateTime(from) > DateTime.Now || Convert.ToDateTime(from) < new DateTime(2018, 1, 1))
-                    {
-                        Console.Write("Thời gian nhập vào phải sau thời gian hiện tại và phải trước năm 2018. Nhập lại: ");
-                        from = null;
-                    }
-                }
-                catch (System.Exception)
-                {
-                    Console.Write("Thời gian nhập vào không hợp lệ (VD:24/12/2000). Nhập lại: ");
+                    Console.Write("=> Thời gian nhập vào phải sau thời gian hiện tại và phải trước năm 2018. Nhập lại: ");
                     from = null;
                 }
             } while (from == null);
@@ -459,52 +569,78 @@ namespace PL_console
             do
             {
                 to = Console.ReadLine();
-                if (validate(5, from) == false)
+                if (validate(5, to, user) == false)
                 {
-                    Console.Write("Thời gian không hợp lệ (VD:24/12/2019). Nhập lại: ");
+                    Console.Write("=> Thời gian nhập vào không hợp lệ (VD:24/12/2000). Nhập lại: ");
                     to = null;
                     continue;
                 }
-                try
+                if (Convert.ToDateTime(to) < Convert.ToDateTime(from) || Convert.ToDateTime(to) > DateTime.Now)
                 {
-                    if (Convert.ToDateTime(to) < Convert.ToDateTime(from))
-                    {
-                        Console.Write("Thời gian nhập vào phải trước thời gian bắt đầu. Nhập lại: ");
-                        to = null;
-                    }
-                }
-                catch (System.Exception)
-                {
-                    Console.Write("Thời gian không hợp lệ (VD:24/12/2019). Nhập lại: ");
+                    Console.Write("=> Thời gian nhập vào phải trước thời gian bắt đầu và sau hiện tại. Nhập lại: ");
                     to = null;
                 }
             } while (to == null);
-            List<Card_Logs> cardLogs = GetListCardLogs(Convert.ToDateTime(from).ToString("yyyy-MM-dd 00:00:00"), Convert.ToDateTime(to).ToString("yyyy-MM-dd 23:59:59"), user);
+            if (choose == 1)
+            {
+                DisplayStatistical(0, from, to, "Thẻ ngày", user);
+            }
+            if (choose == 2)
+            {
+                DisplayStatistical(0, from, to, "Thẻ tháng", user);
+            }
+        }
+        public int GetTurn(string from, string to, string type, User user)
+        {
+            int Count = 0;
+            List<Card_Logs> cardLogs = GetListCardLogs(from, to, user);
+            foreach (var item in cardLogs)
+            {
+                Card card = GetCardByID(item.Card_id, user);
+                if (item.Status == 1 && card.Card_type == type)
+                {
+                    Count++;
+                }
+            }
+            return Count;
+        }
+        public double GetMoney(string from, string to, string type, User user)
+        {
+            double monney = 0;
+            List<Card_Logs> cardLogs = GetListCardLogs(from, to, user);
+            foreach (var item in cardLogs)
+            {
+                Card card = GetCardByID(item.Card_id, user);
+                if (item.Status == 1 && card.Card_type == type)
+                {
+                    monney = monney + Convert.ToDouble(item.Money);
+                }
+            }
+            return monney;
+        }
+        public void DisplayStatistical(int page, string from, string to, string type, User user)
+        {
+            string timeOut = "";
+            string status = "";
+            List<Card_Logs> cardLogs = GetListCardLogsByPage(page, Convert.ToDateTime(from).ToString("yyyy-MM-dd 00:00:00"), Convert.ToDateTime(to).ToString("yyyy-MM-dd 23:59:59"), type, user);
             var table = new ConsoleTable("STT", "Biển số xe", "Thời gian vào", "Thời gian ra", "Mã thẻ", "Loại thẻ", "Trạng thái", "Giá tiền");
             int STT = 0;
             Card card = null;
             foreach (var item in cardLogs)
             {
                 card = GetCardByID(item.Card_id, user);
-                if (card.Card_type == "Thẻ ngày" || item.IntoMoney > 0)
+                STT = STT + 1;
+                if (item.Status == 0)
                 {
-                    STT = STT + 1;
-                    if (item.DateTimeEnd == new DateTime(0))
-                    {
-                        datimeEnd = "             ";
-                        status = "Chưa lấy xe ";
-                        intoMoney = "             ";
-                    }
-                    if (item.DateTimeEnd != new DateTime(0))
-                    {
-                        datimeEnd = Convert.ToString(item.DateTimeEnd);
-                        status = "Đã lấy xe ";
-                        intoMoney = Convert.ToString(item.IntoMoney) + "  VNĐ";
-                        totalmoney = totalmoney + Convert.ToDouble(item.IntoMoney);
-                        Inturn++;
-                    }
-                    table.AddRow(STT, item.LisensePlate, item.DateTimeStart, datimeEnd, item.Card_id, card.Card_type, status, intoMoney);
+                    timeOut = "             ";
+                    status = "Chưa lấy xe ";
                 }
+                if (item.Status == 1)
+                {
+                    timeOut = Convert.ToString(item.TimeIn);
+                    status = "Đã lấy xe ";
+                }
+                table.AddRow(STT, item.LisensePlate, item.TimeIn, timeOut, item.Card_id, card.Card_type, status, Convert.ToString(item.Money) + " VNĐ");
             }
             if (STT <= 0)
             {
@@ -518,21 +654,51 @@ namespace PL_console
                 Console.WriteLine();
                 Console.WriteLine("                   Từ ngày: {0}                                   Đến ngày: {1}", from, to);
                 Console.WriteLine();
-                Console.WriteLine("                   Thổng số tiền: {0} VND                            Số lượt:  {1}", totalmoney, Inturn);
+                Console.WriteLine("                   Thổng số tiền: {0} VND                            Số lượt:  {1}", GetMoney(from, to, type, user), GetTurn(from, to, type, user));
                 Console.WriteLine();
-                Console.WriteLine("                   Số tiền chỉ dành cho các xe dùng thẻ ngày và thẻ tháng đã hết hạn.");
+                Console.WriteLine("                   Số tiền chỉ dành cho các xe dùng {0}.", type);
                 Console.WriteLine();
                 Console.WriteLine();
                 table.Write(Format.Alternative);
-                Console.Write("Nhấn Enter để quay lại.");
-                Console.ReadKey();
-                Console.WriteLine();
+                double pageNo = Math.Ceiling(Convert.ToDouble(GetCardLogNO(from, to, type, user) / 10));
+                Console.WriteLine("                                              Trang: {0} / {1}", (page / 10) + 1, pageNo);
+                if (pageNo > 1)
+                {
+                    Console.WriteLine("Nhập mã (24122000) để thoát");
+                    Console.Write("Nhập trang: ");
+                    do
+                    {
+                        try
+                        {
+                            page = Convert.ToInt32(Console.ReadLine());
+                            if (page == 24122000)
+                            {
+                                menu.MenuStatictis(user);
+                            }
+                            if (page > pageNo || page <= 0)
+                            {
+                                Console.Write("Số trang nhập quá lớn hoặc quá nhỏ. Nhập lại: ");
+                                page = 0;
+                            }
+                        }
+                        catch (System.Exception)
+                        {
+                            Console.Write("Số trang nhập không hợp lệ. Nhập lại: ");
+                            page = 0;
+                        }
+                    } while (page == 0);
+                    DisplayStatistical(((page - 1) * 10), from, to, type, user);
+                }
+                else
+                {
+                    Console.Write("Nhấn Enter để quay lại.");
+                    Console.ReadKey();
+                    Console.WriteLine();
+                }
             }
         }
         public void CheckUser(User user, Exception ex)
         {
-
-           
             Console.WriteLine();
             Console.WriteLine(ex.Message);
             Console.WriteLine("LỖI!!! MỜI BẠN THỬ LẠI !!!");
@@ -543,7 +709,7 @@ namespace PL_console
             }
             if (user.User_level == 1)
             {
-                menu.CheckInCheckOut(user);
+                menu.MenuSecurity(user);
             }
         }
     }

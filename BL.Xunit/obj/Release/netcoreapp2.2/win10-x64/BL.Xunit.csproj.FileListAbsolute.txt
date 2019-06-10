@@ -1,25 +1,3 @@
-D:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\BL.Xunit\bin\Release\netcoreapp2.2\win10-x64\xunit.runner.visualstudio.dotnetcore.testadapter.dll
-D:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\BL.Xunit\bin\Release\netcoreapp2.2\win10-x64\xunit.runner.reporters.netcoreapp10.dll
-D:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\BL.Xunit\bin\Release\netcoreapp2.2\win10-x64\xunit.runner.utility.netcoreapp10.dll
-D:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\BL.Xunit\bin\Release\netcoreapp2.2\win10-x64\ConnectionString.txt
-D:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\BL.Xunit\bin\Release\netcoreapp2.2\win10-x64\BL.Xunit.deps.json
-D:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\BL.Xunit\bin\Release\netcoreapp2.2\win10-x64\BL.Xunit.runtimeconfig.json
-D:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\BL.Xunit\bin\Release\netcoreapp2.2\win10-x64\BL.Xunit.runtimeconfig.dev.json
-D:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\BL.Xunit\bin\Release\netcoreapp2.2\win10-x64\BL.Xunit.dll
-D:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\BL.Xunit\bin\Release\netcoreapp2.2\win10-x64\BL.Xunit.pdb
-D:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\BL.Xunit\bin\Release\netcoreapp2.2\win10-x64\BL.dll
-D:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\BL.Xunit\bin\Release\netcoreapp2.2\win10-x64\DAL.dll
-D:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\BL.Xunit\bin\Release\netcoreapp2.2\win10-x64\Persistence.dll
-D:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\BL.Xunit\bin\Release\netcoreapp2.2\win10-x64\BL.pdb
-D:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\BL.Xunit\bin\Release\netcoreapp2.2\win10-x64\Persistence.pdb
-D:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\BL.Xunit\bin\Release\netcoreapp2.2\win10-x64\DAL.pdb
-D:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\BL.Xunit\obj\Release\netcoreapp2.2\win10-x64\BL.Xunit.csprojAssemblyReference.cache
-D:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\BL.Xunit\obj\Release\netcoreapp2.2\win10-x64\BL.Xunit.csproj.CoreCompileInputs.cache
-D:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\BL.Xunit\obj\Release\netcoreapp2.2\win10-x64\BL.Xunit.AssemblyInfoInputs.cache
-D:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\BL.Xunit\obj\Release\netcoreapp2.2\win10-x64\BL.Xunit.AssemblyInfo.cs
-D:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\BL.Xunit\obj\Release\netcoreapp2.2\win10-x64\BL.Xunit.csproj.CopyComplete
-D:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\BL.Xunit\obj\Release\netcoreapp2.2\win10-x64\BL.Xunit.dll
-D:\PROGRAMER\SEM1\Project sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\BL.Xunit\obj\Release\netcoreapp2.2\win10-x64\BL.Xunit.pdb
 D:\PROGRAMER\SEM1\LeChiDung-PF02 Project Sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\BL.Xunit\bin\Release\netcoreapp2.2\win10-x64\xunit.runner.visualstudio.dotnetcore.testadapter.dll
 D:\PROGRAMER\SEM1\LeChiDung-PF02 Project Sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\BL.Xunit\bin\Release\netcoreapp2.2\win10-x64\xunit.runner.reporters.netcoreapp10.dll
 D:\PROGRAMER\SEM1\LeChiDung-PF02 Project Sem1\FinalProjectSem1_Group1_MotoParkingManagementSystem\BL.Xunit\bin\Release\netcoreapp2.2\win10-x64\xunit.runner.utility.netcoreapp10.dll

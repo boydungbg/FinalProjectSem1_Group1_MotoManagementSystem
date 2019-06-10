@@ -189,11 +189,10 @@ namespace PL_Console
                         manager.CreateCard(user);
                         break;
                     case '2':
-                        manager.DisplayListCardsMonth(user);
+                        manager.DisplayListCardsMonth(0, user);
                         break;
                     case '3':
-                        // MenuStatictis();
-                        manager.Statistical(user);
+                        MenuStatictis(user);
                         break;
                     case '4':
                         MenuChoice();
@@ -204,54 +203,56 @@ namespace PL_Console
                 }
             } while (choose != '4');
         }
-        public void MenuSecurity(User user)
+        public void MenuStatictis(User user)
         {
             char choose;
             do
             {
                 Console.Clear();
-
-                string[] menuItem = { "Kiểm tra xe ra vào", "Đăng xuất" };
-                choose = Menu(menuItem, 2, "Chào mừng bạn đã đến với hệ thống quản lý bãi gửi xe", "#Chọn: ");
+                ManagerCardAndStatistic manager = new ManagerCardAndStatistic();
+                string[] menuItem = { "Thống kê xe ra vào thẻ ngày", "Thống kê xe ra vào thẻ tháng", "Quay lại" };
+                choose = Menu(menuItem, 3, "Chào mừng bạn đã đến với hệ thống quản lý bãi gửi xe", "#Chọn: ");
                 switch (choose)
                 {
                     case '1':
-                        CheckInCheckOut(user);
+                        manager.Statistical(user, 1);
                         break;
                     case '2':
-                        MenuChoice();
+                        manager.Statistical(user, 2);
+                        break;
+                    case '3':
+                        MenuManager(user);
                         break;
                     default:
+                        Console.WriteLine("Bạn nhập sai!!!Vui lòng nhập lai....!");
                         break;
                 }
-            } while (choose != '2');
-
+            } while (choose != '4');
         }
-        public void CheckInCheckOut(User user)
+        public void MenuSecurity(User user)
         {
             SecurityCheckInCheckOut security = new SecurityCheckInCheckOut();
             char choose;
             do
             {
                 Console.Clear();
-                string[] menuItem = { "Kiểm tra xe vào", "Kiểm tra xe ra", "Quay lại" };
+                string[] menuItem = { "Kiểm tra xe vào", "Kiểm tra xe ra", "Đăng xuất" };
                 choose = Menu(menuItem, 3, "Kiểm tra xe vào xe ra", "#Chọn: ");
                 switch (choose)
                 {
                     case '1':
-                        security.CheckIn(user);
+                        security.Check(user, 1);
                         break;
                     case '2':
-                        security.CheckOut(user);
+                        security.Check(user, 2);
                         break;
                     case '3':
-                        MenuSecurity(user);
+                        MenuChoice();
                         break;
                     default:
                         break;
                 }
             } while (choose != '3');
-
         }
         public char yesNo()
         {

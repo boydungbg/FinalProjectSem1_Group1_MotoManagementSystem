@@ -21,25 +21,18 @@ namespace DAL
                 connection.Open();
             }
         }
-        public bool CreateCard(Card card, Customer cus, Card_Detail card_Detail)
+        public bool CreateCard(Card card, Customer cus)
         {
             bool result = false;
             MySqlCommand command = new MySqlCommand("", connection);
             //Lock table 
-            command.CommandText = @"lock tables Customer write, Card write, Card_detail write;";
+            command.CommandText = @"lock tables Customer write, Card write;";
             command.ExecuteNonQuery();
             //Transaction
             MySqlTransaction transaction = connection.BeginTransaction();
             command.Transaction = transaction;
             try
             {
-                //Insert card
-                command.CommandText = @"insert into Card(card_id,card_type,license_plate) 
-                values  (@cardid,@cardType,@LicensePlate);";
-                command.Parameters.AddWithValue("@cardid", card.Card_id);
-                command.Parameters.AddWithValue("@cardType", card.Card_type);
-                command.Parameters.AddWithValue("@LicensePlate", cus.Cus_licensePlate);
-                command.ExecuteNonQuery();
                 // Insert Customer
                 command.CommandText = @"insert into Customer(cus_id,cus_fullname,cus_address,license_plate)
                 values   (@cus_id,@cus_name,@cus_address,@license_Plate);";
@@ -48,13 +41,15 @@ namespace DAL
                 command.Parameters.AddWithValue("@cus_address", cus.Cus_address);
                 command.Parameters.AddWithValue("@license_Plate", cus.Cus_licensePlate);
                 command.ExecuteNonQuery();
-                // Insert Card_detail
-                command.CommandText = @"insert into Card_detail (card_id,cus_id,start_day,end_day)
-                        values (@card_id_card_detail,@cus_id_card_detail,@start_day,@end_day);";
-                command.Parameters.AddWithValue("@card_id_card_detail", card.Card_id);
-                command.Parameters.AddWithValue("@cus_id_card_detail", cus.Cus_id);
-                command.Parameters.AddWithValue("@start_day", card_Detail.Start_day);
-                command.Parameters.AddWithValue("@end_day", card_Detail.End_day);
+                //Insert card
+                command.CommandText = @"insert into Card(card_id,cus_id,card_type,license_plate,start_day,end_day) 
+                values  (@card_id,@cus_id_card,@cardType,@LicensePlate,@start_day,@end_day);";
+                command.Parameters.AddWithValue("@card_id", card.Card_id);
+                command.Parameters.AddWithValue("@cus_id_card", cus.Cus_id);
+                command.Parameters.AddWithValue("@LicensePlate", cus.Cus_licensePlate);
+                command.Parameters.AddWithValue("@start_day", card.Start_day);
+                command.Parameters.AddWithValue("@end_day", card.End_day);
+                command.Parameters.AddWithValue("@cardType", card.Card_type);
                 command.ExecuteNonQuery();
                 transaction.Commit();
                 result = true;
@@ -77,7 +72,11 @@ namespace DAL
         public bool UpdateCardByID(Card card, int cardid)
         {
             MySqlCommand command = new MySqlCommand("", connection);
-            query = @"Update Card SET license_plate = '" + card.LicensePlate + "', card_status = '" + card.Card_Status + "', card_type = '" + card.Card_type + "' where  card_id = " + cardid + "; ";
+            query = @"Update Card SET license_plate = @LicensePlate, card_status = @card_status, card_type =@card_type where  card_id = @card_id;";
+            command.Parameters.AddWithValue("@LicensePlate", card.LicensePlate);
+            command.Parameters.AddWithValue("@card_status", card.Card_Status);
+            command.Parameters.AddWithValue("@card_type", card.Card_type);
+            command.Parameters.AddWithValue("@card_id", cardid);
             command.CommandText = query;
             command.ExecuteNonQuery();
             connection.Close();
@@ -86,17 +85,12 @@ namespace DAL
         public bool DeleteCardByID(int cardid, string cusid)
         {
             MySqlCommand command = new MySqlCommand("", connection);
-            query = @"Delete from Card_detail where card_id = @card_id_card_detail and cus_id = @cus_id_card_detail;";
-            command.Parameters.AddWithValue("@card_id_card_detail", cardid);
-            command.Parameters.AddWithValue("@cus_id_card_detail", cusid);
+            query = @"Delete from Card where card_id = @cardid;";
+            command.Parameters.AddWithValue("@cardid", cardid);
             command.CommandText = query;
             command.ExecuteNonQuery();
             query = @"Delete from Customer where cus_id = @cusid;";
             command.Parameters.AddWithValue("@cusid", cusid);
-            command.CommandText = query;
-            command.ExecuteNonQuery();
-            query = @"Delete from Card where card_id = @cardid;";
-            command.Parameters.AddWithValue("@cardid", cardid);
             command.CommandText = query;
             command.ExecuteNonQuery();
             connection.Close();
@@ -114,24 +108,20 @@ namespace DAL
             connection.Close();
             return card;
         }
-        public Card GetCardByLicensePlate(string licensePlate)
-        {
-            query = @"select * from Card where license_plate = '" + licensePlate + "' ;";
-            reader = DBHelper.ExecQuery(query, connection);
-            Card card = null;
-            if (reader.Read())
-            {
-                card = GetCardInfo(reader);
-            }
-            connection.Close();
-            return card;
-        }
         private Card GetCardInfo(MySqlDataReader reader)
         {
             Card card = new Card();
-            if (reader.IsDBNull(reader.GetOrdinal("card_id")))
+            if (reader.IsDBNull(reader.GetOrdinal("card_id")) || reader.IsDBNull(reader.GetOrdinal("cus_id")) || reader.IsDBNull(reader.GetOrdinal("start_day")) || reader.IsDBNull(reader.GetOrdinal("end_day")))
             {
-                return null;
+                card.Cus_id = "Không có";
+                card.Start_day = new DateTime();
+                card.End_day = new DateTime();
+            }
+            else
+            {
+                card.Cus_id = reader.GetString("cus_id");
+                card.Start_day = reader.GetDateTime("start_day");
+                card.End_day = reader.GetDateTime("end_day");
             }
             card.Card_id = reader.GetInt32("card_id");
             card.LicensePlate = reader.GetString("license_plate");
@@ -140,9 +130,9 @@ namespace DAL
             card.Date_created = reader.GetDateTime("date_created");
             return card;
         }
-        public List<Card> GetlistCard()
+        public List<Card> GetlistCard(int page)
         {
-            query = @"select * from Card;";
+            query = @"select * from Card limit " + page + ",10;";
             reader = DBHelper.ExecQuery(query, connection);
             List<Card> card = new List<Card>();
             while (reader.Read())
@@ -151,6 +141,42 @@ namespace DAL
             }
             connection.Close();
             return card;
+        }
+        public double GetCardNO()
+        {
+            query = @"select count(card_id) from Card;";
+            reader = DBHelper.ExecQuery(query, connection);
+            double CardNo = 0;
+            while (reader.Read())
+            {
+                CardNo = reader.GetInt32("count(card_id)");
+            }
+            connection.Close();
+            return CardNo;
+        }
+        public List<Card> GetlistCardMonth(int page)
+        {
+            query = @"select * from Card where card_type = 'Thẻ tháng' limit " + page + ",10;";
+            reader = DBHelper.ExecQuery(query, connection);
+            List<Card> card = new List<Card>();
+            while (reader.Read())
+            {
+                card.Add(GetCardInfo(reader));
+            }
+            connection.Close();
+            return card;
+        }
+        public double GetCardMonthNO()
+        {
+            query = @"select count(card_id) from Card where card_type = 'Thẻ tháng';";
+            reader = DBHelper.ExecQuery(query, connection);
+            double CardNo = 0;
+            while (reader.Read())
+            {
+                CardNo = reader.GetInt32("count(card_id)");
+            }
+            connection.Close();
+            return CardNo;
         }
         public Card GetCardID()
         {

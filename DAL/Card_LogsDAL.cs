@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
 using MySql.Data.MySqlClient;
 using Persistence;
 
@@ -24,17 +25,17 @@ namespace DAL
         public bool CreateCardLogs(Card_Logs card_Logs)
         {
             MySqlCommand command = new MySqlCommand("", connection);
-            query = @"insert into Card_Logs(card_id,acc_name,cl_licensePlate,cl_dateTimeStart) values
-                ('" + card_Logs.Card_id + "','" + card_Logs.User_name + "','" + card_Logs.LisensePlate + "','" + card_Logs.DateTimeStart?.ToString("yyyy-MM-dd HH:mm:ss") + "')";
+            query = @"insert into Card_Logs(card_id,acc_name,cl_licensePlate,cl_timeIn) values
+                ('" + card_Logs.Card_id + "','" + card_Logs.User_name + "','" + card_Logs.LisensePlate + "','" + card_Logs.TimeIn?.ToString("yyyy-MM-dd HH:mm:ss") + "')";
             command.CommandText = query;
             command.ExecuteNonQuery();
             connection.Close();
             return true;
         }
-        public bool UpdateCardLogsByLicensePlateAndCardID(Card_Logs cardLogs, string licensePlate, int cardid, string dateTimeStart)
+        public bool UpdateCardLogsByLicensePlateAndCardID(Card_Logs cardLogs, string licensePlate, int cardid, string timeIn)
         {
             MySqlCommand command = new MySqlCommand("", connection);
-            query = @"Update  Card_logs  SET cl_dateTimeEnd = '" + cardLogs.DateTimeEnd?.ToString("yyyy-MM-dd HH:mm:ss") + "'  , cl_sendTime = '" + cardLogs.SendTime + "',cl_intoMoney = " + cardLogs.IntoMoney + " where card_id = " + cardid + "  and cl_licensePlate = '" + licensePlate + "' and cl_dateTimeStart = '" + dateTimeStart + "'; ";
+            query = @"Update  Card_logs  SET cl_timeOut = '" + cardLogs.TimeOut?.ToString("yyyy-MM-dd HH:mm:ss") + "', cl_status = " + cardLogs.Status + ",cl_money = " + cardLogs.Money + " where card_id = " + cardid + "  and cl_licensePlate = '" + licensePlate + "' and cl_timeIn = '" + timeIn + "'; ";
             command.CommandText = query;
             command.ExecuteNonQuery();
             connection.Close();
@@ -42,7 +43,19 @@ namespace DAL
         }
         public Card_Logs GetCardLogsByCardIDAndLicensePlate(int cardid, string licensePlate)
         {
-            query = @"select card_id,cl_licensePlate,max(cl_dateTimeStart) as cl_dateTimeStart,cl_dateTimeEnd,cl_sendTime,cl_intoMoney from Card_Logs where card_id =" + cardid + " and cl_licensePlate='" + licensePlate + "';";
+            query = @"select card_id,cl_licensePlate,max(cl_timeIn) as cl_timeIn,cl_timeOut,cl_status,cl_money from Card_Logs where card_id =" + cardid + " and cl_licensePlate='" + licensePlate + "';";
+            reader = DBHelper.ExecQuery(query, connection);
+            Card_Logs cardLogs = null;
+            if (reader.Read())
+            {
+                cardLogs = GetCardLogsInfo(reader);
+            }
+            connection.Close();
+            return cardLogs;
+        }
+        public Card_Logs GetCardLogsByLicensePlate(string licensePlate)
+        {
+            query = @"select card_id,cl_licensePlate,max(cl_timeIn) as cl_timeIn,cl_timeOut,cl_status,cl_money from Card_Logs where cl_licensePlate='" + licensePlate + "';";
             reader = DBHelper.ExecQuery(query, connection);
             Card_Logs cardLogs = null;
             if (reader.Read())
@@ -59,31 +72,70 @@ namespace DAL
             {
                 return null;
             }
-            cardLogs.Card_id = reader.GetInt32("card_id");
-            cardLogs.LisensePlate = reader.GetString("cl_licensePlate");
-            cardLogs.DateTimeStart = reader.GetDateTime("cl_dateTimeStart");
-            if (reader.IsDBNull(reader.GetOrdinal("cl_dateTimeEnd")) && reader.IsDBNull(reader.GetOrdinal("cl_sendTime")) && reader.IsDBNull(reader.GetOrdinal("cl_intoMoney")))
+            if (reader.IsDBNull(reader.GetOrdinal("cl_timeOut")))
             {
-                cardLogs.DateTimeEnd = new DateTime(0);
-                cardLogs.SendTime = "Không có";
-                cardLogs.IntoMoney = 0;
+                cardLogs.TimeOut = new DateTime();
             }
             else
             {
-                cardLogs.DateTimeEnd = reader.GetDateTime("cl_dateTimeEnd");
-                cardLogs.SendTime = reader.GetString("cl_sendTime");
-                cardLogs.IntoMoney = reader.GetDouble("cl_intoMoney");
+                cardLogs.TimeOut = reader.GetDateTime("cl_timeOut");
             }
+            cardLogs.Card_id = reader.GetInt32("card_id");
+            cardLogs.TimeIn = reader.GetDateTime("cl_timeIn");
+            cardLogs.LisensePlate = reader.GetString("cl_licensePlate");
+            cardLogs.Status = reader.GetInt16("cl_status");
+            cardLogs.Money = reader.GetDouble("cl_money");
             return cardLogs;
         }
-        public List<Card_Logs> GetListCardLogs(string from, string to)
+        public List<Card_Logs> GetListCardLogsByPage(int page, string from, string to, string type)
         {
-            query = @"select * from Card_logs where cl_dateTimeStart between '" + from + "' AND '" + to + "';";
+            query = @"call sp_card_logs_statistical(" + page + ",'" + from + "','" + to + "','" + type + "')";
             reader = DBHelper.ExecQuery(query, connection);
             List<Card_Logs> cardLogs = new List<Card_Logs>();
             while (reader.Read())
             {
                 cardLogs.Add(GetCardLogsInfo(reader));
+            }
+            connection.Close();
+            return cardLogs;
+        }
+        public List<Card_Logs> GetListCardLogs(string from, string to)
+        {
+            query = @"select * from Card_logs  where cl_timeIn between '" + from + "' and '" + to + "';";
+            reader = DBHelper.ExecQuery(query, connection);
+            List<Card_Logs> cardLogs = new List<Card_Logs>();
+            while (reader.Read())
+            {
+                cardLogs.Add(GetCardLogsInfo(reader));
+            }
+            connection.Close();
+            return cardLogs;
+        }
+        public double GetCardLogNO(string from, string to, string type)
+        {
+            query = @" select count(cl.cl_id) as cl_id from Card_logs cl inner join Card c on cl.card_id = c.card_id
+             where cl.cl_timeIn between '" + from + "' and '" + to + "' and c.card_type = '" + type + "';";
+            double CardLogNO = 0;
+            reader = DBHelper.ExecQuery(query, connection);
+            if (reader.Read())
+            {
+                CardLogNO = reader.GetInt32("cl_id");
+            }
+            connection.Close();
+            return CardLogNO;
+        }
+        public Card_Logs GetCardLogsByID(int cardid, int status)
+        {
+            query = @"select cl_id,cl_status,max(cl_timeIn) from Card_Logs where card_id =" + cardid + " and cl_status = " + status + ";";
+            reader = DBHelper.ExecQuery(query, connection);
+            Card_Logs cardLogs = new Card_Logs();
+            if (reader.Read())
+            {
+                if (reader.IsDBNull(reader.GetOrdinal("cl_status")))
+                {
+                    return null;
+                }
+                cardLogs.Status = reader.GetInt16("cl_status");
             }
             connection.Close();
             return cardLogs;

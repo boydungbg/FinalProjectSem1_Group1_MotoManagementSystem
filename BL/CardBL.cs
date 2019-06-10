@@ -11,13 +11,13 @@ namespace BL
         {
             cardDAL = new CardDAL();
         }
-        public bool CreateCard(Card card, Customer cus, Card_Detail card_Detail)
+        public bool CreateCard(Card card, Customer cus)
         {
-            if (card == null || cus == null || card_Detail == null)
+            if (card == null || cus == null)
             {
                 return false;
             }
-            return cardDAL.CreateCard(card, cus, card_Detail);
+            return cardDAL.CreateCard(card, cus);
         }
         public Card GetCardByID(int id)
         {
@@ -35,14 +35,6 @@ namespace BL
             }
             return cardDAL.DeleteCardByID(cardid, cusid);
         }
-        public Card GetCardByLicensePlate(string licensePlate)
-        {
-            if (licensePlate == null)
-            {
-                return null;
-            }
-            return cardDAL.GetCardByLicensePlate(licensePlate);
-        }
         public bool UpdateCardByID(Card card, int id)
         {
             if (card == null || id == 0)
@@ -51,13 +43,25 @@ namespace BL
             }
             return cardDAL.UpdateCardByID(card, id);
         }
-        public List<Card> GetlistCard()
+        public List<Card> GetlistCard(int page)
         {
-            return cardDAL.GetlistCard();
+            return cardDAL.GetlistCard(page);
         }
         public Card GetCardID()
         {
             return cardDAL.GetCardID();
+        }
+        public double GetCardNo()
+        {
+            return cardDAL.GetCardNO();
+        }
+        public List<Card> GetlistCardMonth(int page)
+        {
+            return cardDAL.GetlistCardMonth(page);
+        }
+        public double GetCardMonthNo()
+        {
+            return cardDAL.GetCardMonthNO();
         }
     }
 }
