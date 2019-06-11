@@ -37,11 +37,22 @@ namespace BL.Xunit
             card_Logs = new Card_Logs(10012, null, null, null, DateTime.Now, 10000, 1);
             Assert.False(cardLogsBL.UpdateCardLogsByLicensePlateAndCardID(null, "75G1-2222", 10012, "2019-05-20 00:00:00"));
         }
-        [Fact]
-        public void GetCardLogsByLinceseAndCardIDTest1()
+        [Theory]
+        [InlineData(10011, "33G1-3333")]
+        [InlineData(10015, "88A1-8888")]
+        public void GetCardLogsByLinceseAndCardIDTest1(int cardID, string licensePlate)
         {
             Card_LogsBL cardLogsBL = new Card_LogsBL();
-            Card_Logs card_Logs = cardLogsBL.GetCardLogsByCardIDAndLicensePlate(10012, "75G1-4422");
+            Card_Logs card_Logs = cardLogsBL.GetCardLogsByCardIDAndLicensePlate(cardID, licensePlate);
+            Assert.NotNull(card_Logs);
+        }
+        [Theory]
+        [InlineData(123123, "@#!@#")]
+        [InlineData(123123, null)]
+        public void GetCardLogsByLinceseAndCardIDTest2(int cardID, string licensePlate)
+        {
+            Card_LogsBL cardLogsBL = new Card_LogsBL();
+            Card_Logs card_Logs = cardLogsBL.GetCardLogsByCardIDAndLicensePlate(cardID, licensePlate);
             Assert.Null(card_Logs);
         }
         [Fact]
@@ -59,18 +70,35 @@ namespace BL.Xunit
             Assert.Empty(listCardLogs);
         }
         [Theory]
+        [InlineData(10011, 1)]
+        [InlineData(10015, 1)]
+        public void GetListCardByIDAndStatusTest1(int cardID, int status)
+        {
+            Card_LogsBL cardLogsBL = new Card_LogsBL();
+            Card_Logs card_logs = cardLogsBL.GetCardLogsByID(cardID, status);
+            Assert.NotNull(card_logs);
+        }
+        [Theory]
         [InlineData(10099, 1)]
         [InlineData(0, 0)]
-        public void GetListCardByIDTest2(int cardID, int status)
+        public void GetListCardByIDAndStatusTest2(int cardID, int status)
         {
             Card_LogsBL cardLogsBL = new Card_LogsBL();
             Card_Logs card_logs = cardLogsBL.GetCardLogsByID(cardID, status);
             Assert.Null(card_logs);
         }
         [Theory]
+        [InlineData("33G1-3333")]
+        [InlineData("88A1-8888")]
+        public void GetCardLogsByLicensePlateTest1(string licensePlate)
+        {
+            Card_LogsBL cardLogsBL = new Card_LogsBL();
+            Card_Logs card_logs = cardLogsBL.GetCardLogsByLicensePlate(licensePlate);
+            Assert.NotNull(card_logs);
+        }
+        [Theory]
         [InlineData("72222")]
         [InlineData("88888")]
-        [InlineData(null)]
         public void GetCardLogsByLicensePlateTest2(string licensePlate)
         {
             Card_LogsBL cardLogsBL = new Card_LogsBL();
