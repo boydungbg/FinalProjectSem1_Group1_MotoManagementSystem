@@ -234,7 +234,7 @@ namespace PL_console
             }
             if (check == 6)
             {
-                Regex regex = new Regex("[A-Z0-9 -]*\\S$");
+                Regex regex = new Regex("[A-Z0-9 -,]*\\S$");
                 MatchCollection matchCollectionstr = regex.Matches(input);
                 if (matchCollectionstr.Count == 0)
                 {
@@ -541,7 +541,6 @@ namespace PL_console
         }
         public void Statistical(User user, int choose)
         {
-
             string from;
             string to;
             Console.Clear();
@@ -559,9 +558,14 @@ namespace PL_console
                     from = null;
                     continue;
                 }
-                if (Convert.ToDateTime(from) > DateTime.Now || Convert.ToDateTime(from) < new DateTime(2019, 1, 1))
+                if (Convert.ToDateTime(from) > DateTime.Now)
                 {
-                    Console.Write("=> Thời gian nhập vào phải trước thời gian hiện tại và phải sau năm 2018. Nhập lại: ");
+                    Console.Write("=> Mốc thời gian bắt đầu phải trước thời gian hiện tại. Nhập lại: ");
+                    from = null;
+                }
+                if (Convert.ToDateTime(from) < new DateTime(2019, 1, 1))
+                {
+                    Console.Write("=> Mốc thời gian bắt đầu phải sau năm 2018. Nhập lại: ");
                     from = null;
                 }
             } while (from == null);
@@ -575,9 +579,14 @@ namespace PL_console
                     to = null;
                     continue;
                 }
-                if (Convert.ToDateTime(to) < Convert.ToDateTime(from) || Convert.ToDateTime(to) > DateTime.Now)
+                if (Convert.ToDateTime(to) < Convert.ToDateTime(from))
                 {
-                    Console.Write("=> Thời gian nhập vào phải trước thời gian bắt đầu và trước hiện tại. Nhập lại: ");
+                    Console.Write("=> Mốc thời gian kết thúc phải sau mốc thời gian bắt đầu. Nhập lại: ");
+                    to = null;
+                }
+                if (Convert.ToDateTime(to) > DateTime.Now)
+                {
+                    Console.Write("=> Mốc thời gian kết thúc phải trước hiện tại. Nhập lại: ");
                     to = null;
                 }
             } while (to == null);
@@ -642,6 +651,7 @@ namespace PL_console
                 }
                 table.AddRow(STT, item.LisensePlate, item.TimeIn, timeOut, item.Card_id, card.Card_type, status, Convert.ToString(item.Money) + " VNĐ");
             }
+            Console.Clear();
             if (STT <= 0)
             {
                 Console.WriteLine("Không có dữ liệu nào về xe ra xe vào! Nhấn Enter để quay lại.");
@@ -649,7 +659,6 @@ namespace PL_console
             }
             else
             {
-                Console.Clear();
                 Console.WriteLine();
                 Console.WriteLine();
                 Console.WriteLine("                   Từ ngày: {0}                                   Đến ngày: {1}", from, to);

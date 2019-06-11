@@ -7,7 +7,9 @@ namespace PL_Console
         static void Main(string[] args)
         {
             Menus menu = new Menus();
+            Console.ForegroundColor = ConsoleColor.White;
             menu.MenuChoice();
+            Console.ResetColor();
         }
     }
 }
