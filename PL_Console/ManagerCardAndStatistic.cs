@@ -543,6 +543,7 @@ namespace PL_console
         {
             string from;
             string to;
+            int flag;
             Console.Clear();
             Console.WriteLine(b);
             if (choose == 1) Console.WriteLine(" Thống kê xe ra vào thẻ ngày");
@@ -551,45 +552,51 @@ namespace PL_console
             Console.Write("Từ ngày (VD:24/12/2000): ");
             do
             {
+                flag = 0;
                 from = Console.ReadLine();
                 if (validate(5, from, user) == false)
                 {
                     Console.Write("=> Thời gian nhập vào không hợp lệ (VD:24/12/2000). Nhập lại: ");
-                    from = null;
-                    continue;
+                    flag = 1;
                 }
-                if (Convert.ToDateTime(from) > DateTime.Now)
+                else
                 {
-                    Console.Write("=> Mốc thời gian bắt đầu phải trước thời gian hiện tại. Nhập lại: ");
-                    from = null;
+                    if (Convert.ToDateTime(from) > DateTime.Now)
+                    {
+                        Console.Write("=> Mốc thời gian bắt đầu phải trước thời gian hiện tại. Nhập lại: ");
+                        flag = 1;
+                    }
+                    if (Convert.ToDateTime(from) < new DateTime(2019, 1, 1))
+                    {
+                        Console.Write("=> Mốc thời gian bắt đầu phải sau năm 2018. Nhập lại: ");
+                        flag = 1;
+                    }
                 }
-                if (Convert.ToDateTime(from) < new DateTime(2019, 1, 1))
-                {
-                    Console.Write("=> Mốc thời gian bắt đầu phải sau năm 2018. Nhập lại: ");
-                    from = null;
-                }
-            } while (from == null);
+            } while (flag == 1);
             Console.Write("Đến ngày (VD:24/12/2019): ");
             do
             {
+                flag = 0;
                 to = Console.ReadLine();
                 if (validate(5, to, user) == false)
                 {
                     Console.Write("=> Thời gian nhập vào không hợp lệ (VD:24/12/2000). Nhập lại: ");
-                    to = null;
-                    continue;
+                    flag = 1;
                 }
-                if (Convert.ToDateTime(to) < Convert.ToDateTime(from))
+                else
                 {
-                    Console.Write("=> Mốc thời gian kết thúc phải sau mốc thời gian bắt đầu. Nhập lại: ");
-                    to = null;
+                    if (Convert.ToDateTime(to) < Convert.ToDateTime(from))
+                    {
+                        Console.Write("=> Mốc thời gian kết thúc phải sau mốc thời gian bắt đầu. Nhập lại: ");
+                        flag = 1;
+                    }
+                    if (Convert.ToDateTime(to) > DateTime.Now)
+                    {
+                        Console.Write("=> Mốc thời gian kết thúc phải trước hiện tại. Nhập lại: ");
+                        flag = 1;
+                    }
                 }
-                if (Convert.ToDateTime(to) > DateTime.Now)
-                {
-                    Console.Write("=> Mốc thời gian kết thúc phải trước hiện tại. Nhập lại: ");
-                    to = null;
-                }
-            } while (to == null);
+            } while (flag == 1);
             if (choose == 1)
             {
                 DisplayStatistical(0, from, to, "Thẻ ngày", user);
