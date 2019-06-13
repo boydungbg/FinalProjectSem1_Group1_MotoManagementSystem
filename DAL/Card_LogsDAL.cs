@@ -43,7 +43,7 @@ namespace DAL
         }
         public Card_Logs GetCardLogsByCardIDAndLicensePlate(int cardid, string licensePlate)
         {
-            query = @"select card_id,cl_licensePlate,max(cl_timeIn) as cl_timeIn,cl_timeOut,cl_status,cl_money from Card_Logs where card_id =" + cardid + " and cl_licensePlate='" + licensePlate + "';";
+            query = @"select card_id,cl_licensePlate,cl_timeIn,cl_timeOut,cl_status,cl_money from Card_Logs where card_id =" + cardid + " and cl_licensePlate='" + licensePlate + "' and cl_status = 0;";
             reader = DBHelper.ExecQuery(query, connection);
             Card_Logs cardLogs = null;
             if (reader.Read())
@@ -55,7 +55,7 @@ namespace DAL
         }
         public Card_Logs GetCardLogsByLicensePlate(string licensePlate)
         {
-            query = @"select card_id,cl_licensePlate,max(cl_timeIn) as cl_timeIn,cl_timeOut,cl_status,cl_money from Card_Logs where cl_licensePlate='" + licensePlate + "';";
+            query = @"select card_id,cl_licensePlate,cl_timeIn,cl_timeOut,cl_status,cl_money from Card_Logs where cl_licensePlate='" + licensePlate + "'  and cl_status = 0;";
             reader = DBHelper.ExecQuery(query, connection);
             Card_Logs cardLogs = null;
             if (reader.Read())

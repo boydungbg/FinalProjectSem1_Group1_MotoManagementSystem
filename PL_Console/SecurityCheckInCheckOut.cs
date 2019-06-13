@@ -183,7 +183,7 @@ namespace PL_Console
                 }
             }
             Card_Logs cardLogs = manager.GetCardLogsByLicensePlate(licensePlate, user);
-            if (cardLogs != null && licensePlate == cardLogs.LisensePlate && cardLogs.Status == 0)
+            if (cardLogs != null)
             {
                 Console.WriteLine("=> Biển số xe trùng với một khách hàng khác.");
                 licensePlate = null;
