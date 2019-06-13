@@ -60,13 +60,13 @@ namespace BL
             }
             return card_LogsDAL.GetListCardLogsByPage(page, from, to, type);
         }
-        public List<Card_Logs> GetListCardLogs(string from, string to)
+        public List<Card_Logs> GetListCardLogs(string from, string to, string keyWord)
         {
-            if (from == null || to == null)
+            if (from == null || to == null || keyWord == null)
             {
                 return null;
             }
-            return card_LogsDAL.GetListCardLogs(from, to);
+            return card_LogsDAL.GetListCardLogs(from, to, keyWord);
         }
         public double GetCardLogNO(string from, string to, string type)
         {

@@ -99,9 +99,9 @@ namespace DAL
             connection.Close();
             return cardLogs;
         }
-        public List<Card_Logs> GetListCardLogs(string from, string to)
+        public List<Card_Logs> GetListCardLogs(string from, string to, string keyword)
         {
-            query = @"select * from Card_logs  where cl_timeIn between '" + from + "' and '" + to + "';";
+            query = @"select * from Card_logs  where cl_timeIn between '" + from + "' and '" + to + "' and cl_licensePlate like '%" + keyword + "%';";
             reader = DBHelper.ExecQuery(query, connection);
             List<Card_Logs> cardLogs = new List<Card_Logs>();
             while (reader.Read())
@@ -152,9 +152,9 @@ namespace DAL
             connection.Close();
             return cardLogs;
         }
-        public double GetListCardLogsByKeyWorkNo(string from, string to, string keyWork)
+        public double GetListCardLogsByKeyWorkNo(string from, string to, string keyWord)
         {
-            query = @"select count(cl_id) from Card_logs  where cl_timeIn between '" + from + "' and '" + to + "' and cl_licensePlate like '%" + keyWork + "%';";
+            query = @"select count(cl_id) from Card_logs  where cl_timeIn between '" + from + "' and '" + to + "' and cl_licensePlate like '%" + keyWord + "%';";
             reader = DBHelper.ExecQuery(query, connection);
             List<Card_Logs> cardLogs = new List<Card_Logs>();
             double CardLogNO = 0;

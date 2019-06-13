@@ -38,14 +38,14 @@ namespace DAL.Xunit
         public void GetListCardLogsTest1()
         {
             Card_LogsDAL cardLogsDAL = new Card_LogsDAL();
-            List<Card_Logs> listCardLogs = cardLogsDAL.GetListCardLogs("2019-06-05", "2019-05-31");
+            List<Card_Logs> listCardLogs = cardLogsDAL.GetListCardLogs("2019-06-05", "2019-05-31","");
             Assert.NotNull(listCardLogs);
         }
         [Fact]
         public void GetListCardLogsTest2()
         {
             Card_LogsDAL cardLogsDAL = new Card_LogsDAL();
-            List<Card_Logs> listCardLogs = cardLogsDAL.GetListCardLogs("2000-05-26", "2000-05-27");
+            List<Card_Logs> listCardLogs = cardLogsDAL.GetListCardLogs("2000-05-26", "2000-05-27","");
             Assert.Empty(listCardLogs);
         }
         [Theory]

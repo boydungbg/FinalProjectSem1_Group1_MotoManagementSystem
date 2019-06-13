@@ -511,13 +511,13 @@ namespace PL_console
             }
             return cardLogs;
         }
-        public List<Card_Logs> GetListCardLogs(string from, string to, User user)
+        public List<Card_Logs> GetListCardLogs(string from, string to, string keyWord, User user)
         {
             List<Card_Logs> cardLogs = null;
             try
             {
                 Card_LogsBL cardLogsBL = new Card_LogsBL();
-                cardLogs = cardLogsBL.GetListCardLogs(from, to);
+                cardLogs = cardLogsBL.GetListCardLogs(from, to, keyWord);
             }
             catch (Exception ex)
             {
@@ -602,46 +602,78 @@ namespace PL_console
             to = Convert.ToDateTime(to).ToString("yyyy-MM-dd 23:59:59");
             if (choose == 1)
             {
-                DisplayStatistical(0, from, to, "Thẻ ngày", user);
+                DisplayStatistical(0, from, to, "Thẻ ngày", 1, user);
             }
             if (choose == 2)
             {
-                DisplayStatistical(0, from, to, "Thẻ tháng", user);
+                DisplayStatistical(0, from, to, "Thẻ tháng", 2, user);
             }
             if (choose == 3)
             {
-                SearchLicenPlateKeyWord(0, from, to, "", user);
+                SearchLicenPlateKeyWord(0, from, to, "", 3, user);
             }
         }
-        public int GetTurn(string from, string to, string type, User user)
+        public int GetTurn(string from, string to, string type, int choose, string keyWord, User user)
         {
             int Count = 0;
-            List<Card_Logs> cardLogs = GetListCardLogs(from, to, user);
-            foreach (var item in cardLogs)
+            List<Card_Logs> cardLogs = null;
+            if (choose == 1 || choose == 2)
             {
-                Card card = GetCardByID(item.Card_id, user);
-                if (item.Status == 1 && card.Card_type == type)
+                cardLogs = GetListCardLogs(from, to, keyWord, user);
+                foreach (var item in cardLogs)
                 {
-                    Count++;
+                    Card card = GetCardByID(item.Card_id, user);
+                    if (item.Status == 1 && card.Card_type == type)
+                    {
+                        Count++;
+                    }
+                }
+            }
+            if (choose == 3)
+            {
+                cardLogs = GetListCardLogs(from, to, keyWord, user);
+                foreach (var item in cardLogs)
+                {
+                    Card card = GetCardByID(item.Card_id, user);
+                    if (item.Status == 1)
+                    {
+                        Count++;
+                    }
                 }
             }
             return Count;
         }
-        public double GetMoney(string from, string to, string type, User user)
+        public double GetMoney(string from, string to, string type, int choose, string keyWord, User user)
         {
             double monney = 0;
-            List<Card_Logs> cardLogs = GetListCardLogs(from, to, user);
-            foreach (var item in cardLogs)
+            List<Card_Logs> cardLogs = null;
+            if (choose == 1 || choose == 2)
             {
-                Card card = GetCardByID(item.Card_id, user);
-                if (item.Status == 1 && card.Card_type == type)
+                cardLogs = GetListCardLogs(from, to, "", user);
+                foreach (var item in cardLogs)
                 {
-                    monney = monney + Convert.ToDouble(item.Money);
+                    Card card = GetCardByID(item.Card_id, user);
+                    if (item.Status == 1 && card.Card_type == type)
+                    {
+                        monney = monney + Convert.ToDouble(item.Money);
+                    }
+                }
+            }
+            if (choose == 3)
+            {
+                cardLogs = GetListCardLogs(from, to, keyWord, user);
+                foreach (var item in cardLogs)
+                {
+                    Card card = GetCardByID(item.Card_id, user);
+                    if (item.Status == 1)
+                    {
+                        monney = monney + Convert.ToDouble(item.Money);
+                    }
                 }
             }
             return monney;
         }
-        public void DisplayStatistical(int page, string from, string to, string type, User user)
+        public void DisplayStatistical(int page, string from, string to, string type, int choose, User user)
         {
             string timeOut = "";
             string status = "";
@@ -677,7 +709,7 @@ namespace PL_console
                 Console.WriteLine();
                 Console.WriteLine("                   Từ ngày: {0}                                   Đến ngày: {1}", from, to);
                 Console.WriteLine();
-                Console.WriteLine("                   Tổng số tiền: {0} VND                                    Số lượt:  {1}", GetMoney(from, to, type, user), GetTurn(from, to, type, user));
+                Console.WriteLine("                   Tổng số tiền: {0} VND                                    Số lượt:  {1}", GetMoney(from, to, type, choose, "", user), GetTurn(from, to, type, choose, "", user));
                 Console.WriteLine();
                 Console.WriteLine("                   Số tiền chỉ dành cho các xe dùng {0}.", type);
                 Console.WriteLine();
@@ -710,7 +742,7 @@ namespace PL_console
                             page = 0;
                         }
                     } while (page == 0);
-                    DisplayStatistical(((page - 1) * 10), from, to, type, user);
+                    DisplayStatistical(((page - 1) * 10), from, to, type, choose, user);
                 }
                 else
                 {
@@ -735,13 +767,11 @@ namespace PL_console
                 menu.MenuSecurity(user);
             }
         }
-        public void SearchLicenPlateKeyWord(int page, string from, string to, string keyWord, User user)
+        public void SearchLicenPlateKeyWord(int page, string from, string to, string keyWord, int choose, User user)
         {
             ConsoleKeyInfo key;
             string timeOut = "";
             string status = "";
-            double money = 0;
-            int Iturn = 0;
             List<Card_Logs> cardLogs = null;
             Console.Clear();
             try
@@ -769,8 +799,6 @@ namespace PL_console
                 {
                     timeOut = Convert.ToString(item.TimeIn);
                     status = "Đã lấy xe ";
-                    money = money + Convert.ToDouble(item.Money);
-                    Iturn++;
                 }
                 table.AddRow(STT, item.LisensePlate, item.TimeIn, timeOut, item.Card_id, card.Card_type, status, Convert.ToString(item.Money) + " VNĐ");
             }
@@ -785,7 +813,7 @@ namespace PL_console
                 Console.WriteLine();
                 Console.WriteLine("                   Từ ngày: {0}                                   Đến ngày: {1}", from, to);
                 Console.WriteLine();
-                Console.WriteLine("                   Tổng số tiền: {0} VND                                   Số lượt:  {1}", money, Iturn);
+                Console.WriteLine("                   Tổng số tiền: {0} VND                                   Số lượt:  {1}", GetMoney(from, to, "", choose, keyWord, user), GetTurn(from, to, "", choose, keyWord, user));
                 Console.WriteLine();
                 Console.WriteLine();
                 Console.WriteLine();
@@ -842,7 +870,7 @@ namespace PL_console
                                 page = 0;
                             }
                         } while (page == 0);
-                        SearchLicenPlateKeyWord(((page - 1) * 10), from, to, keyWord, user);
+                        SearchLicenPlateKeyWord(((page - 1) * 10), from, to, keyWord, choose, user);
                     }
                 }
                 else if (key.Key == ConsoleKey.Backspace)
@@ -854,7 +882,7 @@ namespace PL_console
                     }
                 }
             }
-            SearchLicenPlateKeyWord(0, from, to, keyWord, user);
+            SearchLicenPlateKeyWord(0, from, to, keyWord, choose, user);
         }
     }
 }

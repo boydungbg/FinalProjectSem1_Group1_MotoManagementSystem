@@ -59,14 +59,14 @@ namespace BL.Xunit
         public void GetListCardLogsTest1()
         {
             Card_LogsBL cardLogsDAL = new Card_LogsBL();
-            List<Card_Logs> listCardLogs = cardLogsDAL.GetListCardLogs("2019-05-26", "2019-05-27");
+            List<Card_Logs> listCardLogs = cardLogsDAL.GetListCardLogs("2019-05-26", "2019-06-27", "");
             Assert.NotNull(listCardLogs);
         }
         [Fact]
         public void GetListCardLogsTest2()
         {
             Card_LogsBL cardLogsDAL = new Card_LogsBL();
-            List<Card_Logs> listCardLogs = cardLogsDAL.GetListCardLogs("2000-05-26", "2000-05-27");
+            List<Card_Logs> listCardLogs = cardLogsDAL.GetListCardLogs("2000-05-26", "2000-06-27", "");
             Assert.Empty(listCardLogs);
         }
         [Theory]
