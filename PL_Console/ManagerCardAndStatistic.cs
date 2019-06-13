@@ -808,46 +808,50 @@ namespace PL_console
             {
                 keyWord += key.KeyChar;
             }
-            if (key.Key == ConsoleKey.Escape || key.Key == ConsoleKey.Enter)
+            else
             {
-                if (pageNo > 1)
+                if (key.Key == ConsoleKey.Escape || key.Key == ConsoleKey.Enter)
                 {
-                    Console.WriteLine("Nhập mã (24122000) để thoát");
-                    Console.Write("Nhập trang: ");
-                    do
+                    if (pageNo == 1)
                     {
-                        try
+                        Console.WriteLine("Nhấn Enter để thoát.");
+                        menu.MenuStatictis(user);
+                    }
+                    if (pageNo > 1)
+                    {
+                        Console.WriteLine("Nhập mã (24122000) để thoát");
+                        Console.Write("Nhập trang: ");
+                        do
                         {
-                            page = Convert.ToInt32(Console.ReadLine());
-                            if (page == 24122000)
+                            try
                             {
-                                menu.MenuStatictis(user);
+                                page = Convert.ToInt32(Console.ReadLine());
+                                if (page == 24122000)
+                                {
+                                    menu.MenuStatictis(user);
+                                }
+                                if (page > pageNo || page <= 0)
+                                {
+                                    Console.Write("Số trang nhập quá lớn hoặc quá nhỏ. Nhập lại: ");
+                                    page = 0;
+                                }
                             }
-                            if (page > pageNo || page <= 0)
+                            catch (System.Exception)
                             {
-                                Console.Write("Số trang nhập quá lớn hoặc quá nhỏ. Nhập lại: ");
+                                Console.Write("Số trang nhập không hợp lệ. Nhập lại: ");
                                 page = 0;
                             }
-                        }
-                        catch (System.Exception)
-                        {
-                            Console.Write("Số trang nhập không hợp lệ. Nhập lại: ");
-                            page = 0;
-                        }
-                    } while (page == 0);
-                    SearchLicenPlateKeyWord(((page - 1) * 10), from, to, keyWord, user);
+                        } while (page == 0);
+                        SearchLicenPlateKeyWord(((page - 1) * 10), from, to, keyWord, user);
+                    }
                 }
-                if (pageNo == 1)
+                else if (key.Key == ConsoleKey.Backspace)
                 {
-                    return;
-                }
-            }
-            else if (key.Key == ConsoleKey.Backspace)
-            {
-                if (keyWord.Length > 0)
-                {
-                    keyWord = keyWord.Remove(keyWord.Length - 1);
-                    Console.Write("\b \b");
+                    if (keyWord.Length > 0)
+                    {
+                        keyWord = keyWord.Remove(keyWord.Length - 1);
+                        Console.Write("\b \b");
+                    }
                 }
             }
             SearchLicenPlateKeyWord(0, from, to, keyWord, user);
