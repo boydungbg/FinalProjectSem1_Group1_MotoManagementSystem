@@ -517,7 +517,7 @@ namespace PL_console
             try
             {
                 Card_LogsBL cardLogsBL = new Card_LogsBL();
-                cardLogs = cardLogsBL.GetListCardLogs(Convert.ToDateTime(from).ToString("yyyy-MM-dd 00:00:00"), Convert.ToDateTime(to).ToString("yyyy-MM-dd 23:59:59"));
+                cardLogs = cardLogsBL.GetListCardLogs(from, to);
             }
             catch (Exception ex)
             {
@@ -531,7 +531,7 @@ namespace PL_console
             try
             {
                 Card_LogsBL cardLogsBL = new Card_LogsBL();
-                cardLogsNo = cardLogsBL.GetCardLogNO(Convert.ToDateTime(from).ToString("yyyy-MM-dd 00:00:00"), Convert.ToDateTime(to).ToString("yyyy-MM-dd 23:59:59"), type);
+                cardLogsNo = cardLogsBL.GetCardLogNO(from, to, type);
             }
             catch (Exception ex)
             {
@@ -548,6 +548,7 @@ namespace PL_console
             Console.WriteLine(b);
             if (choose == 1) Console.WriteLine(" Thống kê xe ra vào thẻ ngày");
             if (choose == 2) Console.WriteLine(" Thống kê xe ra vào thẻ tháng");
+            if (choose == 3) Console.WriteLine(" Thống kê xe ra vào bằng biển số xe");
             Console.WriteLine(b);
             Console.Write("Từ ngày (VD:24/12/2000): ");
             do
@@ -597,6 +598,8 @@ namespace PL_console
                     }
                 }
             } while (flag == 1);
+            from = Convert.ToDateTime(from).ToString("yyyy-MM-dd 00:00:00");
+            to = Convert.ToDateTime(to).ToString("yyyy-MM-dd 23:59:59");
             if (choose == 1)
             {
                 DisplayStatistical(0, from, to, "Thẻ ngày", user);
@@ -604,6 +607,10 @@ namespace PL_console
             if (choose == 2)
             {
                 DisplayStatistical(0, from, to, "Thẻ tháng", user);
+            }
+            if (choose == 3)
+            {
+                SearchLicenPlateKeyWord(0, from, to, "", user);
             }
         }
         public int GetTurn(string from, string to, string type, User user)
@@ -638,7 +645,7 @@ namespace PL_console
         {
             string timeOut = "";
             string status = "";
-            List<Card_Logs> cardLogs = GetListCardLogsByPage(page, Convert.ToDateTime(from).ToString("yyyy-MM-dd 00:00:00"), Convert.ToDateTime(to).ToString("yyyy-MM-dd 23:59:59"), type, user);
+            List<Card_Logs> cardLogs = GetListCardLogsByPage(page, from, to, type, user);
             var table = new ConsoleTable("STT", "Biển số xe", "Thời gian vào", "Thời gian ra", "Mã thẻ", "Loại thẻ", "Trạng thái", "Giá tiền");
             int STT = 0;
             Card card = null;
@@ -670,7 +677,7 @@ namespace PL_console
                 Console.WriteLine();
                 Console.WriteLine("                   Từ ngày: {0}                                   Đến ngày: {1}", from, to);
                 Console.WriteLine();
-                Console.WriteLine("                   Thổng số tiền: {0} VND                            Số lượt:  {1}", GetMoney(from, to, type, user), GetTurn(from, to, type, user));
+                Console.WriteLine("                   Tổng số tiền: {0} VND                                    Số lượt:  {1}", GetMoney(from, to, type, user), GetTurn(from, to, type, user));
                 Console.WriteLine();
                 Console.WriteLine("                   Số tiền chỉ dành cho các xe dùng {0}.", type);
                 Console.WriteLine();
@@ -727,6 +734,123 @@ namespace PL_console
             {
                 menu.MenuSecurity(user);
             }
+        }
+        public void SearchLicenPlateKeyWord(int page, string from, string to, string keyWord, User user)
+        {
+            ConsoleKeyInfo key;
+            string timeOut = "";
+            string status = "";
+            double money = 0;
+            int Iturn = 0;
+            List<Card_Logs> cardLogs = null;
+            Console.Clear();
+            try
+            {
+                Card_LogsBL cardLogsBL = new Card_LogsBL();
+                cardLogs = cardLogsBL.GetListCardLogsByKeyWork(page, Convert.ToDateTime(from).ToString("yyyy-MM-dd 00:00:00"), Convert.ToDateTime(to).ToString("yyyy-MM-dd 23:59:59"), keyWord);
+            }
+            catch (Exception ex)
+            {
+                CheckUser(user, ex);
+            }
+            var table = new ConsoleTable("STT", "Biển số xe", "Thời gian vào", "Thời gian ra", "Mã thẻ", "Loại thẻ", "Trạng thái", "Giá tiền");
+            int STT = 0;
+            Card card = null;
+            foreach (var item in cardLogs)
+            {
+                card = GetCardByID(item.Card_id, user);
+                STT = STT + 1;
+                if (item.Status == 0)
+                {
+                    timeOut = "             ";
+                    status = "Chưa lấy xe ";
+                }
+                if (item.Status == 1)
+                {
+                    timeOut = Convert.ToString(item.TimeIn);
+                    status = "Đã lấy xe ";
+                    money = money + Convert.ToDouble(item.Money);
+                    Iturn++;
+                }
+                table.AddRow(STT, item.LisensePlate, item.TimeIn, timeOut, item.Card_id, card.Card_type, status, Convert.ToString(item.Money) + " VNĐ");
+            }
+            double pageNo = 0;
+            if (STT <= 0)
+            {
+                Console.WriteLine("'{0}' không tìm thấy!", keyWord);
+            }
+            else
+            {
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.WriteLine("                   Từ ngày: {0}                                   Đến ngày: {1}", from, to);
+                Console.WriteLine();
+                Console.WriteLine("                   Tổng số tiền: {0} VND                                   Số lượt:  {1}", money, Iturn);
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.WriteLine();
+                table.Write(Format.Alternative);
+                try
+                {
+                    Card_LogsBL cardLogsBL = new Card_LogsBL();
+                    pageNo = Math.Ceiling(Convert.ToDouble(cardLogsBL.GetListCardLogsByKeyWorkNo(from, to, keyWord) / 10));
+                }
+                catch (System.Exception ex)
+                {
+                    CheckUser(user, ex);
+                }
+                Console.WriteLine("                                              Trang: {0} / {1}", (page / 10) + 1, pageNo);
+            }
+            Console.Write("Nhập biển số xe:");
+            Console.Write(keyWord);
+            key = Console.ReadKey();
+            if (key.Key != ConsoleKey.Backspace && key.Key != ConsoleKey.Enter)
+            {
+                keyWord += key.KeyChar;
+            }
+            if (key.Key == ConsoleKey.Escape || key.Key == ConsoleKey.Enter)
+            {
+                if (pageNo > 1)
+                {
+                    Console.WriteLine("Nhập mã (24122000) để thoát");
+                    Console.Write("Nhập trang: ");
+                    do
+                    {
+                        try
+                        {
+                            page = Convert.ToInt32(Console.ReadLine());
+                            if (page == 24122000)
+                            {
+                                menu.MenuStatictis(user);
+                            }
+                            if (page > pageNo || page <= 0)
+                            {
+                                Console.Write("Số trang nhập quá lớn hoặc quá nhỏ. Nhập lại: ");
+                                page = 0;
+                            }
+                        }
+                        catch (System.Exception)
+                        {
+                            Console.Write("Số trang nhập không hợp lệ. Nhập lại: ");
+                            page = 0;
+                        }
+                    } while (page == 0);
+                    SearchLicenPlateKeyWord(((page - 1) * 10), from, to, keyWord, user);
+                }
+                if (pageNo == 1)
+                {
+                    return;
+                }
+            }
+            else if (key.Key == ConsoleKey.Backspace)
+            {
+                if (keyWord.Length > 0)
+                {
+                    keyWord = keyWord.Remove(keyWord.Length - 1);
+                    Console.Write("\b \b");
+                }
+            }
+            SearchLicenPlateKeyWord(0, from, to, keyWord, user);
         }
     }
 }

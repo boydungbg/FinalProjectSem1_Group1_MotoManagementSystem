@@ -140,5 +140,30 @@ namespace DAL
             connection.Close();
             return cardLogs;
         }
+        public List<Card_Logs> GetListCardLogsByKeyWork(int page, string from, string to, string keyWork)
+        {
+            query = @"select * from Card_logs  where cl_timeIn between '" + from + "' and '" + to + "' and cl_licensePlate like '%" + keyWork + "%' limit " + page + ",10  ;";
+            reader = DBHelper.ExecQuery(query, connection);
+            List<Card_Logs> cardLogs = new List<Card_Logs>();
+            while (reader.Read())
+            {
+                cardLogs.Add(GetCardLogsInfo(reader));
+            }
+            connection.Close();
+            return cardLogs;
+        }
+        public double GetListCardLogsByKeyWorkNo(string from, string to, string keyWork)
+        {
+            query = @"select count(cl_id) from Card_logs  where cl_timeIn between '" + from + "' and '" + to + "' and cl_licensePlate like '%" + keyWork + "%';";
+            reader = DBHelper.ExecQuery(query, connection);
+            List<Card_Logs> cardLogs = new List<Card_Logs>();
+            double CardLogNO = 0;
+            while (reader.Read())
+            {
+                CardLogNO = reader.GetInt32("count(cl_id)");
+            }
+            connection.Close();
+            return CardLogNO;
+        }
     }
 }

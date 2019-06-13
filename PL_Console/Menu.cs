@@ -210,8 +210,8 @@ namespace PL_Console
             {
                 Console.Clear();
                 ManagerCardAndStatistic manager = new ManagerCardAndStatistic();
-                string[] menuItem = { "Thống kê xe ra vào thẻ ngày", "Thống kê xe ra vào thẻ tháng", "Quay lại" };
-                choose = Menu(menuItem, 3, "Chào mừng bạn đã đến với hệ thống quản lý bãi gửi xe", "#Chọn: ");
+                string[] menuItem = { "Thống kê xe ra vào thẻ ngày", "Thống kê xe ra vào thẻ tháng", "Thống kê xe ra vào bằng biển số xe", "Quay lại" };
+                choose = Menu(menuItem, 4, "Chào mừng bạn đã đến với hệ thống quản lý bãi gửi xe", "#Chọn: ");
                 switch (choose)
                 {
                     case '1':
@@ -221,6 +221,9 @@ namespace PL_Console
                         manager.Statistical(user, 2);
                         break;
                     case '3':
+                        manager.Statistical(user, 3);
+                        break;
+                    case '4':
                         MenuManager(user);
                         break;
                     default:

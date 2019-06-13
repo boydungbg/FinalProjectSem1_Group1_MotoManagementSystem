@@ -72,5 +72,17 @@ namespace BL
         {
             return card_LogsDAL.GetCardLogNO(from, to, type);
         }
+        public List<Card_Logs> GetListCardLogsByKeyWork(int page, string from, string to, string keyWork)
+        {
+            if (from == null || to == null || keyWork == null || page < 0)
+            {
+                return null;
+            }
+            return card_LogsDAL.GetListCardLogsByKeyWork(page, from, to, keyWork);
+        }
+        public double GetListCardLogsByKeyWorkNo(string from, string to, string keyWork)
+        {
+            return card_LogsDAL.GetListCardLogsByKeyWorkNo(from, to, keyWork);
+        }
     }
 }
