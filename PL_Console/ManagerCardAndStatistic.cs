@@ -692,7 +692,7 @@ namespace PL_console
                 }
                 if (item.Status == 1)
                 {
-                    timeOut = Convert.ToString(item.TimeIn);
+                    timeOut = Convert.ToString(item.TimeOut);
                     status = "Đã lấy xe ";
                 }
                 table.AddRow(STT, item.LisensePlate, item.TimeIn, timeOut, item.Card_id, card.Card_type, status, Convert.ToString(item.Money) + " VNĐ");
@@ -797,7 +797,7 @@ namespace PL_console
                 }
                 if (item.Status == 1)
                 {
-                    timeOut = Convert.ToString(item.TimeIn);
+                    timeOut = Convert.ToString(item.TimeOut);
                     status = "Đã lấy xe ";
                 }
                 table.AddRow(STT, item.LisensePlate, item.TimeIn, timeOut, item.Card_id, card.Card_type, status, Convert.ToString(item.Money) + " VNĐ");
